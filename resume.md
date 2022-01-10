@@ -1,15 +1,14 @@
 ---
-layout: post
+layout: page 
 title:  "Resume"
 date:   2022-01-09 14:58:55 +0000
 categories: resume
+permalink: /resume/
 ---
 # Syed Hamza Zaidi  
 
 **SOFTWARE ENGINEER · SENIOR AT BITS PILANI**  
 syedhamzazaidi5[at]gmail.com | [syedhamzazaidi](https://github.com/syedhamzazaidi) | [syed-hamza-zaidi](https://www.linkedin.com/in/syed-hamza-zaidi/)
-
-<br />
 
 ## Work Experience
 
