@@ -44,11 +44,33 @@ qualifications:
 
     tabs:
     -
-        title: Work
-        icon: uil-briefcase-alt
-    -
         title: Education
         icon: uil-graduation-cap
+        points:
+        -
+            title: B.E. Electronics & Instrumentation Engg.
+            subtext: Birla Institute of Technology & Science, Pilani
+            dates: August, 2018 - July, 2022
+        -
+            title: Higher Secondary School Certificate
+            subtext: Delhi Public School, Greater Noida
+            dates: July, 2015 - June, 2017
+        -
+            title: Secondary School Certificate
+            subtext: Delhi Public School, Greater Noida
+            dates: July, 2013 - June, 2015
+    -
+        title: Work
+        icon: uil-briefcase-alt
+        points:
+        -
+            title: Salesforce
+            subtext: SWE Contractor
+            dates: October, 2021 - Present
+        -
+            title: Salesforce
+            subtext: SWE Summer Intern
+            dates: June, 2021 - July, 2021
 
 ---
 
