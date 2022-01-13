@@ -1,4 +1,4 @@
-<footer class="site-footer h-card">
+<!-- <footer class="site-footer h-card">
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
@@ -32,6 +32,24 @@
       {%- include social.html -%}
     </div>
 
+  </div>
+
+</footer> -->
+
+<footer class="footer">
+  <div class="footer__bg">
+      <div class="footer__container container grid">
+          <div>
+              <h1 class="footer__title">{{ site.author.name }}</h1>
+              <span class="footer__subtitle">{{ site.author.title }}</span>
+          </div>
+
+          <div class="footer__socials">
+            {%- include social.html -%}
+          </div>
+      </div>
+
+      <p class="footer__copy">&#169; {{ site.author.name }}. All rights reserved.</p>
   </div>
 
 </footer>
