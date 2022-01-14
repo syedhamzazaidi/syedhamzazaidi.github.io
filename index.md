@@ -72,5 +72,18 @@ qualifications:
             subtext: SWE Summer Intern
             dates: June, 2021 - July, 2021
 
+services:
+    title: Blog
+    subtitle: Words by me
+    blocks:
+    -
+        title: My Summer at Salesforce1
+        icon: uil-arrow 
+    -
+        title: My Summer at Salesforce2
+        icon: uil-arrow
+    -
+        title: My Summer at Salesforce3
+        icon: uil-arrow
 ---
 
