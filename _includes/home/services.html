@@ -3,8 +3,7 @@
     <span class="section__subtitle">{{ page.services.subtitle}}</span>
 
     <div class="services__container container grid">
-        {% for block in page.services.blocks %}
-        {% if forloop.index > {{ site.max_blog_posts }} %}{% break %}{% endif %}
+        {% for block in page.services.blocks limit: {{ site.max_blog_posts }} %}
         <!--===================== SERVICES 1 ====================-->
         <div class="services__content">
             <div>

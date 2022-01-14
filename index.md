@@ -8,40 +8,77 @@
 layout: home
 
 landing:
-    title: Hello!
-    secondtext: Software Developer
-    thirdtext: Hey!
-    button: Click Me!
+    title: Hi, I'm Hamza
+    secondtext: A Software Developer
+    thirdtext: >
+        I'm currently a final year undergrad at BITS Pilani, India. I love working with code.
+    # button: Click Me!
 
 about:
     title: About Me
-    subtext: My introduction
-    content: Web Developer, blah blah, Web developer, with extensive knowledge and years of experience, working in web technologies and Ui/Ux design, delivering quality work.
+    subtext: Here's a little bit about me 
+    content: >
+        I'm interested in working on Artifical Intelligence / Machine Learning Projects - 
+        especially Computer Vision. Apart from coding, I also enjoy reading and writing.
 
     stats:
         -
-            number: 2+
-            line1: Something
-            line2: Done
+            number: 1
+            line1: Year
+            line2: Experience
         -
-            number: 5+
-            line1: Hours
-            line2: Worked
+            number: 1
+            line1: Follower 
+            line2: on Github
         -
-            number: 1,00,000+
-            line1: Customers
-            line2: Served
+            number: 1 
+            line1: Hackathon
+            line2: Win
 
-    button: Download CV
+    button: Check Out My CV
 
-skills:
-    title:
-    subtext:
+# skills:
+#     title: Skills
+#     subtext: I'm good at these things
+
+skills-list:
+    title: Skills
+    subtitle: I'm good at these things
+    topics:
+        languages:
+            - Python
+            - C
+            - C++
+            - Java
+            - Go
+
+        ML frameworks:
+            - PyTorch
+            - Tensorflow / Keras
+            - NumPy
+            - Pandas
+            - MatPlotLib
+            - OpenCV
+
+        Web frameworks:
+            - Flask
+            - Jekyll
+
+        tools:
+            - Bash
+            - Git & Github
+            - Docker
+            - Postman
+
+        design:
+            - Adobe Photoshop
+            - Adobe Illustrator
+            - Adobe InDesign
+            - Sketch
 
 qualifications:
     title: Qualifications
     subtext: My qualifications
-
     tabs:
     -
         title: Education
@@ -86,25 +123,25 @@ services:
         title: My Summer at Salesforce3
         icon: uil-arrow
 
-portfolio:
-    title: Portfolio
-    subtitle: Most Recent Work
-    projects:
-    -
-        title: Project 1
-        subtitle: Subtitle 1
-        image: portfolio1.jpg
-        button: Clicky!
-    -
-        title: Project 2
-        subtitle: Subtitle 2
-        image: portfolio2.jpg
-        button: Check it out!
-    -
-        title: Project 3
-        subtitle: Subtitle 3
-        image: portfolio3.jpg
-        button: Yolo
+# portfolio:
+#     title: Portfolio
+#     subtitle: Most Recent Work
+#     projects:
+#     -
+#         title: Project 1
+#         subtitle: Subtitle 1
+#         image: portfolio1.jpg
+#         button: Clicky!
+#     -
+#         title: Project 2
+#         subtitle: Subtitle 2
+#         image: portfolio2.jpg
+#         button: Check it out!
+#     -
+#         title: Project 3
+#         subtitle: Subtitle 3
+#         image: portfolio3.jpg
+#         button: Yolo
      
 ---
 

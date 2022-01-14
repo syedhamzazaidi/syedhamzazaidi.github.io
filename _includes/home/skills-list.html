@@ -1,0 +1,20 @@
+<section class="skills section", id="skills">
+    <h2 class="section__title">{{ page.skills-list.title }}</h2>
+    <span class="section__subtitle">{{ page.skills-list.subtitle }}</span>
+    <div class="skills_list__container container grid">
+      <!-- <p>I’ve picked up quite a few skills during the course of my three co-ops, and aim to improve these skills everyday. Here are a few of the technologies that I have experience with:</p> -->
+      <div class="skills__content">
+        {% for topic in page.skills-list.topics %}
+        <div class="skills__content">
+          <h1 class="skills__title">{{ topic[0] | capitalise }}</h1>
+          <ul>
+            {% for item in topic[1] %}
+            <li class="skillz__category__item">{{ item }}</li>
+            {% endfor %}
+          </ul>
+          <br>
+        </div>
+       {% endfor %}
+      </div>
+    </div>
+  </section>
