@@ -19,7 +19,8 @@ about:
     subtext: Here's a little bit about me 
     content: >
         I'm interested in working on Artifical Intelligence / Machine Learning Projects - 
-        especially Computer Vision. Apart from coding, I also enjoy reading and writing.
+        especially Computer Vision. Apart from coding, I also enjoy reading and writing. 
+        This website is currently a work-in-progress. Please ignore any incom
 
     stats:
         -
