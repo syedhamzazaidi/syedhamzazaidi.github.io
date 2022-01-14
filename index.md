@@ -11,7 +11,7 @@ landing:
     title: Hi, I'm Hamza
     secondtext: A Software Developer
     thirdtext: >
-        I'm currently a final year undergrad at BITS Pilani, India. I love working with code.
+        I'm currently a final year undergrad at BITS Pilani, India. I love working with code. This website is currently a work-in-progress. Please ignore any incom
     # button: Click Me!
 
 about:
@@ -19,8 +19,7 @@ about:
     subtext: Here's a little bit about me 
     content: >
         I'm interested in working on Artifical Intelligence / Machine Learning Projects - 
-        especially Computer Vision. Apart from coding, I also enjoy reading and writing. 
-        This website is currently a work-in-progress. Please ignore any incom
+        especially Computer Vision. Apart from coding, I also enjoy reading and writing.
 
     stats:
         -
