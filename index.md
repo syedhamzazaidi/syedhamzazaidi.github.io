@@ -62,7 +62,7 @@ skills-list:
 
         Web frameworks:
             - Flask
-            - Jekyll
+            - Jekyll / Liquid
 
         tools:
             - Bash
