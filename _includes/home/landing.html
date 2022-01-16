@@ -3,14 +3,14 @@
     <div class="home__container container grid">
         <div class="home__content grid">
             <div class="home__social">
+            {%- if site.socials.twitter -%}
+                <a href="https://twitter.com/{{ site.socials.twitter | cgi_escape | escape }}" target="_blank" class="home__social-icon">
+                    <i class="uil uil-twitter-alt" ></i>
+                </a>
+            {%- endif -%}
             {%- if site.socials.linkedin -%}
                 <a href="https://www.linkedin.com/in/{{ site.socials.linkedin | cgi_escape | escape}}" target="_blank" class="home__social-icon">
                     <i class="uil uil-linkedin-alt"></i>
-                </a>
-            {%- endif -%}
-            {%- if site.socials.twitter -%}
-                <a href="https://twitter.com/{{ site.social.twitter | cgi_escape | escape }}" target="_blank" title="{{ social.twitter | escape }}" class="home__social-icon">
-                    <i class="uil uil-twitter-alt" ></i>
                 </a>
             {%- endif -%}
             {%- if site.socials.github -%}
