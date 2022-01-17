@@ -271,6 +271,18 @@ img{
     box-shadow: 0 -1px 4px rgba(0,0,0,.15);
 }
 
+/*==================== BLOG ====================*/
+
+.post a:link, .post a:visited {
+    color: var(--first-color);
+    text-decoration: none;
+}
+
+.post a:hover, .post a:active {
+    color: var(--first-color-lighter);
+    text-decoration: underline;
+}
+
 /*==================== HOME ====================*/
 .home__container{
     gap: 1rem;
