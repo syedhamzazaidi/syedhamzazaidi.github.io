@@ -283,6 +283,21 @@ img{
     text-decoration: underline;
 }
 
+.post hr {
+    width: 75%;
+    margin: auto;
+    height: 1px;
+    border-color: var(--first-color);
+}
+
+.post .section__title {
+    margin-top: var(--mb-2);
+}
+
+.post .section__subtitle {
+    margin-bottom: var(--mb-2);
+}
+
 /*==================== HOME ====================*/
 .home__container{
     gap: 1rem;
