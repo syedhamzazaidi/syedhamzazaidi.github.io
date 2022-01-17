@@ -5,13 +5,13 @@ layout: default
 <br />
 <br />
 <br />
-{%- include home/landing.html -%}
-{%- include home/about.html -%}
-{% if page.skills %}{%- include home/skills.html -%}{% endif %}
-{% if page.skills-list %}{%- include home/skills-list.html -%}{% endif %}
-{% if page.qualifications %}{%- include home/qualifications.html -%}{% endif %}
-{% if page.services %}{%- include home/services.html -%}{% endif %}
-{% if page.portfolio %}{%- include home/portfolio.html -%}{% endif %}
+{% include home/landing.html %}
+{% include home/about.html %}
+{% if page.skills %}{% include home/skills.html %}{% endif %}
+{% if page.skills-list %}{% include home/skills-list.html %}{% endif %}
+{% if page.qualifications %}{% include home/qualifications.html %}{% endif %}
+{% if page.services %}{% include home/services.html %}{% endif %}
+{% if page.portfolio %}{% include home/portfolio.html %}{% endif %}
 <br />
 
 
