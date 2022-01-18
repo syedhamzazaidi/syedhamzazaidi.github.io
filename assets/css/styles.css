@@ -296,6 +296,12 @@ img{
     font-family: var(--blog-font);
 }
 
+.post img {
+    width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+}
+
 .post .section__title {
     margin-top: var(--mb-2);
 }
