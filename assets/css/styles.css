@@ -1,5 +1,6 @@
 /*==================== GOOGLE FONTS ====================*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400&display=swap');
 
 /*==================== VARIABLES CSS ====================*/
 :root {
@@ -25,6 +26,7 @@
 
     /*========== Font and typography ==========*/
     --body-font: 'Poppins', sans-serif;
+    --blog-font: 'Fraunces', serif;
 
     /* .5rem = 8px, 1rem = 16px, 1.5rem = 24px ... */
     --big-font-size: 2rem;
@@ -288,6 +290,10 @@ img{
     margin: auto;
     height: 1px;
     border-color: var(--first-color);
+}
+
+.post {
+    font-family: var(--blog-font);
 }
 
 .post .section__title {
