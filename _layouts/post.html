@@ -46,8 +46,13 @@ layout: default
   <img class ="post__banner" src="{{ page.thumbnail | default: default-banner }}">
   <h2 class="section__title">{{ page.title }}</h2>
   <span class="section__subtitle">{{ page.subtitle }}</span>
+  {%- assign date_format =  "%b %-d, %Y" -%}
+  <time class="dt-published post section__subtitle" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+    {{ page.date | date: date_format }}
+  </time>
   <div class="post__container container grid">
     <hr /> 
     {{ content }}
   </div>
+  <a href="{{ page.url | relative_url }}" hidden></a>
 </section>
