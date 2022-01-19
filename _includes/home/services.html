@@ -9,6 +9,10 @@
             <div>
                 <i class="uil {{ block.icon }} services__icon"></i>
                 <h3 class="services__title">{{ post.title }}</h3>
+                {%- assign date_format =  "%b %-d, %Y" -%}
+                <p><time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                    {{ post.date | date: date_format }}
+                </time></p>
 
                 <a href="{{ post.url }}" class="button button-flex button--link">Read &rarr;</a>
 
