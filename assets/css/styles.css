@@ -410,16 +410,17 @@ img{
 
 /*==================== BUTTONS ====================*/
 .button{
-    display: inline-block;
-    background-color: var(--first-color);
+    /* display: inline-block; */
+    /* background-color: var(--first-color); */
     color: #FFF;
     padding: 1rem;
-    border-radius: .5rem;
+    /* border-radius: .5rem; */
     font-weight: var(--font-medium);
 }
 
 .button:hover{
-    background-color: var(--first-color-alt);
+    /* background-color: var(--first-color-alt); */
+    text-decoration: underline;
 }
 
 .button__icon{
