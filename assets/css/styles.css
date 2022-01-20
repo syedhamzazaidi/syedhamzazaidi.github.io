@@ -618,6 +618,17 @@ img{
     transform: rotate(-180deg);
 }
 
+.skills_list__content{
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 2rem;
+    padding-top: 2rem;
+}
+
+.skills_list__container{
+    white-space: nowrap;
+}
+
 /*==================== QUALIFICATION ====================*/
 .qualification__tabs{
     display: flex;
