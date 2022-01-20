@@ -628,6 +628,9 @@ img{
 
 .skills_list__container{
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*==================== QUALIFICATION ====================*/
