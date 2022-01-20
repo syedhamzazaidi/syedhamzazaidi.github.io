@@ -619,6 +619,7 @@ img{
 }
 
 .skills_list__content{
+    font-size: var(--small-font-size);
     display: inline-block;
     vertical-align: top;
     padding-right: 2rem;
