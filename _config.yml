@@ -57,6 +57,14 @@ socials:
 # minima:
 #   skin: classic
 
+exclude:
+ - Dockerfile
+ - LICENSE.txt
+ - README.md
+ - setup.sh
+ - Gemfile
+ - Gemfile.lock
+
 plugins:
  - jekyll-feed
  - jekyll-seo-tag
