@@ -54,7 +54,7 @@ skills-list:
 
         ML frameworks:
             - PyTorch
-            - Tensorflow / Keras
+            - Tensorflow & Keras
             - NumPy
             - Pandas
             - MatPlotLib
@@ -62,19 +62,13 @@ skills-list:
 
         Web frameworks:
             - Flask
-            - Jekyll / Liquid
+            - Jekyll & Liquid
 
         tools:
             - Bash
             - Git & Github
             - Docker
             - Postman
-
-        design:
-            - Adobe Photoshop
-            - Adobe Illustrator
-            - Adobe InDesign
-            - Sketch
 
 qualifications:
     title: Qualifications
