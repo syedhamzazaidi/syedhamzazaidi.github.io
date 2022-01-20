@@ -623,11 +623,10 @@ img{
     display: inline-block;
     vertical-align: top;
     padding-right: 2rem;
-    padding-top: 2rem;
+    padding-top: 4rem;
 }
 
 .skills_list__container{
-    white-space: nowrap;
     display: flex;
     justify-content: center;
     align-items: center;
