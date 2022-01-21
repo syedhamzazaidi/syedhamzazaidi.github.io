@@ -58,22 +58,22 @@ tabs.forEach(tab =>{
         const target = document.querySelector(tab.dataset.target);
 
         tabContents.forEach(tabContent =>{
-            tabContent.classList.remove('qualification__active');
+            tabContent.classList.remove('qualifications__active');
         });
 
-        target.classList.add('qualification__active');
+        target.classList.add('qualifications__active');
 
         tabs.forEach(tab =>{
-            tab.classList.remove('qualification__active');
+            tab.classList.remove('qualifications__active');
         })
-        tab.classList.add('qualification__active');
+        tab.classList.add('qualifications__active');
     })
 })
 
-/*==================== SERVICES MODAL ====================*/
-const modalViews = document.querySelectorAll('.services__modal'),
-    modalBtns = document.querySelectorAll('.services__button'),
-    modalCloses = document.querySelectorAll('.services__modal-close');
+/*==================== BLOG MODAL ====================*/
+const modalViews = document.querySelectorAll('.blog__modal'),
+    modalBtns = document.querySelectorAll('.blog__button'),
+    modalCloses = document.querySelectorAll('.blog__modal-close');
 
 let modal = function (modalClick){
     modalViews[modalClick].classList.add('active-modal');
