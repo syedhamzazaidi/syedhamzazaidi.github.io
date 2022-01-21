@@ -1,11 +1,11 @@
 <!--==================== QUALIFICATION ====================-->
 <section class="qualification section">
-    <h2 class="section__title">{{ page.qualifications.title }}</h2>
-    <div class="section__subtitle">{{ page.qualifications.subtext }}</div>
+    <h2 class="section__title">{{ site.data.content.qualifications.title }}</h2>
+    <div class="section__subtitle">{{ site.data.content.qualifications.subtext }}</div>
 
     <div class="qualification__container container">
         <div class="qualification__tabs">
-            {% for tab in page.qualifications.tabs %}
+            {% for tab in site.data.content.qualifications.tabs %}
             <div class="qualification__button button--flex {% if forloop.first == true %}qualification__active{% endif %}" data-target="#{{ tab.title | downcase }}">
                 <i class="uil uil-briefcase-alt qualification__icon {{ tab.icon | default: uil-briefcase-alt }}"></i>
                 {{ tab.title }}
@@ -15,7 +15,7 @@
         </div>
 
         <div class="qualification__sections">
-            {% for tab in page.qualifications.tabs %}
+            {% for tab in site.data.content.qualifications.tabs %}
             <div class="qualification__content {% if forloop.first == true %}qualification__active{% endif %}" data-content id="{{ tab.title | downcase }}">
                 {% for point in tab.points %}
                 {% assign odd = forloop.index | modulo:2 %}

@@ -39,12 +39,12 @@
 
             </div>
             <div class="home__data">
-                <h1 class="home__title">{{ page.landing.title }}</h1>
-                <h3 class="home__subtitle">{{ page.landing.secondtext }}</h3>
-                <p class="home__description">{{ page.landing.thirdtext }}</p>
-                {% if page.landing.button %}
+                <h1 class="home__title">{{ site.data.content.landing.title }}</h1>
+                <h3 class="home__subtitle">{{ site.data.content.landing.secondtext }}</h3>
+                <p class="home__description">{{ site.data.content.landing.thirdtext }}</p>
+                {% if site.data.content.landing.button %}
                 <a href="#contact" class="button button--flex">
-                    {{ page.landing.button }} <i class="uil uil-message button__icon"></i>
+                    {{ site.data.content.landing.button }} <i class="uil uil-message button__icon"></i>
                 </a>
                 {% endif %}
             </div>

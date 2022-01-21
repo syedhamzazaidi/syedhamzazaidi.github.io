@@ -7,11 +7,11 @@ layout: default
 <br />
 {% include home/landing.html %}
 {% include home/about.html %}
-{% if page.skills %}{% include home/skills.html %}{% endif %}
-{% if page.skills-list %}{% include home/skills-list.html %}{% endif %}
-{% if page.qualifications %}{% include home/qualifications.html %}{% endif %}
-{% if page.services %}{% include home/services.html %}{% endif %}
-{% if page.portfolio %}{% include home/portfolio.html %}{% endif %}
+{% if site.data.content.skills %}{% include home/skills.html %}{% endif %}
+{% if site.data.content.skills-list %}{% include home/skills-list.html %}{% endif %}
+{% if site.data.content.qualifications %}{% include home/qualifications.html %}{% endif %}
+{% if site.data.content.services %}{% include home/services.html %}{% endif %}
+{% if site.data.content.portfolio %}{% include home/portfolio.html %}{% endif %}
 <br />
 
 

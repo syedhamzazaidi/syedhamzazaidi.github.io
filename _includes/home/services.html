@@ -1,6 +1,6 @@
 <section class="services section" id="services">
-    <h2 class="section__title">{{ page.services.title }}</h2>
-    <span class="section__subtitle">{{ page.services.subtitle}}</span>
+    <h2 class="section__title">{{ site.data.content.services.title }}</h2>
+    <span class="section__subtitle">{{ site.data.content.services.subtitle}}</span>
 
     <div class="services__container container grid">
         {% for post in site.posts limit: 3 %}

@@ -1,11 +1,11 @@
 <!--==================== PORTFOLIO ====================-->
 <section class="portfolio section" id="portfolio">
-    <h2 class="section__title">{{ page.portfolio.title }}</h2>
-    <span class="section__subtitle">{{ page.portfolio.subtitle }}</span>
+    <h2 class="section__title">{{ site.data.content.portfolio.title }}</h2>
+    <span class="section__subtitle">{{ site.data.content.portfolio.subtitle }}</span>
 
     <div class="portfolio__container container swiper-container">
         <div class="swiper-wrapper">
-            {% for project in page.portfolio.projects %}
+            {% for project in site.data.content.portfolio.projects %}
             <!--======================== PORTFOLIO 1 =============-->
             <div class="portfolio__content grid swiper-slide">
                 <img src="assets/img/{{ project.image }}" alt="" class="portfolio__img">
