@@ -1,53 +1,52 @@
-<!--==================== QUALIFICATION ====================-->
-<section class="qualification section">
+<section class="qualifications section" id="qualifications">
     <h2 class="section__title">{{ site.data.content.qualifications.title }}</h2>
     <div class="section__subtitle">{{ site.data.content.qualifications.subtext }}</div>
 
-    <div class="qualification__container container">
-        <div class="qualification__tabs">
+    <div class="qualifications__container container">
+        <div class="qualifications__tabs">
             {% for tab in site.data.content.qualifications.tabs %}
-            <div class="qualification__button button--flex {% if forloop.first == true %}qualification__active{% endif %}" data-target="#{{ tab.title | downcase }}">
-                <i class="uil uil-briefcase-alt qualification__icon {{ tab.icon | default: uil-briefcase-alt }}"></i>
+            <div class="qualifications__button button--flex {% if forloop.first == true %}qualifications__active{% endif %}" data-target="#{{ tab.title | downcase }}">
+                <i class="uil uil-briefcase-alt qualifications__icon {{ tab.icon | default: uil-briefcase-alt }}"></i>
                 {{ tab.title }}
             </div>
             {% endfor %}
 
         </div>
 
-        <div class="qualification__sections">
+        <div class="qualifications__sections">
             {% for tab in site.data.content.qualifications.tabs %}
-            <div class="qualification__content {% if forloop.first == true %}qualification__active{% endif %}" data-content id="{{ tab.title | downcase }}">
+            <div class="qualifications__content {% if forloop.first == true %}qualifications__active{% endif %}" data-content id="{{ tab.title | downcase }}">
                 {% for point in tab.points %}
                 {% assign odd = forloop.index | modulo:2 %}
                     {% if odd == 1 %}
-                        <div class="qualification__data">
+                        <div class="qualifications__data">
                             <div>
-                                <h3 class="qualification__title">{{ point.title }}</h3>
-                                <span class="qualification__subtitle">{{ point.subtext }}</span>
-                                <div class="qualification__calendar">
+                                <h3 class="qualifications__title">{{ point.title }}</h3>
+                                <span class="qualifications__subtitle">{{ point.subtext }}</span>
+                                <div class="qualifications__calendar">
                                     <i class="uil uil-calendar-alt"></i>
                                     {{ point.dates }}
                                 </div>
                             </div>
 
                             <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
+                                <span class="qualifications__rounder"></span>
+                                <span class="qualifications__line"></span>
                             </div>
                         </div>
                         
                         {% else %}
-                        <div class="qualification__data">
+                        <div class="qualifications__data">
                             <div></div>
                             <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
+                                <span class="qualifications__rounder"></span>
+                                <span class="qualifications__line"></span>
                             </div>
                             
                             <div>
-                                <h3 class="qualification__title">{{ point.title }}</h3>
-                                <span class="qualification__subtitle">{{ point.subtext }}</span>
-                                <div class="qualification__calendar">
+                                <h3 class="qualifications__title">{{ point.title }}</h3>
+                                <span class="qualifications__subtitle">{{ point.subtext }}</span>
+                                <div class="qualifications__calendar">
                                     <i class="uil uil-calendar-alt"></i>
                                     {{ point.dates }}
                                 </div>

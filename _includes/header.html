@@ -3,37 +3,15 @@
       <a href="{{ site.baseurl }}/#" class="nav__logo">{{ site.author.name }}</a>
       <div class="nav__menu" id="nav-menu">
           <ul class="nav__list grid">
+              {% for topic in site.data.content %}
+              {% capture topic-name %}{{ topic[0] | split: "-" | first | strip }}{% endcapture %}
               <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#home" class="nav__link active-link">
-                      <i class="uil uil-estate nav__icon"></i> Home
+                  <a href="{{ site.baseurl }}/#{{ topic-name }}" class="nav__link {% if forloop.first %}active-link{% endif %}">
+                      <i class="uil uil-estate nav__icon"></i> {{ topic-name | capitalize }}
                   </a>
               </li>
-              <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#about" class="nav__link">
-                      <i class="uil uil-user nav__icon"></i> About
-                  </a>
-              </li>
-              <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#skills" class="nav__link">
-                      <i class="uil uil-file-alt nav__icon"></i> Skills
-                  </a>
-              </li>
-              <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#services" class="nav__link">
-                      <i class="uil uil-briefcase-alt nav__icon"></i> Services
-                  </a>
-              </li>
-              <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#portfolio" class="nav__link">
-                      <i class="uil uil-scenery nav__icon"></i> Portfolio
-                  </a>
-              </li>
-              <li class="nav__item">
-                  <a href="{{ site.baseurl }}/#contact" class="nav__link">
-                      <i class="uil uil-estate nav__icon"></i> Contact Me
-                  </a>
-              </li>
-          </ul>
+              {% endfor %}
+         </ul>
           <i class="uil uil-times nav__close" id="nav-close"></i>
       </div>
 
