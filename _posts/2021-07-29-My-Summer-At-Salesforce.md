@@ -1,6 +1,7 @@
 ---
 layout: post
 title: My Summer at Salesforce
+thumbnail: salesforce-sf.jpeg
 ---
 Aloha!
 

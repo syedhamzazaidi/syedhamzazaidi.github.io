@@ -40,10 +40,7 @@ layout: default
 {% endcomment %}
 
 <section class="post section">
-  {%- capture default-banner -%}
-  {{ site.baseurl }}/assets/img/banner.jpeg
-  {%- endcapture -%}
-  <img class ="post__banner" src="{{ page.thumbnail | default: default-banner }}">
+  <img src="{{ site.baseurl }}/assets/thumbnails/{{ page.thumbnail | default: 'default.jpeg' }}">
   <h2 class="section__title">{{ page.title }}</h2>
   <span class="section__subtitle">{{ page.subtitle }}</span>
   {%- assign date_format =  "%b %-d, %Y" -%}
