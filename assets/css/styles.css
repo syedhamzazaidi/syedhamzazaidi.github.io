@@ -1316,3 +1316,50 @@ img{
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/*==================== BLOG ====================*/
+
+.blog body{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: #7f7fd5;
+    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+
+.container__card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    margin-block: 2rem;
+    gap: 2rem;
+}
+
+.card img{
+    display: block;
+    object-fit: cover;
+    color: inherit;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: clamp(20rem, calc(20rem + 2vw), 22rem);
+    overflow: hidden;
+    box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: var(--body-color);
+    background: linear-gradient(to right, var(--container-color), var(--body-color));
+    border: solid 1px var(--first-color);
+}
+
+.card__body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-bottom: 1rem;
+    color: var(--text-color);
+    line-height: 1.1rem;
+}

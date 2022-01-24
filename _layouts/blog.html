@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<section class="blog section">
+    <h2 class="section__title">Blog</h2>
+    <span class="section__subtitle">My Words</span>
+    <div class="container__card grid">
+        {% for post in site.posts %}
+        <a href="{{ post.url }}">
+            <div class="card">
+                <div class="card__header">
+                    <img src="{{ site.baseurl }}/assets/thumbnails/{{ post.thumbnail | default: 'default.jpeg' }}" alt="card__image" class="card__image" width="400">
+                </div>
+                <div class="card__body">
+                    <h3>{{post.title}}</h3>
+                    <small>{{ post.date | date_to_string }}</small>
+                    <small>{{ post.content | truncate:100 }}</small>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
