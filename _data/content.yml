@@ -8,7 +8,7 @@ home:
 
 about:
     title: About Me
-    subtext: Here's a little bit about me 
+    subtitle: Here's a little bit about me
     content: >
         I'm interested in working on Artifical Intelligence / Machine Learning Projects - 
         especially Computer Vision. Apart from coding, I also enjoy reading and writing.
@@ -31,7 +31,7 @@ about:
 
 # skills:
 #     title: Skills
-#     subtext: I'm good at these things
+#     subtitle: I'm good at these things
 
 skills-list:
     title: Skills
@@ -64,7 +64,7 @@ skills-list:
 
 qualifications:
     title: Qualifications
-    subtext: My qualifications
+    subtitle: My qualifications
     tabs:
     -
         title: Education
@@ -72,15 +72,15 @@ qualifications:
         points:
         -
             title: B.E. Electronics & Instrumentation Engg.
-            subtext: Birla Institute of Technology & Science, Pilani
+            subtitle: Birla Institute of Technology & Science, Pilani
             dates: August, 2018 - July, 2022
         -
             title: Higher Secondary School Certificate
-            subtext: Delhi Public School, Greater Noida
+            subtitle: Delhi Public School, Greater Noida
             dates: July, 2015 - June, 2017
         -
             title: Secondary School Certificate
-            subtext: Delhi Public School, Greater Noida
+            subtitle: Delhi Public School, Greater Noida
             dates: July, 2013 - June, 2015
     -
         title: Work
@@ -88,11 +88,11 @@ qualifications:
         points:
         -
             title: Salesforce
-            subtext: SWE Contractor
+            subtitle: SWE Contractor
             dates: October, 2021 - Present
         -
             title: Salesforce
-            subtext: SWE Summer Intern
+            subtitle: SWE Summer Intern
             dates: June, 2021 - July, 2021
 
 blog:
