@@ -3,7 +3,7 @@
     <span class="section__subtitle">{{ site.data.content.blog.subtitle}}</span>
 
     <div class="blog__container container grid">
-        {% for post in site.posts limit: 3 %}
+        {% for post in site.posts limit: 5 %}
         <div class="blog__content">
             <div>
                 <i class="uil {{ block.icon }} blog__icon"></i>
@@ -12,35 +12,8 @@
                 <p><time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                     {{ post.date | date: date_format }}
                 </time></p>
-
                 <a href="{{ post.url }}" class="button button-flex button--link">Read &rarr;</a>
-
-                {% comment %}
-                <div class="blog__modal">
-                    <div class="blog__modal-content">
-                        <h4 class="blog__modal-title">Backend <br> Developer</h4>
-                        <i class="uil uil-times blog__modal-close"></i>
-
-                        <ul class="blog__modal-blog grid">
-                            <li class="blog__modal-service">
-                                <i class="uil uil-check-circle blog__modal-icon"></i>
-                                <p>I design Web Architecture.</p>
-                            </li>
-
-                            <li class="blog__modal-service">
-                                <i class="uil uil-check-circle blog__modal-icon"></i>
-                                <p>I create structural backbone of the platform.</p>
-                            </li>
-
-                            <li class="blog__modal-service">
-                                <i class="uil uil-check-circle blog__modal-icon"></i>
-                                <p>I maintain version control tools.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                {% endcomment %}
-            </div>
+           </div>
         </div>
         {% endfor %}
     </div>
