@@ -6,13 +6,21 @@
         {% for post in site.posts limit: 5 %}
         <div class="blog__content">
             <div>
-                <i class="uil {{ block.icon }} blog__icon"></i>
+                <i class="uil blog__icon"></i>
                 <h3 class="blog__title">{{ post.title }}</h3>
                 {%- assign date_format =  "%b %-d, %Y" -%}
                 <p><time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                     {{ post.date | date: date_format }}
                 </time></p>
                 <a href="{{ post.url }}" class="button button-flex button--link">Read &rarr;</a>
+           </div>
+        </div>
+        <div class="blog__content">
+            <div>
+                <i class="uil blog__icon"></i>
+                <h3 class="blog__title">Check out the Blog!</h3>
+                <p>-</p>
+                <a href="{{ site.baseurl }}/blog" class="button button-flex button--link">Read &rarr;</a>
            </div>
         </div>
         {% endfor %}
