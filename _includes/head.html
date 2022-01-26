@@ -11,7 +11,7 @@
   <!--==================== CSS ====================-->
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/styles.css">
 
-  <title>{{ site.author.name }}'s Portfolio</title>
+  <title>{%- if page.title -%}{{ page.title }} | {% endif -%}{{ site.author.name }}'s Portfolio</title>
   {%- include custom-head.html -%}
   {%- include google-analytics.html -%}
 </head>
