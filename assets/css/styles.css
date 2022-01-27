@@ -149,7 +149,8 @@ img{
 /*==================== REUSABLE CSS CLASSES ====================*/
 .section{
     padding: 2rem 0 4rem;
-    min-height: 80vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
 .section__title{
