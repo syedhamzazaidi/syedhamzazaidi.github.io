@@ -1,18 +1,18 @@
 ---
 home:
     title: Hi, I'm Hamza
-    secondtext: A Software Developer
-    thirdtext: >
-        I'm currently a final year undergrad at BITS Pilani, India. I love working with code. This website is currently a work-in-progress. Please ignore any incom
+    subtitle: A Software Developer
+    content: >
+        I'm a final year undergrad at BITS Pilani, India.
+        Currently exploring everything from WebDev to Blockchain.
+        This website is currently a work-in-progress. Please ignore any incomp
     # button: Click Me!
 
 about:
     title: About Me
-    subtitle: Here's a little bit about me
+    subtitle: Because I like talking about myself
     content: >
-        I'm interested in working on Artifical Intelligence / Machine Learning Projects - 
-        especially Computer Vision. Apart from coding, I also enjoy reading and writing.
-
+        I'm currently working on my undergraduate thesis on the topic: {TBD}
     stats:
         -
             number: 1
@@ -26,8 +26,7 @@ about:
             number: 1 
             line1: Hackathon
             line2: Win
-
-    button: Check Out My CV
+    button: Check Out My Resume
 
 # skills:
 #     title: Skills
@@ -37,26 +36,23 @@ skills-list:
     title: Skills
     subtitle: I'm good at these things
     topics:
-        languages:
+        Languages:
             - Python
             - C
             - C++
             - Java
             - Go
-
-        ML frameworks:
+        ML Frameworks:
             - PyTorch
             - Tensorflow & Keras
             - NumPy
             - Pandas
             - MatPlotLib
             - OpenCV
-
-        Web frameworks:
+        Web Frameworks:
             - Flask
             - Jekyll & Liquid
-
-        tools:
+        Tools:
             - Bash
             - Git & Github
             - Docker
@@ -64,7 +60,7 @@ skills-list:
 
 qualifications:
     title: Qualifications
-    subtitle: My qualifications
+    subtitle: Where I've Been / Where I Am
     tabs:
     -
         title: Education
@@ -98,16 +94,6 @@ qualifications:
 blog:
     title: Blog
     subtitle: Words by me
-    blocks:
-    -
-        title: My Summer at Salesforce1
-        icon: uil-arrow 
-    -
-        title: My Summer at Salesforce2
-        icon: uil-arrow
-    -
-        title: My Summer at Salesforce3
-        icon: uil-arrow
 
 # portfolio:
 #     title: Portfolio

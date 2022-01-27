@@ -6,7 +6,7 @@
       <div class="skills__content">
         {% for topic in site.data.content.skills-list.topics %}
         <div class="skills_list__content">
-          <h1 class="skills__title">{{ topic[0] | capitalize }}</h1>
+          <h1 class="skills__title">{{ topic[0] }}</h1>
           <ul>
             {% for item in topic[1] %}
             <li class="skillz__category__item">{{ item }}</li>
