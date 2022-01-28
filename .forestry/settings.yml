@@ -12,8 +12,8 @@ sections:
 - type: jekyll-pages
   label: Pages
   create: all
-upload_dir: assets/img; /assets/thumbnails
-public_path: "/assets/img; /assets/thumbnails"
+upload_dir: assets/thumbnails
+public_path: "/assets/thumbnails"
 front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
