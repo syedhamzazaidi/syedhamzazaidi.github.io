@@ -50,6 +50,7 @@ exclude:
  - setup.sh
  - Gemfile
  - Gemfile.lock
+ - [vendor]
 
 plugins:
  - jekyll-feed
