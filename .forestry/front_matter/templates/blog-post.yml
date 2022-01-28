@@ -1,0 +1,15 @@
+---
+label: Blog post
+hide_body: false
+fields:
+- type: text
+  name: layout
+  label: layout
+  hidden: true
+  default: post
+- type: text
+  name: title
+  label: title
+- type: file
+  name: thumbnail
+  label: thumbnail
