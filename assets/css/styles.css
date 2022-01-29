@@ -1007,7 +1007,8 @@ img{
     position: fixed;
     right: 1rem;
     bottom: 5rem;
-    background-color: var(--first-color);
+    font-size: 2rem;
+    text-shadow: 0px 0px 8px var(--first-color);
     opacity: .8;
     padding: 0 .3rem;
     border-radius: .4rem;
@@ -1016,7 +1017,7 @@ img{
 }
 
 .scrollup:hover{
-    background-color: var(--first-color-alt);
+    text-shadow: 0px 0px 12px var(--first-color-alt);
 }
 
 .scrollup__icon{
