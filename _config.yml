@@ -47,6 +47,7 @@ exclude:
  - Dockerfile
  - LICENSE.txt
  - README.md
+ - README
  - setup.sh
  - Gemfile
  - Gemfile.lock
