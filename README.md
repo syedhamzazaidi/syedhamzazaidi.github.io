@@ -6,7 +6,7 @@ There is a lack of good developer portfolio templates for Jekyll, so I decided t
 
 ## Theme Preview
 
-![Theme preview](README/preview.gif)
+![Theme preview](README/Preview.gif)
 
 ## Live Demo
 
