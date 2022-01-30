@@ -1,8 +1,8 @@
 # dev-portfolio
 
-There is a lack of good developer portfolio templates for Jekyll, so I decided to convert an existing html+css template to a jekyll one so it can be used easily with github-pages.
+There is a lack of modern developer portfolio templates for Jekyll, so I decided to convert an existing html+css template to a jekyll one so it can be used easily with github-pages.
 
-##### ***Disclaimer:*** Before I go on and take credit for barely doing any work, I would like to give credit to the original creator of the html+css template. Link to their tutorial here: [Responsive Personal Portfolio Website Using HTML CSS And JavaScript | Dark/Light Mode](https://youtu.be/27JtRAI3QO8). I have not been able to contact them and get permission to turn it into a jekyll theme but the tutorial contains all the code and is public so its fine... right? I'll take the repo down in case I'm asked to.
+##### ***Disclaimer:*** Before I go on and take credit for barely doing any work, I would like to give credit to the original creator of the html+css template. Link to their tutorial here: [Responsive Personal Portfolio Website Using HTML CSS And JavaScript | Dark/Light Mode](https://youtu.be/27JtRAI3QO8). I have not been able to contact them and get permission to turn it into a jekyll theme but the tutorial contains all the code and is public so I guess its fine... right? I'll take the repo down in case I'm asked to.
 
 ## Theme Preview
 
@@ -23,7 +23,7 @@ If you're running it for the first time, execute the included `setup.sh` bash sc
 $ bash setup.sh
 ```
 
-Then spin up the docker containers whenever you would like to test out the site locally:
+Then spin up the docker container whenever you would like to test out the site locally:
 
 ```shell
 $ docker start -a jekyll-env
@@ -35,13 +35,17 @@ $ docker start -a jekyll-env
 $ docker stop jekyll-env
 ```
 
-For testing, launch `localhost:4000` on your browser. The website is updated live with any changes you make, so there's no need to stop/start the container everytime you make a change.
+For testing, launch `localhost:4000` on your browser. The website is updated live with any changes you make, so there's no need to restart the container everytime you make a change to the website. Just refresh the browser and it will update to the latest changes.
 
 ## Contents At-A-Glance
 
-A lot of the structing is similar to Jekyll's default theme, 'Minima'. 
+The structing is similar to Jekyll's default theme, 'Minima'. 
 
-The reason I made the jekyll template is to abstract the content from the implementation. And for the same reason, I'm going to skip over the structure of layouts and includes and get straight to how to setup your portfolio. There is no need to change anything in the HTML/CSS/JS files to setup your own portfolio. Just make the following changes to `_config.yml` and `_data/content.yml`
+The reason I made the jekyll template is to abstract the content from the implementation and for the same reason I'm going to skip over the structure of *_layouts* and *_includes* and get straight to how to add your add to the portfolio. 
+
+First, fork the repo to `<your_github_username>.github.io` to use it with github pages.
+
+There is no need to change anything in the HTML/CSS/JS files to setup your own portfolio. Just make the following changes to `_config.yml` and `_data/content.yml`
 
 
 ### *_config.yml*
@@ -65,7 +69,7 @@ socials: # To generate social links in the footer, there are more options in the
   instagram: hamxa.xaidi
   linkedin: syed-hamza-zaidi
 
-exclude: # Excludes files and folders in the build
+exclude: # Excludes the following files and folders in the build
  - Dockerfile
  - LICENSE.txt
  - README.md
@@ -73,7 +77,7 @@ exclude: # Excludes files and folders in the build
  - setup.sh
  - Gemfile
  - Gemfile.lock
- - [vendor]
+ - [vendor] # This is necessary if you plan on using forestry.io
 
 plugins: # Idk what these do but I'm scared to remove them at this point
  - jekyll-feed
@@ -91,7 +95,7 @@ plugins: # Idk what these do but I'm scared to remove them at this point
 # Blog
 ![Blog](README/Blog.png)
 
-Okay, so I've added this entire section by myself.
+Okay, so I've added this entire section myself — so it might be buggy lol. Raise an Issue if anything isn't working and I'll try my best to fix it. 
 
  If you want to add a blog post, add it under `_posts`. It is formatted exactly the way it is for Minima. File name should be `YYYY-MM-DD-<Title>.md` and the first few lines will look like this:
 
@@ -107,7 +111,7 @@ thumbnail: <link to file placed in assets/thumbnails>.jpeg, defaults to 'default
 
 ### Customizing templates
 
-Jekyll and Liquid isn't very difficult to master, try your hand at it. The [README.md of Minima](https://github.com/jekyll/minima), jekyll's default theme is a pretty good place to start. Create a PR if you build something cool, I would love to see it.
+Jekyll and Liquid isn't very difficult to master, I encourage you to try your hand at it. The [README.md of Minima](https://github.com/jekyll/minima), Jekyll's default theme is a pretty good place to start. Create a PR if you build something cool, I would love to merge it.
 
 ### Dark mode
 
