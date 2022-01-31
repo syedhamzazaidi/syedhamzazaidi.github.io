@@ -101,17 +101,17 @@ blog:
 #     projects:
 #     -
 #         title: Project 1
-#         subtitle: Subtitle 1
+#         description: Description 1
 #         image: portfolio1.jpg
 #         button: Clicky!
 #     -
 #         title: Project 2
-#         subtitle: Subtitle 2
+#         description: Description 2
 #         image: portfolio2.jpg
 #         button: Check it out!
 #     -
 #         title: Project 3
-#         subtitle: Subtitle 3
+#         description: Description 3
 #         image: portfolio3.jpg
 #         button: Yolo
      
