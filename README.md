@@ -20,7 +20,7 @@ I've setup a docker container because I did not want to install ruby on my lapto
 If you're running it for the first time, execute the included `setup.sh` bash script:
 
 ```shell
-$ bash setup.sh
+$ ./setup.sh
 ```
 
 Then spin up the docker container whenever you would like to test out the site locally:
