@@ -981,6 +981,14 @@ img{
     margin-top: 1rem;
 }
 
+.footer__subtitle a {
+    color: white;
+}
+
+.footer__subtitle a:hover {
+    text-decoration: underline;
+}
+
 .footer__links{
     display: flex;
     flex-direction: column;
