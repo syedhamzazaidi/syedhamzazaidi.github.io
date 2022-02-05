@@ -9,6 +9,7 @@ description: > # this means to ignore newlines until "show_excerpts:"
 google-analytics: G-024QNHMS9W
 
 date_format: "%b %-d, %Y"
+permalink: /blog/:title/
 
 # generate social links in footer
 socials:
