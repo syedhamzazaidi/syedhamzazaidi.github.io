@@ -37,6 +37,8 @@ $ docker stop jekyll-env
 
 For testing, launch `localhost:4000` on your browser. The website is updated live with any changes you make, so there's no need to restart the container everytime you make a change to the website. Just refresh the browser and it will update to the latest changes.
 
+Alternatively, if you like to not install anything on your machine, I'd suggest importing your fork into [forestry.io](forestry.io). It won't allow you to edit `_config.yml` and `data/content.yml` files but you can add and edit blog posts through it.
+
 ## Contents At-A-Glance
 
 The structing is similar to Jekyll's default theme, 'Minima'. 
@@ -53,7 +55,7 @@ There is no need to change anything in the HTML/CSS/JS files to setup your own p
 ```yaml
 title: <Title for your website>
 author:
-  name: <Your name/pseudonym> # This is used in the title and footer
+  name: <Your name/pseudonym> # This is used in the header and footer
   title: <A label for yourself> # This shows up in the footer
 description: > # Description for the website
   <Enter a description for the website \
@@ -95,7 +97,7 @@ plugins: # Idk what these do but I'm scared to remove them at this point
 # Blog
 ![Blog](README/Blog.png)
 
-Okay, so I've added this entire section myself — so it might be buggy lol. Raise an Issue if anything isn't working and I'll try my best to fix it. 
+Okay, so I've added this entire section myself — so it might be buggy lol. Raise an Issue if anything isn't working and I'll try my best to fix it, or fix it yourself and create a PR.
 
  If you want to add a blog post, add it under `_posts`. It is formatted exactly the way it is for Minima. File name should be `YYYY-MM-DD-<Title>.md` and the first few lines will look like this:
 
@@ -111,7 +113,7 @@ thumbnail: <link to file placed in assets/thumbnails>.jpeg, defaults to 'default
 
 ### Customizing templates
 
-Jekyll and Liquid isn't very difficult to master, I encourage you to try your hand at it. The [README.md of Minima](https://github.com/jekyll/minima), Jekyll's default theme is a pretty good place to start. Create a PR if you build something cool, I would love to merge it.
+Jekyll and Liquid are pretty easy to master, I encourage you to try your hand at it. The [README.md of Minima](https://github.com/jekyll/minima), Jekyll's default theme is a pretty good place to start. Create a PR if you build something cool, I would love to merge it.
 
 ### Dark mode
 
