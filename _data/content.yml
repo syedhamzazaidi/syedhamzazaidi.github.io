@@ -84,8 +84,12 @@ qualifications:
         points:
         -
             title: Salesforce
+            subtitle: Associate Member of Technical Staff
+            dates: July, 2022 - Present
+        -
+            title: Salesforce
             subtitle: SWE Contractor
-            dates: October, 2021 - Present
+            dates: October, 2021 - May, 2022
         -
             title: Salesforce
             subtitle: SWE Summer Intern
