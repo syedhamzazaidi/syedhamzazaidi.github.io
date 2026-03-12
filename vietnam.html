@@ -793,86 +793,54 @@
           </linearGradient>
         </defs>
 
-        <!-- Vietnam simplified outline -->
-        <path class="vietnam-outline" d="
-          M148,18 C152,16 158,15 164,18 C170,22 174,28 176,36
-          C178,44 182,50 186,54 C190,58 192,64 190,72
-          C188,78 184,82 180,88 C176,94 172,100 170,108
-          C168,114 164,118 160,122 C156,126 154,132 154,138
-          C154,144 156,150 158,156 C160,162 160,168 158,174
-          C156,180 152,184 148,188 C144,192 140,198 138,204
-          C136,210 136,216 138,222 C140,228 142,234 142,240
-          C140,246 136,250 132,254 C128,258 126,264 126,270
-          C126,276 128,282 130,288 C132,294 132,300 130,306
-          C128,312 124,316 120,320 C116,324 114,330 114,336
-          C114,342 116,348 118,354 C120,360 120,366 118,372
-          C116,378 112,382 110,388 C108,394 108,400 110,406
-          C112,412 116,416 118,422 C120,428 120,434 118,440
-          C116,444 112,446 108,448 C104,450 100,454 98,460
-          C96,466 98,472 102,476 C106,480 112,482 116,486
-          C120,490 122,494 120,498 C118,502 114,504 110,504
-          C106,504 102,502 98,498
-          M98,498 C94,494 90,492 86,494 C82,496 80,500 82,504
-          C84,508 88,510 92,510 C96,510 98,508 98,504 C98,500 98,498 98,498
-          M176,36 C180,34 184,36 186,40 C188,44 186,48 186,54
-          M164,18 C160,14 154,12 148,14 C142,16 138,20 136,26
-          C134,32 130,36 126,38 C122,40 118,44 118,50
-          C118,56 120,60 124,62 C128,64 130,68 130,74
-          C130,80 126,84 122,86 C118,88 116,92 118,96
-          C120,100 124,102 128,104 C132,106 134,110 134,116
-          C134,122 130,126 126,128 C122,130 120,134 120,140
-          C120,146 122,150 126,152 C130,154 132,158 132,164
-          C132,170 128,174 124,176 C120,178 118,182 118,188
-          C118,194 120,200 124,204 C128,208 130,212 130,218
-          C130,224 126,228 122,230 C118,232 116,236 118,242
-          C120,248 124,250 128,252 C132,254 132,254 132,254
-        "/>
+        <!-- Vietnam country outline (from Natural Earth GeoJSON) -->
+        <path class="vietnam-outline" d="M213.4,74.8L170.7,103.2L144.1,134.6L137.1,157.6L161.5,192.6L191.4,236.0L220.4,256.6L239.8,283.2L254.4,344.7L250.1,403.1L223.4,425.0L186.9,446.4L160.8,474.1L121.0,505.0L109.4,483.7L118.4,461.2L94.7,442.3L122.3,429.0L155.9,426.5L141.8,406.4L195.5,380.9L199.4,341.1L192.0,318.9L197.9,285.7L189.8,262.2L165.6,239.1L145.5,209.9L119.0,170.6L80.7,150.7L89.9,138.8L110.3,130.1L97.9,101.1L58.6,100.9L44.3,70.7L25.6,44.5L42.7,36.4L68.2,36.5L99.3,32.7L126.5,15.0L141.9,27.5L171.1,33.5L166.0,52.7L181.2,66.2L213.4,74.8Z"/>
 
-        <!-- Route path glow -->
-        <path class="route-path-glow" d="M120,460 C122,440 130,420 136,400 L142,330 C144,310 148,290 148,270 L146,240 C144,220 140,200 138,180 L140,140 C142,120 146,100 150,80 L148,60 C146,50 142,42 138,36"/>
+        <!-- Route: HCMC → Da Nang → Hanoi → Ha Giang → (back to Hanoi) → Phong Nha -->
+        <path class="route-path-glow" d="M168,431 C180,400 200,340 219,258 C215,230 170,170 143,92 C135,70 120,45 115,33"/>
+        <path class="route-path" d="M168,431 C180,400 200,340 219,258 C215,230 170,170 143,92 C135,70 120,45 115,33"/>
+        <path class="route-arrow" d="M168,431 C180,400 200,340 219,258 C215,230 170,170 143,92 C135,70 120,45 115,33"/>
 
-        <!-- Route path dashed -->
-        <path class="route-path" d="M120,460 C122,440 130,420 136,400 L142,330 C144,310 148,290 148,270 L146,240 C144,220 140,200 138,180 L140,140 C142,120 146,100 150,80 L148,60 C146,50 142,42 138,36"/>
-
-        <!-- Animated directional arrows along route -->
-        <path class="route-arrow" d="M120,460 C122,440 130,420 136,400 L142,330 C144,310 148,290 148,270 L146,240 C144,220 140,200 138,180 L140,140 C142,120 146,100 150,80 L148,60 C146,50 142,42 138,36"/>
+        <!-- Ha Giang → Hanoi → Phong Nha leg -->
+        <path class="route-path-glow" d="M115,33 C120,50 135,70 143,92 C148,120 155,160 157,206" opacity="0.5"/>
+        <path class="route-path" d="M115,33 C120,50 135,70 143,92 C148,120 155,160 157,206" style="stroke-dasharray:3 6"/>
 
         <!-- Phong Nha → Hanoi flight path -->
-        <path class="flight-path" d="M148,270 C160,230 165,180 150,80"/>
-        <text class="flight-label" x="168" y="180" transform="rotate(-75,168,180)">flight back</text>
+        <path class="flight-path" d="M157,206 C175,170 170,130 143,92"/>
+        <text class="flight-label" x="176" y="155" transform="rotate(-70,176,155)">flight back</text>
 
         <!-- ── HCMC Pin ── -->
-        <g class="map-pin" transform="translate(120,460)">
+        <g class="map-pin" transform="translate(168,431)">
           <circle class="pin-outer" cx="0" cy="0" r="10" stroke="var(--hcmc)"/>
           <circle class="pin-inner" cx="0" cy="0" r="5" fill="var(--hcmc)"/>
-          <text class="map-pin-label" x="-42" y="-18">HCMC</text>
-          <text class="map-pin-dates" x="-42" y="-9">Mar 28–30</text>
-          <rect class="map-pin-nights" x="-44" y="14" width="42" height="13" rx="6" fill="var(--hcmc-light)"/>
-          <text x="-38" y="23" style="font-size:6px;font-weight:600;fill:#c0392b;font-family:Inter,sans-serif;">2–3 nights</text>
+          <text class="map-pin-label" x="-52" y="-18">HCMC</text>
+          <text class="map-pin-dates" x="-52" y="-9">Mar 28–30</text>
+          <rect class="map-pin-nights" x="-54" y="14" width="42" height="13" rx="6" fill="var(--hcmc-light)"/>
+          <text x="-48" y="23" style="font-size:6px;font-weight:600;fill:#c0392b;font-family:Inter,sans-serif;">2–3 nights</text>
         </g>
 
         <!-- ── Da Nang Pin ── -->
-        <g class="map-pin" transform="translate(142,330)">
+        <g class="map-pin" transform="translate(219,258)">
           <circle class="pin-outer" cx="0" cy="0" r="10" stroke="var(--danang)"/>
           <circle class="pin-inner" cx="0" cy="0" r="5" fill="var(--danang)"/>
-          <text class="map-pin-label" x="18" y="-10">Da Nang</text>
-          <text class="map-pin-dates" x="18" y="-1">Mar 30 – Apr 2</text>
-          <rect class="map-pin-nights" x="18" y="4" width="38" height="13" rx="6" fill="var(--danang-light)"/>
-          <text x="23" y="13" style="font-size:6px;font-weight:600;fill:#1a7a73;font-family:Inter,sans-serif;">3 nights</text>
+          <text class="map-pin-label" x="16" y="-10">Da Nang</text>
+          <text class="map-pin-dates" x="16" y="-1">Mar 30 – Apr 2</text>
+          <rect class="map-pin-nights" x="16" y="4" width="38" height="13" rx="6" fill="var(--danang-light)"/>
+          <text x="21" y="13" style="font-size:6px;font-weight:600;fill:#1a7a73;font-family:Inter,sans-serif;">3 nights</text>
         </g>
 
         <!-- ── Hanoi Pin ── -->
-        <g class="map-pin" transform="translate(150,80)">
+        <g class="map-pin" transform="translate(143,92)">
           <circle class="pin-outer" cx="0" cy="0" r="10" stroke="var(--hanoi)"/>
           <circle class="pin-inner" cx="0" cy="0" r="5" fill="var(--hanoi)"/>
-          <text class="map-pin-label" x="18" y="-10">Hanoi</text>
-          <text class="map-pin-dates" x="18" y="-1">Apr 3–6 &amp; 14–16</text>
-          <rect class="map-pin-nights" x="18" y="4" width="36" height="13" rx="6" fill="var(--hanoi-light)"/>
-          <text x="24" y="13" style="font-size:6px;font-weight:600;fill:#8a7200;font-family:Inter,sans-serif;">5 nights</text>
+          <text class="map-pin-label" x="16" y="-10">Hanoi</text>
+          <text class="map-pin-dates" x="16" y="-1">Apr 3–6 &amp; 14–16</text>
+          <rect class="map-pin-nights" x="16" y="4" width="36" height="13" rx="6" fill="var(--hanoi-light)"/>
+          <text x="22" y="13" style="font-size:6px;font-weight:600;fill:#8a7200;font-family:Inter,sans-serif;">5 nights</text>
         </g>
 
         <!-- ── Ha Giang Pin ── -->
-        <g class="map-pin" transform="translate(138,36)">
+        <g class="map-pin" transform="translate(115,33)">
           <circle class="pin-outer" cx="0" cy="0" r="10" stroke="var(--hagiang)"/>
           <circle class="pin-inner" cx="0" cy="0" r="5" fill="var(--hagiang)"/>
           <text class="map-pin-label" x="-60" y="-10">Ha Giang</text>
@@ -882,30 +850,30 @@
         </g>
 
         <!-- ── Phong Nha Pin ── -->
-        <g class="map-pin" transform="translate(148,270)">
+        <g class="map-pin" transform="translate(157,206)">
           <circle class="pin-outer" cx="0" cy="0" r="10" stroke="var(--phongnha)"/>
           <circle class="pin-inner" cx="0" cy="0" r="5" fill="var(--phongnha)"/>
-          <text class="map-pin-label" x="-60" y="-10">Phong Nha</text>
-          <text class="map-pin-dates" x="-60" y="-1">Apr 11–12</text>
+          <text class="map-pin-label" x="-62" y="-10">Phong Nha</text>
+          <text class="map-pin-dates" x="-62" y="-1">Apr 11–12</text>
           <rect class="map-pin-nights" x="-58" y="4" width="34" height="13" rx="6" fill="var(--phongnha-light)"/>
           <text x="-54" y="13" style="font-size:6px;font-weight:600;fill:#6c3483;font-family:Inter,sans-serif;">1 night</text>
         </g>
 
         <!-- Order numbers along route -->
-        <circle cx="130" cy="400" r="7" fill="var(--hcmc)" opacity="0.2"/>
-        <text x="130" y="403" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hcmc);font-family:Inter,sans-serif;">1</text>
+        <circle cx="190" cy="370" r="7" fill="var(--hcmc)" opacity="0.2"/>
+        <text x="190" y="373" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hcmc);font-family:Inter,sans-serif;">1</text>
 
-        <circle cx="142" cy="300" r="7" fill="var(--danang)" opacity="0.2"/>
-        <text x="142" y="303" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--danang);font-family:Inter,sans-serif;">2</text>
+        <circle cx="215" cy="300" r="7" fill="var(--danang)" opacity="0.2"/>
+        <text x="215" y="303" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--danang);font-family:Inter,sans-serif;">2</text>
 
-        <circle cx="145" cy="150" r="7" fill="var(--hanoi)" opacity="0.2"/>
-        <text x="145" y="153" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hanoi);font-family:Inter,sans-serif;">3</text>
+        <circle cx="155" cy="140" r="7" fill="var(--hanoi)" opacity="0.2"/>
+        <text x="155" y="143" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hanoi);font-family:Inter,sans-serif;">3</text>
 
-        <circle cx="140" cy="56" r="7" fill="var(--hagiang)" opacity="0.2"/>
-        <text x="140" y="59" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hagiang);font-family:Inter,sans-serif;">4</text>
+        <circle cx="125" cy="60" r="7" fill="var(--hagiang)" opacity="0.2"/>
+        <text x="125" y="63" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--hagiang);font-family:Inter,sans-serif;">4</text>
 
-        <circle cx="148" cy="220" r="7" fill="var(--phongnha)" opacity="0.2"/>
-        <text x="148" y="223" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--phongnha);font-family:Inter,sans-serif;">5</text>
+        <circle cx="148" cy="160" r="7" fill="var(--phongnha)" opacity="0.2"/>
+        <text x="148" y="163" text-anchor="middle" style="font-size:7px;font-weight:700;fill:var(--phongnha);font-family:Inter,sans-serif;">5</text>
       </svg>
     </div>
   </div>
