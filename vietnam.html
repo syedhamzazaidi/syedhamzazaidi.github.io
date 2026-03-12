@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vietnam 🇻🇳 — April 2026 Itinerary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --hcmc: #ff6b6b;
+    --hcmc-light: #fff0f0;
+    --danang: #4ecdc4;
+    --danang-light: #e8faf8;
+    --hanoi: #ffd93d;
+    --hanoi-light: #fffbe6;
+    --hagiang: #6bcb77;
+    --hagiang-light: #eefbef;
+    --phongnha: #9b59b6;
+    --phongnha-light: #f5eef8;
+    --bg: #fafaf9;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:
+      linear-gradient(135deg, rgba(218,41,28,0.45) 0%, rgba(255,107,107,0.4) 25%, rgba(255,217,61,0.3) 50%, rgba(78,205,196,0.4) 75%, rgba(107,203,119,0.45) 100%),
+      url('https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80&auto=format') center/cover no-repeat,
+      linear-gradient(135deg, #da291c 0%, #ff6b6b 25%, #ffd93d 50%, #4ecdc4 75%, #6bcb77 100%);
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+  }
+
+  .hero-flag {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    opacity: 0.9;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+  }
+
+  .hero-stat .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    z-index: 2;
+    animation: bounce 2s ease infinite;
+    color: #fff;
+    font-size: 1.5rem;
+    opacity: 0.7;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* ── Route Map ── */
+  .route-section {
+    padding: 5rem 2rem;
+    background: #fff;
+  }
+
+  .route-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .route-map {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .route-visual {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    padding: 2rem 0;
+    overflow-x: auto;
+  }
+
+  .route-line {
+    position: absolute;
+    top: 24px;
+    left: 5%;
+    right: 5%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--hcmc), var(--danang) 30%, var(--hanoi) 55%, var(--hagiang) 75%, var(--phongnha));
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  .route-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: rgba(255,255,255,0.5);
+    animation: routePulse 3s ease-in-out infinite;
+    border-radius: 2px;
+  }
+
+  @keyframes routePulse {
+    0% { width: 0; left: 0; }
+    50% { width: 30%; }
+    100% { width: 0; left: 100%; }
+  }
+
+  .route-stop {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 120px;
+  }
+
+  .route-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid;
+  }
+
+  .route-dot:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+
+  .route-stop .stop-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .route-stop .stop-dates {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .route-stop .stop-nights {
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+
+  /* ── Timeline ── */
+  .timeline-section {
+    padding: 5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-section .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.05rem;
+  }
+
+  .gantt {
+    position: relative;
+    overflow-x: auto;
+    margin-bottom: 3rem;
+  }
+
+  .gantt-grid {
+    display: grid;
+    grid-template-columns: 140px repeat(21, 1fr);
+    gap: 0;
+    min-width: 800px;
+  }
+
+  .gantt-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem 0.15rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .gantt-header.label-cell {
+    text-align: right;
+    padding-right: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .gantt-row {
+    display: contents;
+  }
+
+  .gantt-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: right;
+    padding: 0.75rem 1rem 0.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gantt-label .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .gantt-cell {
+    border-bottom: 1px solid var(--border);
+    border-left: 1px solid #f0f0f0;
+    padding: 0.75rem 0;
+    position: relative;
+  }
+
+  .gantt-bar {
+    height: 28px;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+
+  .gantt-bar:hover {
+    opacity: 1;
+  }
+
+  /* ── Destination Cards ── */
+  .destinations {
+    padding: 3rem 2rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .destinations h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .dest-banner {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .dest-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, var(--card-bg), transparent);
+  }
+
+  .dest-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .dest-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .dest-header {
+    padding: 2rem 2.5rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .dest-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .dest-info {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .dest-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .dest-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .dest-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .dest-meta-item .meta-icon {
+    font-size: 1rem;
+  }
+
+  .dest-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dest-body {
+    padding: 0 2.5rem 2rem;
+  }
+
+  .dest-notes {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+  }
+
+  .dest-notes p {
+    margin-bottom: 0.4rem;
+  }
+
+  .dest-notes p:last-child {
+    margin-bottom: 0;
+  }
+
+  .dest-notes .note-label {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* ── Option Tables ── */
+  .options-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .options-table thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .options-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .options-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .options-table tbody tr:hover {
+    background: rgba(0,0,0,0.015);
+  }
+
+  .option-name a {
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .option-name a:hover {
+    text-decoration: underline;
+  }
+
+  .option-name .sold-out {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .option-details {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .option-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 0.5rem;
+  }
+
+  .status-paid {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  .status-soldout {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  /* ── Summary Table ── */
+  .summary-section {
+    padding: 5rem 2rem;
+    background: #fff;
+  }
+
+  .summary-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .summary-table-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-table thead th {
+    background: var(--text);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .summary-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .summary-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .summary-table tbody tr:hover {
+    background: rgba(0,0,0,0.02);
+  }
+
+  .location-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+  }
+
+  .location-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .comment-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer .footer-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .dest-banner { height: 140px; }
+    .dest-header { padding: 1.5rem; }
+    .dest-body { padding: 0 1.5rem 1.5rem; }
+    .route-visual { justify-content: flex-start; gap: 0.5rem; padding: 2rem 1rem; }
+    .route-stop { min-width: 90px; }
+    .route-dot { width: 44px; height: 44px; }
+    .gantt-grid { min-width: 600px; grid-template-columns: 100px repeat(21, 1fr); }
+  }
+
+  /* ── Animations ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .dest-card:nth-child(1) { animation-delay: 0.1s; }
+  .dest-card:nth-child(2) { animation-delay: 0.2s; }
+  .dest-card:nth-child(3) { animation-delay: 0.3s; }
+  .dest-card:nth-child(4) { animation-delay: 0.4s; }
+  .dest-card:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ── Travel connector between cards ── */
+  .travel-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .travel-connector .travel-icon {
+    font-size: 1.2rem;
+  }
+
+  .travel-connector .travel-line {
+    height: 2px;
+    width: 60px;
+    background: var(--border);
+    border-radius: 1px;
+  }
+
+  /* Colors for each destination */
+  .hcmc .dest-icon { background: var(--hcmc-light); }
+  .hcmc .option-name a { color: var(--hcmc); }
+  .hcmc .dest-notes { background: var(--hcmc-light); border-color: var(--hcmc); }
+  .hcmc .badge { background: var(--hcmc-light); color: #c0392b; }
+
+  .danang .dest-icon { background: var(--danang-light); }
+  .danang .option-name a { color: #2d9e96; }
+  .danang .dest-notes { background: var(--danang-light); border-color: var(--danang); }
+  .danang .badge { background: var(--danang-light); color: #1a7a73; }
+
+  .hanoi .dest-icon { background: var(--hanoi-light); }
+  .hanoi .option-name a { color: #c9a800; }
+  .hanoi .dest-notes { background: var(--hanoi-light); border-color: var(--hanoi); }
+  .hanoi .badge { background: var(--hanoi-light); color: #8a7200; }
+
+  .hagiang .dest-icon { background: var(--hagiang-light); }
+  .hagiang .dest-notes { background: var(--hagiang-light); border-color: var(--hagiang); }
+  .hagiang .badge { background: var(--hagiang-light); color: #2d7a36; }
+
+  .phongnha .dest-icon { background: var(--phongnha-light); }
+  .phongnha .dest-notes { background: var(--phongnha-light); border-color: var(--phongnha); }
+  .phongnha .badge { background: var(--phongnha-light); color: #6c3483; }
+</style>
+</head>
+<body>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-flag">🇻🇳</div>
+    <h1>Vietnam</h1>
+    <p class="subtitle">March — April 2026</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="number">5</span>
+        <span class="label">Destinations</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number">~20</span>
+        <span class="label">Days</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number">1,650km</span>
+        <span class="label">North to South</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">&#9660;</div>
+</section>
+
+<!-- ════════════ ROUTE MAP ════════════ -->
+<section class="route-section">
+  <h2>The Route</h2>
+  <div class="route-map">
+    <div class="route-visual">
+      <div class="route-line"></div>
+
+      <div class="route-stop">
+        <div class="route-dot" style="background-image: url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=120&q=80&auto=format'); border-color: var(--hcmc);"></div>
+        <div class="stop-name">Ho Chi Minh City</div>
+        <div class="stop-dates">Mar 28–30</div>
+        <div class="stop-nights" style="background: var(--hcmc-light); color: #c0392b;">2–3 nights</div>
+      </div>
+
+      <div class="route-stop">
+        <div class="route-dot" style="background-image: url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=120&q=80&auto=format'); border-color: var(--danang);"></div>
+        <div class="stop-name">Da Nang</div>
+        <div class="stop-dates">Mar 30–Apr 2</div>
+        <div class="stop-nights" style="background: var(--danang-light); color: #1a7a73;">3 nights</div>
+      </div>
+
+      <div class="route-stop">
+        <div class="route-dot" style="background-image: url('https://images.unsplash.com/photo-1509030450996-dd1a26dda07a?w=120&q=80&auto=format'); border-color: var(--hanoi);"></div>
+        <div class="stop-name">Hanoi</div>
+        <div class="stop-dates">Apr 3–6 &amp; 14–16</div>
+        <div class="stop-nights" style="background: var(--hanoi-light); color: #8a7200;">5 nights</div>
+      </div>
+
+      <div class="route-stop">
+        <div class="route-dot" style="background-image: url('https://images.unsplash.com/photo-1570366583862-f91883984fde?w=120&q=80&auto=format'); border-color: var(--hagiang);"></div>
+        <div class="stop-name">Ha Giang</div>
+        <div class="stop-dates">Apr 6–11</div>
+        <div class="stop-nights" style="background: var(--hagiang-light); color: #2d7a36;">~5 nights</div>
+      </div>
+
+      <div class="route-stop">
+        <div class="route-dot" style="background-image: url('https://images.unsplash.com/photo-1528181304800-259b08848526?w=120&q=80&auto=format'); border-color: var(--phongnha);"></div>
+        <div class="stop-name">Phong Nha</div>
+        <div class="stop-dates">Apr 11–12</div>
+        <div class="stop-nights" style="background: var(--phongnha-light); color: #6c3483;">1 night</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GANTT TIMELINE ════════════ -->
+<section class="timeline-section">
+  <h2>Timeline</h2>
+  <p class="section-sub">March 27 — April 16, 2026</p>
+
+  <div class="gantt">
+    <div class="gantt-grid">
+      <!-- Header row: label + 21 days (Mar 27 to Apr 16) -->
+      <div class="gantt-header label-cell"></div>
+      <div class="gantt-header">27</div>
+      <div class="gantt-header">28</div>
+      <div class="gantt-header">29</div>
+      <div class="gantt-header">30</div>
+      <div class="gantt-header" style="border-left: 2px solid #ccc;">31</div>
+      <div class="gantt-header">1</div>
+      <div class="gantt-header">2</div>
+      <div class="gantt-header">3</div>
+      <div class="gantt-header">4</div>
+      <div class="gantt-header">5</div>
+      <div class="gantt-header">6</div>
+      <div class="gantt-header">7</div>
+      <div class="gantt-header">8</div>
+      <div class="gantt-header">9</div>
+      <div class="gantt-header">10</div>
+      <div class="gantt-header">11</div>
+      <div class="gantt-header">12</div>
+      <div class="gantt-header">13</div>
+      <div class="gantt-header">14</div>
+      <div class="gantt-header">15</div>
+      <div class="gantt-header">16</div>
+
+      <!-- Month labels row -->
+      <div class="gantt-header label-cell" style="font-size:0.7rem; color: var(--text-muted);">Month</div>
+      <div class="gantt-header" style="font-size:0.6rem; color: var(--text-muted);">Mar</div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem; border-left: 2px solid #ccc;"></div>
+      <div class="gantt-header" style="font-size:0.6rem; color: var(--text-muted);">Apr</div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+      <div class="gantt-header" style="font-size:0.6rem;"></div>
+
+      <!-- Ho Chi Minh City: Mar 27/28 – Mar 30 (cols 1-4, i.e. days 27,28,29,30) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--hcmc)"></span> HCMC</div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hcmc); opacity:0.4;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hcmc);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hcmc);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hcmc); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- Da Nang: Mar 30 – Apr 2 (cols 4-7) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--danang)"></span> Da Nang</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--danang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--danang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--danang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--danang); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- Hanoi: Apr 3–6 + Apr 14–16 (cols 8-10 + 18-20) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--hanoi)"></span> Hanoi</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hanoi);"></div></div>
+      </div>
+
+      <!-- Ha Giang: Apr 6–11 (cols 10-15) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--hagiang)"></span> Ha Giang</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--hagiang); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- Phong Nha: Apr 11–12 (cols 15-16) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--phongnha)"></span> Phong Nha</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--phongnha);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--phongnha); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- Hang En: Apr 12–13 (cols 17-18) -->
+      <div class="gantt-row">
+        <div class="gantt-label"><span class="dot" style="background: var(--phongnha)"></span> Hang En</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--phongnha);"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: var(--phongnha); opacity:0.4;"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- Luggage @ Hanoi: Apr 6–14 -->
+      <div class="gantt-row">
+        <div class="gantt-label" style="font-size:0.7rem; color: var(--text-muted);">🧳 Luggage</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar" style="background: repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 4px, #fff 4px, #fff 8px); border: 1px dashed #c9a800;"></div></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="text-align:center; font-size:0.78rem; color: var(--text-muted);">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:3px; opacity:0.4; background:#888; vertical-align:middle; margin-right:4px;"></span> Faded bars = travel/checkout days &nbsp;&nbsp;
+    <span style="display:inline-block; width:20px; height:10px; border-radius:3px; background:repeating-linear-gradient(45deg, var(--hanoi), var(--hanoi) 3px, #fff 3px, #fff 6px); border: 1px dashed #c9a800; vertical-align:middle; margin-right:4px;"></span> Luggage storage at Mad Monkey, Hanoi
+  </div>
+</section>
+
+<!-- ════════════ DESTINATION CARDS ════════════ -->
+<section class="destinations">
+  <h2>Accommodation Details</h2>
+
+  <!-- ── HCMC ── -->
+  <div class="dest-card hcmc fade-in">
+    <div class="dest-banner" style="background-image: url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1200&q=80&auto=format');"></div>
+    <div class="dest-header">
+      <div class="dest-icon">🏙️</div>
+      <div class="dest-info">
+        <h3>Ho Chi Minh City</h3>
+        <div class="dest-meta">
+          <div class="dest-meta-item"><span class="meta-icon">📅</span> March 28 – 30</div>
+          <div class="dest-meta-item"><span class="meta-icon">🌙</span> 2–3 Nights</div>
+          <div class="dest-meta-item"><span class="meta-icon">🎯</span> Social Hostel</div>
+        </div>
+        <div class="dest-badges">
+          <span class="badge">Party</span>
+          <span class="badge">Rooftop Bars</span>
+          <span class="badge">Free Beer</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-body">
+      <div class="dest-notes">
+        <span class="note-label">Notes</span>
+        <p>Ask for early check-in (possibly 3 nights).</p>
+        <p>Leave luggage on Day 3 (March 30) until evening flight.</p>
+        <p>Payment: Cash or card on check-in. 8% surcharge for card payments.</p>
+      </div>
+      <table class="options-table">
+        <thead>
+          <tr><th>Name</th><th>Details</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="option-name"><a href="https://www.hostelworld.com/pwa/hosteldetails.php/Saigon-Rooftops-Hostel/Ho-Chi-Minh/322563?from=2026-03-28&to=2026-03-30&guests=3" target="_blank">Saigon Rooftops Hostel</a> <span class="status-badge status-paid">2 nights paid</span></td>
+            <td class="option-details">PARTY HOSTEL! Free 1 beer each night on the rooftop bar. Breakfast buffet included.</td>
+            <td class="option-price">4-bed dorm<br>9.2k</td>
+          </tr>
+          <tr>
+            <td class="option-name"><a href="https://www.hostelworld.com/pwa/hosteldetails.php/Bui-Vien-Street-Hostel/Ho-Chi-Minh/314239?from=2026-03-28&to=2026-03-30&guests=3" target="_blank">Bui Vien Street Hostel</a></td>
+            <td class="option-details">Breakfast included. Free beer on the rooftop bar. Less party, better dorms.</td>
+            <td class="option-price">4-bed dorm<br>8.2k</td>
+          </tr>
+          <tr>
+            <td class="option-name"><a href="https://www.hostelworld.com/pwa/hosteldetails.php/The-Hideout/Ho-Chi-Minh/84156?from=2026-03-28&to=2026-03-30&guests=3" target="_blank">The Hideout</a></td>
+            <td class="option-details">2 free beers 7–8 PM + happy hours 8–11 PM. Early check-in possible. Party vibe but lower rated than Saigon Rooftops.</td>
+            <td class="option-price">4-bed dorm<br>7.8k (no brekkie)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="travel-connector">
+    <div class="travel-line"></div>
+    <span class="travel-icon">✈️</span>
+    <span>Evening flight to Da Nang</span>
+    <div class="travel-line"></div>
+  </div>
+
+  <!-- ── DA NANG ── -->
+  <div class="dest-card danang fade-in">
+    <div class="dest-banner" style="background-image: url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1200&q=80&auto=format');"></div>
+    <div class="dest-header">
+      <div class="dest-icon">🏖️</div>
+      <div class="dest-info">
+        <h3>Da Nang</h3>
+        <div class="dest-meta">
+          <div class="dest-meta-item"><span class="meta-icon">📅</span> March 30 – April 2</div>
+          <div class="dest-meta-item"><span class="meta-icon">🌙</span> 3 Nights</div>
+          <div class="dest-meta-item"><span class="meta-icon">🎯</span> Beach View, High Floor</div>
+        </div>
+        <div class="dest-badges">
+          <span class="badge">Beach</span>
+          <span class="badge">Apartment</span>
+          <span class="badge">Sea View</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-body">
+      <div class="dest-notes">
+        <span class="note-label">Notes</span>
+        <p>Late arrival on travel day from HCMC.</p>
+        <p>Leave luggage on checkout day (April 2) until night for overnight bus.</p>
+      </div>
+      <table class="options-table">
+        <thead>
+          <tr><th>Name</th><th>Details</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="option-name"><span class="sold-out">MercuryBeach — Luxury 2BR/3Beds Seaview</span> <span class="status-badge status-soldout">Sold Out</span></td>
+            <td class="option-details">Sea view. Massive, well-decorated apartment.</td>
+            <td class="option-price">15k / 3 nights<br>~1.85k/person/night</td>
+          </tr>
+          <tr>
+            <td class="option-name"><a href="https://www.airbnb.co.in/rooms/1223732123955778872?adults=3&check_in=2026-03-30&check_out=2026-04-02" target="_blank">ChamEco House — Dragon Bridge</a></td>
+            <td class="option-details">Big and spacious. Everyone gets their own beds. 3 min walk from Dragon Bridge. Nice restaurants nearby.</td>
+            <td class="option-price">₹18,997 total</td>
+          </tr>
+          <tr>
+            <td class="option-name"><a href="https://www.airbnb.co.in/rooms/987949846497419957?check_in=2026-03-30&check_out=2026-04-02&guests=1&adults=3" target="_blank">Apt Opposite Beach w/ Netflix</a></td>
+            <td class="option-details">Apartment looks average overall. Great view though.</td>
+            <td class="option-price">16,996 / 3 nights</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="travel-connector">
+    <div class="travel-line"></div>
+    <span class="travel-icon">🚌</span>
+    <span>Overnight bus to Hanoi</span>
+    <div class="travel-line"></div>
+  </div>
+
+  <!-- ── HANOI ── -->
+  <div class="dest-card hanoi fade-in">
+    <div class="dest-banner" style="background-image: url('https://images.unsplash.com/photo-1509030450996-dd1a26dda07a?w=1200&q=80&auto=format');"></div>
+    <div class="dest-header">
+      <div class="dest-icon">🏯</div>
+      <div class="dest-info">
+        <h3>Hanoi</h3>
+        <div class="dest-meta">
+          <div class="dest-meta-item"><span class="meta-icon">📅</span> April 3–6 &amp; April 14–16</div>
+          <div class="dest-meta-item"><span class="meta-icon">🌙</span> 3 + 2 Nights</div>
+          <div class="dest-meta-item"><span class="meta-icon">🧳</span> Luggage Base Apr 6–14</div>
+        </div>
+        <div class="dest-badges">
+          <span class="badge">Party Hostel</span>
+          <span class="badge">Luggage Storage</span>
+          <span class="badge">Laundry</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-body">
+      <div class="dest-notes">
+        <span class="note-label">Notes</span>
+        <p>Leave luggage April 6 (Monday) until night for overnight bus to Ha Giang.</p>
+        <p>Plan: keep bulk luggage at Mad Monkey for Ha Giang + Phong Nha duration, check once on the 11th to refresh stuff.</p>
+      </div>
+      <table class="options-table">
+        <thead>
+          <tr><th>Name</th><th>Details</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="option-name"><a href="https://www.hostelworld.com/pwa/hosteldetails.php/Mad-Monkey-Hanoi/Hanoi/316827?from=2026-04-03&to=2026-04-06&guests=3" target="_blank">Mad Monkey Hostels</a></td>
+            <td class="option-details">PARTY hostel! Luggage storage option — can keep luggage during Ha Giang & Hang En. They also run a Ha Giang tour (worth checking). Laundry available.</td>
+            <td class="option-price">TBD</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="travel-connector">
+    <div class="travel-line"></div>
+    <span class="travel-icon">🏍️</span>
+    <span>Overnight bus &rarr; Ha Giang Loop</span>
+    <div class="travel-line"></div>
+  </div>
+
+  <!-- ── HA GIANG ── -->
+  <div class="dest-card hagiang fade-in">
+    <div class="dest-banner" style="background-image: url('https://images.unsplash.com/photo-1570366583862-f91883984fde?w=1200&q=80&auto=format');"></div>
+    <div class="dest-header">
+      <div class="dest-icon">🏔️</div>
+      <div class="dest-info">
+        <h3>Ha Giang</h3>
+        <div class="dest-meta">
+          <div class="dest-meta-item"><span class="meta-icon">📅</span> April 6–11</div>
+          <div class="dest-meta-item"><span class="meta-icon">🌙</span> ~5 Nights</div>
+          <div class="dest-meta-item"><span class="meta-icon">🎯</span> Tour Covered</div>
+        </div>
+        <div class="dest-badges">
+          <span class="badge">Motorbike Loop</span>
+          <span class="badge">Mountains</span>
+          <span class="badge">Adventure</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-body">
+      <div class="dest-notes">
+        <span class="note-label">Notes</span>
+        <p>Hopefully covered by the tour — hotel only needed for keeping stuff.</p>
+        <p>Check if Mad Monkey Hanoi covers this tour.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="travel-connector">
+    <div class="travel-line"></div>
+    <span class="travel-icon">🚐</span>
+    <span>Transfer to Phong Nha</span>
+    <div class="travel-line"></div>
+  </div>
+
+  <!-- ── PHONG NHA ── -->
+  <div class="dest-card phongnha fade-in">
+    <div class="dest-banner" style="background-image: url('https://images.unsplash.com/photo-1528181304800-259b08848526?w=1200&q=80&auto=format');"></div>
+    <div class="dest-header">
+      <div class="dest-icon">🦇</div>
+      <div class="dest-info">
+        <h3>Phong Nha</h3>
+        <div class="dest-meta">
+          <div class="dest-meta-item"><span class="meta-icon">📅</span> April 11–12</div>
+          <div class="dest-meta-item"><span class="meta-icon">🌙</span> 1 Night</div>
+          <div class="dest-meta-item"><span class="meta-icon">🎯</span> Comfortable</div>
+        </div>
+        <div class="dest-badges">
+          <span class="badge">Caves</span>
+          <span class="badge">Hang En</span>
+          <span class="badge">Nature</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-body">
+      <div class="dest-notes">
+        <span class="note-label">Notes</span>
+        <p>Just need a hotel for one night. After Hang En cave, plan is to leave immediately.</p>
+        <p>If staying after Hang En, need to book April 13–14 separately.</p>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; font-style: italic;">Accommodation options TBD — priority is comfort.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════ SUMMARY TABLE ════════════ -->
+<section class="summary-section">
+  <h2>At a Glance</h2>
+  <div class="summary-table-wrap">
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Dates</th>
+          <th>Nights</th>
+          <th>Hotel</th>
+          <th>Status</th>
+          <th>Key Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--hcmc)"></span> Ho Chi Minh City</div></td>
+          <td>Mar 27/28 – Mar 30</td>
+          <td>2–3</td>
+          <td>Saigon Chill Hostels</td>
+          <td><span class="status-badge status-paid">2 Nights Paid</span></td>
+          <td class="comment-text">Early check-in. Store luggage Day 3. Late flight out.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--danang)"></span> Da Nang</div></td>
+          <td>Mar 30 – Apr 2</td>
+          <td>3</td>
+          <td>TBD</td>
+          <td>—</td>
+          <td class="comment-text">Store luggage checkout day. Overnight bus out.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--hanoi)"></span> Hanoi (1st stay)</div></td>
+          <td>Apr 3 – Apr 6</td>
+          <td>3</td>
+          <td>Mad Monkey?</td>
+          <td>—</td>
+          <td class="comment-text">Store luggage Day 4. Overnight bus to Ha Giang.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--hanoi); opacity:0.5"></span> Luggage @ Hanoi</div></td>
+          <td>Apr 6 – Apr 14</td>
+          <td>—</td>
+          <td>Mad Monkey?</td>
+          <td>—</td>
+          <td class="comment-text">Bulk luggage stored during Ha Giang + Phong Nha. Quick check on 11th.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--hagiang)"></span> Ha Giang</div></td>
+          <td>Apr 6 – Apr 11</td>
+          <td>~5</td>
+          <td>Tour-covered</td>
+          <td>—</td>
+          <td class="comment-text">Motorbike loop. Hotels covered by tour.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--phongnha)"></span> Phong Nha</div></td>
+          <td>Apr 11 – Apr 12</td>
+          <td>1</td>
+          <td>TBD</td>
+          <td>—</td>
+          <td class="comment-text">1 night only. Leave after Hang En. Book 13-14 separately if needed.</td>
+        </tr>
+        <tr>
+          <td><div class="location-cell"><span class="location-dot" style="background:var(--hanoi)"></span> Hanoi (return)</div></td>
+          <td>Apr 14 – Apr 16</td>
+          <td>2</td>
+          <td>Mad Monkey?</td>
+          <td>—</td>
+          <td class="comment-text">Final stay. Collect luggage.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-emoji">🇻🇳 🍜 🏍️ 🏔️ 🦇</div>
+  <p>Vietnam 2026 — Let's gooooo</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
