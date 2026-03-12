@@ -476,12 +476,11 @@ function animate() {
 
   // Billboard cards (face camera)
   cardMeshes.forEach(mesh => {
-    // Get world position of mesh
     const worldPos = new THREE.Vector3();
     mesh.getWorldPosition(worldPos);
-    // Look at camera from world position
+    // Look from camera toward card, then flip — so card faces camera
     const lookMatrix = new THREE.Matrix4();
-    lookMatrix.lookAt(worldPos, camera.position, camera.up);
+    lookMatrix.lookAt(camera.position, worldPos, camera.up);
     const quat = new THREE.Quaternion();
     quat.setFromRotationMatrix(lookMatrix);
     // Convert to local space (undo group rotation)
