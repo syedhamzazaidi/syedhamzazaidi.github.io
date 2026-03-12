@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamza Zaidi — Software Engineer</title>
+<meta name="description" content="Syed Hamza Zaidi — Software Engineer at Salesforce. BITS Pilani '22. Photography, travel, and building things.">
+<meta property="og:title" content="Hamza Zaidi — Software Engineer">
+<meta property="og:description" content="Software Engineer at Salesforce. BITS Pilani '22.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://syedhamzazaidi.github.io">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-024QNHMS9W"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-024QNHMS9W');</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden;font-family:'Inter',sans-serif;color:#fff}
+
+/* Loading */
+.loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;z-index:200;transition:opacity .6s}
+.loading.hidden{opacity:0;pointer-events:none}
+.loading-spinner{width:32px;height:32px;border:2px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.6);border-radius:50%;animation:spin .8s linear infinite}
+.loading p{margin-top:1rem;color:rgba(255,255,255,.4);font-size:.8rem;letter-spacing:.05em}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Canvas */
+#canvas-container{width:100vw;height:100vh;position:fixed;inset:0}
+
+/* Overlay UI */
+.overlay{position:fixed;z-index:10;pointer-events:none}
+.overlay a,.overlay button{pointer-events:auto}
+
+.site-name{top:24px;left:28px;font-family:'Instrument Serif',serif;font-size:1.4rem;font-weight:400;letter-spacing:-.01em;opacity:.85}
+.site-name a{color:#fff;text-decoration:none}
+
+.tagline{bottom:28px;left:0;right:0;text-align:center;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:300}
+
+.social-row{bottom:24px;right:28px;display:flex;gap:16px;align-items:center}
+.social-row a{color:rgba(255,255,255,.45);transition:color .3s;font-size:.75rem;letter-spacing:.04em;text-decoration:none}
+.social-row a:hover{color:#fff}
+
+.hint{top:50%;left:50%;transform:translate(-50%,120px);font-size:.75rem;color:rgba(255,255,255,.3);letter-spacing:.08em;transition:opacity 1.5s;text-align:center}
+.hint.hidden{opacity:0}
+
+/* Mobile tagline + socials stacking */
+@media(max-width:600px){
+  .tagline{bottom:60px;font-size:.65rem}
+  .social-row{bottom:24px;right:0;left:0;justify-content:center}
+  .site-name{top:16px;left:16px;font-size:1.2rem}
+}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100;opacity:0;pointer-events:none;transition:opacity .4s}
+.modal-backdrop.active{opacity:1;pointer-events:auto}
+
+.modal-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);max-width:680px;width:calc(100% - 48px);max-height:calc(100vh - 80px);overflow-y:auto;background:rgba(18,18,24,.95);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:3rem;z-index:101;opacity:0;pointer-events:none;transition:opacity .4s,transform .4s}
+.modal-panel.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.5rem;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all .2s}
+.modal-close:hover{color:#fff;background:rgba(255,255,255,.08)}
+
+/* Modal content styles */
+.modal-panel h2{font-family:'Instrument Serif',serif;font-size:2rem;font-weight:400;margin-bottom:.5rem}
+.modal-panel h3{font-size:1rem;font-weight:600;margin:1.5rem 0 .5rem;color:rgba(255,255,255,.9)}
+.modal-panel p{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.modal-panel .subtitle{font-size:.8rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+
+/* About modal */
+.about-header{display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1.5rem}
+.about-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.about-intro{flex:1}
+.about-intro h2{margin-bottom:.25rem}
+.about-intro .role{font-size:.85rem;color:rgba(255,255,255,.5)}
+
+.timeline{border-left:2px solid rgba(255,255,255,.1);padding-left:1.25rem;margin:1rem 0}
+.timeline-item{margin-bottom:1.25rem;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-1.56rem;top:6px;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.15)}
+.timeline-item .t-title{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.85)}
+.timeline-item .t-sub{font-size:.8rem;color:rgba(255,255,255,.45)}
+.timeline-item .t-date{font-size:.75rem;color:rgba(255,255,255,.3)}
+
+.skills-grid{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.skill-tag{padding:4px 12px;border-radius:20px;font-size:.75rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.08)}
+
+.resume-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;text-decoration:none;font-size:.85rem;margin-top:.5rem;transition:all .2s}
+.resume-btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}
+
+/* Blog modal */
+.blog-date{font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:1.5rem}
+.blog-content p{margin-bottom:1.25rem}
+.blog-content h3{font-size:1.1rem;margin:2rem 0 .75rem;color:rgba(255,255,255,.95);font-family:'Instrument Serif',serif;font-size:1.4rem;font-weight:400}
+
+/* Scrollbar */
+.modal-panel::-webkit-scrollbar{width:4px}
+.modal-panel::-webkit-scrollbar-track{background:transparent}
+.modal-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+
+@media(max-width:600px){
+  .modal-panel{padding:2rem 1.5rem;border-radius:12px}
+  .modal-panel h2{font-size:1.5rem}
+  .about-header{flex-direction:column;align-items:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading" id="loading">
+  <div class="loading-spinner"></div>
+  <p>loading cosmos</p>
+</div>
+
+<!-- Overlay UI -->
+<div class="overlay site-name"><a href="/">Hamza Zaidi</a></div>
+<div class="overlay tagline">software engineer &middot; photographer &middot; traveler</div>
+<div class="overlay social-row">
+  <a href="https://github.com/syedhamzazaidi" target="_blank">github</a>
+  <a href="https://linkedin.com/in/syed-hamza-zaidi" target="_blank">linkedin</a>
+  <a href="https://x.com/athamxa" target="_blank">x</a>
+  <a href="https://instagram.com/hamxa.xaidi" target="_blank">instagram</a>
+</div>
+<div class="overlay hint" id="hint">click a card to explore</div>
+
+<!-- Canvas -->
+<div id="canvas-container"></div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop" id="modal-backdrop"></div>
+
+<!-- Modal panel -->
+<div class="modal-panel" id="modal-panel">
+  <button class="modal-close" id="modal-close">&times;</button>
+  <div id="modal-content"></div>
+</div>
+
+<!-- Hidden modal content templates -->
+<template id="tpl-about">
+  <div class="about-header">
+    <img src="assets/img/about.jpg" alt="Hamza" class="about-photo">
+    <div class="about-intro">
+      <h2>Hamza Zaidi</h2>
+      <div class="role">Software Engineer at Salesforce</div>
+    </div>
+  </div>
+
+  <p>I'm a Software Engineer with 4+ years of experience, currently at Salesforce. I graduated from BITS Pilani in 2022 with a B.E. in Electronics & Instrumentation. Outside of work, I'm into photography, travel, and building side projects — one of which got funded at a hackathon.</p>
+
+  <h3>Work</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="t-title">Associate Member of Technical Staff</div>
+      <div class="t-sub">Salesforce</div>
+      <div class="t-date">July 2022 — Present</div>
+    </div>
+    <div class="timeline-item">
+      <div class="t-title">Software Engineer (Contractor)</div>
+      <div class="t-sub">Salesforce</div>
+      <div class="t-date">October 2021 — May 2022</div>
+    </div>
+    <div class="timeline-item">
+      <div class="t-title">Software Engineer Intern</div>
+      <div class="t-sub">Salesforce</div>
+      <div class="t-date">June 2021 — July 2021</div>
+    </div>
+  </div>
+
+  <h3>Education</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="t-title">B.E. Electronics & Instrumentation</div>
+      <div class="t-sub">BITS Pilani</div>
+      <div class="t-date">2018 — 2022</div>
+    </div>
+  </div>
+
+  <h3>Skills</h3>
+  <div class="skills-grid">
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">Java</span>
+    <span class="skill-tag">Go</span>
+    <span class="skill-tag">JavaScript</span>
+    <span class="skill-tag">TypeScript</span>
+    <span class="skill-tag">React</span>
+    <span class="skill-tag">Docker</span>
+    <span class="skill-tag">Kubernetes</span>
+    <span class="skill-tag">Microservices</span>
+    <span class="skill-tag">REST APIs</span>
+    <span class="skill-tag">CI/CD</span>
+    <span class="skill-tag">PyTorch</span>
+    <span class="skill-tag">PostgreSQL</span>
+    <span class="skill-tag">Git</span>
+    <span class="skill-tag">Bash</span>
+  </div>
+
+  <a href="assets/pdf/resume.pdf" target="_blank" class="resume-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Download Resume
+  </a>
+</template>
+
+<template id="tpl-blog">
+  <h2>My Summer at Salesforce</h2>
+  <div class="blog-date">July 29, 2021</div>
+  <div class="blog-content">
+    <p>Aloha!</p>
+    <p>Most of you probably already know me but in case this goes viral let me quickly introduce myself: My name is Hamza and I'm currently studying Electronics & Instrumentation Engineering at BITS Pilani. Last year, I accepted a summer internship at Salesforce. I'll be very honest, before I joined I had little to no experience working in a corporate. So, when I was offered this opportunity I started searching online trying to get a glimpse of what it is like and coming up short. So as I wrap up my internship after 8 short weeks, I've decided to pen down my experience here in the hopes that it will help provide some insight to that excited incoming intern curious to know what to expect from their first big internship. Another, more personal, reason is I wanted to have a blog post capturing the memories I have made this summer to come back to years down the road as I reminisce about the place where my career began. I've split up my experience into 4 major sections: Onboarding, Social Events, VTO, Hackathon. I've left out my project — mainly because I'm not sure if I'm allowed to disclose it, but it was a rewarding experience where I finally got to apply some of the things I've learned over the years to a real life use-case.</p>
+
+    <h3>Onboarding</h3>
+    <p>Salesforce #futureforce has a unique onboarding experience. We got our offers in the second half of September but our internship was to start in June. This meant we had a lot of time between receiving our offers and the actual joining date. Throughout this period, the onboarding team kept reaching out frequently and setting up small meets to give us updates and clarify any doubts. Not only did these meets act as a way to curb the anxiety about the timeline and status of our internships, they also acted as icebreakers where we got to know each other months before we even joined. The team provided a really smooth experience at each stage from signing the legal documents to shipping and receiving our hardware (we got MacBook Pros).</p>
+    <p>Skipping forward to a week before the actual joining date, the team hosted a session to let us know what all to expect during our first week, which is spent entirely on onboarding new interns. I remember joking to a friend that they have an "onboarding session for the actual onboarding session" — that's just how thorough the team is. During the first week, they got us up to speed on the workings of the company, the tools used (Slack, Quip, GSuite, Org62, Trailhead), while also getting us access to the codebases we were going to be working on. We also had our first connects with our mentors and managers where we were briefed about our projects. As far as I know, all of us got really interesting projects from implementing IR models, working on bots, creating dashboards on the Salesforce platform, to implementing full stack solutions to niche developer problems.</p>
+
+    <h3>Social Events</h3>
+    <p>I'll go over this briefly since this was a different experience for everyone. For us, the team set up two activities: an icebreaker chit-chat session on Gatheround and a virtual escape room where we were split into teams of 4 and had to race other teams in escaping from the room by solving puzzles. These activities provided us with the initial push to start interacting with each other and soon we started setting up weekly game nights and virtual movie parties on our own.</p>
+    <p>We also had a fun Global Coffee Chat program where interns could put up their profiles on a global directory and reach out to others to setup 1-on-1 virtual coffee chats. During the summer, I had around 10 such chats and met a lot of interesting people from around the world, connecting on various things like music, chess, gaming, and even Indian food recipes!</p>
+
+    <h3>VTO</h3>
+    <p>Salesforce has an amazing 1-1-1 model which dedicates 1% of the company's equity, 1% of its product, and 1% of employees' time back to the community. We could take Volunteer Time Off (VTO) which is paid time off to volunteer for causes important to us. I have logged 6 VTO hours this summer contributing to research through the Penguin Watch and NASA Globe Cloud Gaze projects on Zooniverse but definitely, the most impactful thing I've done is help students from underserved communities make their resumes. These students come from struggling backgrounds and have spent a year in a residential program hosted by Navgurukul where they learned programming and soft skills. They are going to be applying to jobs in the coming months and we helped them make their resumes and shared our experiences with the hiring process. Hearing about some of the things they have gone through in life and seeing how determined they are to make it was a really humbling experience.</p>
+
+    <h3>Hackathon</h3>
+    <p>Some of the best advice I've received during my college years is "Say Yes". If you've seen Yes Man starring Jim Carrey, you know what I'm talking about. If you haven't, then I highly encourage you to watch it. So when a friend asked me if I wanted to take part in the InTurn Innovate Hackathon, I said yes without a second thought. We partnered with two more interns and a mentor to form our team LiteForce. We then spent a lot of time brainstorming ideas and then implementing them within a short deadline. This forced us to skip the small talk and go straight to trusting each other. I'd say this is probably one of the best ways of meeting and getting to know new people. We managed to win which put us in the spotlight with managers and directors reaching out to us to learn more about the project and congratulating us on our win!</p>
+
+    <p>All in all, it was a really amazing summer. I'm thankful to everyone at Salesforce for this wonderful experience. I'm also thankful to my seniors who answered all of my questions and doubts before I even accepted the offer. Now it is my turn to carry on that goodwill. If you have any questions or just want to connect, feel free to reach out — my DMs are always open!</p>
+  </div>
+</template>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ─── Config ───
+const SPHERE_RADIUS = 9;
+const PARTICLE_COUNT = window.innerWidth < 600 ? 800 : 1500;
+const ROTATION_SPEED = 0.0004;
+const CARD_SIZE = 2.2;
+
+// ─── Card definitions ───
+const CARDS = [
+  { id:'about',     title:'About Me',          emoji:'👤',  color:'#818cf8', action:{type:'modal'} },
+  { id:'blog',      title:'Salesforce Blog',   emoji:'✍️',  color:'#fbbf24', action:{type:'modal'} },
+  { id:'vietnam',   title:'Vietnam Trip',      emoji:'🇻🇳', color:'#34d399', action:{type:'link', url:'/vietnam'} },
+  { id:'resume',    title:'Resume',            emoji:'📄',  color:'#a78bfa', action:{type:'link', url:'/assets/pdf/resume.pdf', newTab:true} },
+  { id:'github',    title:'GitHub',            emoji:'',    color:'#e2e8f0', action:{type:'link', url:'https://github.com/syedhamzazaidi', newTab:true}, icon:'gh' },
+  { id:'linkedin',  title:'LinkedIn',          emoji:'',    color:'#38bdf8', action:{type:'link', url:'https://linkedin.com/in/syed-hamza-zaidi', newTab:true}, icon:'li' },
+  { id:'x',         title:'X (Twitter)',       emoji:'',    color:'#e2e8f0', action:{type:'link', url:'https://x.com/athamxa', newTab:true}, icon:'x' },
+  { id:'instagram', title:'Instagram',         emoji:'',    color:'#f472b6', action:{type:'link', url:'https://instagram.com/hamxa.xaidi', newTab:true}, icon:'ig' },
+];
+
+// ─── Scene setup ───
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(-10, 1.5, 10);
+
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.enablePan = false;
+controls.minDistance = 5;
+controls.maxDistance = 25;
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const ptLight = new THREE.PointLight(0xffffff, 1);
+ptLight.position.set(10, 10, 10);
+scene.add(ptLight);
+
+// ─── Particle sphere (InstancedMesh for perf) ───
+const group = new THREE.Group();
+scene.add(group);
+
+const particleGeo = new THREE.SphereGeometry(1, 6, 4);
+const particleMat = new THREE.MeshBasicMaterial({ color:0xffffff });
+const particles = new THREE.InstancedMesh(particleGeo, particleMat, PARTICLE_COUNT);
+
+const dummy = new THREE.Object3D();
+const color = new THREE.Color();
+
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  const phi = Math.acos(-1 + (2*i)/PARTICLE_COUNT);
+  const theta = Math.sqrt(PARTICLE_COUNT * Math.PI) * phi;
+  const r = SPHERE_RADIUS + (Math.random()-.5)*4;
+
+  dummy.position.set(
+    r * Math.cos(theta) * Math.sin(phi),
+    r * Math.cos(phi),
+    r * Math.sin(theta) * Math.sin(phi)
+  );
+  const s = Math.random() * 0.005 + 0.005;
+  dummy.scale.setScalar(s);
+  dummy.updateMatrix();
+  particles.setMatrixAt(i, dummy.matrix);
+
+  color.setHSL(Math.random()*0.1 + 0.05, 0.8, 0.6 + Math.random()*0.3);
+  particles.setColorAt(i, color);
+}
+particles.instanceMatrix.needsUpdate = true;
+particles.instanceColor.needsUpdate = true;
+group.add(particles);
+
+// ─── Generate card textures ───
+function generateCardTexture(card) {
+  const size = 512;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  const r = 32;
+  ctx.beginPath();
+  ctx.roundRect(8, 8, size-16, size-16, r);
+  ctx.fillStyle = 'rgba(12, 12, 20, 0.88)';
+  ctx.fill();
+
+  // Border
+  ctx.beginPath();
+  ctx.roundRect(8, 8, size-16, size-16, r);
+  ctx.strokeStyle = card.color + '55';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Top accent line
+  ctx.beginPath();
+  ctx.moveTo(size * 0.2, 12);
+  ctx.lineTo(size * 0.8, 12);
+  ctx.strokeStyle = card.color;
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Emoji or icon text
+  const symbol = card.emoji || getIconSymbol(card.icon);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  if (card.emoji) {
+    ctx.font = '120px serif';
+    ctx.fillText(symbol, size/2, size * 0.38);
+  } else {
+    ctx.font = '600 64px Inter, sans-serif';
+    ctx.fillStyle = card.color;
+    ctx.fillText(symbol, size/2, size * 0.38);
+  }
+
+  // Title
+  ctx.font = '500 36px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.fillText(card.title, size/2, size * 0.68);
+
+  // Subtle hint
+  ctx.font = '300 22px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.fillText(card.action.type === 'modal' ? 'click to open' : 'click to visit', size/2, size * 0.82);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+function getIconSymbol(icon) {
+  const map = { gh:'GitHub', li:'LinkedIn', x:'X', ig:'Insta' };
+  return map[icon] || '';
+}
+
+// ─── Create card meshes ───
+const cardMeshes = [];
+
+CARDS.forEach((card, i) => {
+  const tex = generateCardTexture(card);
+  const geo = new THREE.PlaneGeometry(CARD_SIZE, CARD_SIZE);
+  const mat = new THREE.MeshBasicMaterial({
+    map: tex,
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+
+  const angle = (i / CARDS.length) * Math.PI * 2;
+  // Stagger vertically slightly for visual interest
+  const yOffset = (i % 2 === 0 ? 0.6 : -0.6);
+  mesh.position.set(
+    SPHERE_RADIUS * Math.cos(angle),
+    yOffset,
+    SPHERE_RADIUS * Math.sin(angle)
+  );
+
+  mesh.userData = { card, baseScale: 1 };
+  group.add(mesh);
+  cardMeshes.push(mesh);
+});
+
+// ─── Raycaster interaction ───
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let pointerDown = new THREE.Vector2();
+let hoveredCard = null;
+let isModalOpen = false;
+
+renderer.domElement.addEventListener('pointermove', (e) => {
+  pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+
+renderer.domElement.addEventListener('pointerdown', (e) => {
+  pointerDown.set(e.clientX, e.clientY);
+});
+
+renderer.domElement.addEventListener('pointerup', (e) => {
+  if (isModalOpen) return;
+  const dx = e.clientX - pointerDown.x;
+  const dy = e.clientY - pointerDown.y;
+  if (Math.sqrt(dx*dx + dy*dy) > 6) return; // was a drag
+
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(cardMeshes);
+  if (hits.length > 0) {
+    const { card } = hits[0].object.userData;
+    if (card.action.type === 'modal') {
+      openModal(card.id);
+    } else if (card.action.type === 'link') {
+      if (card.action.newTab) {
+        window.open(card.action.url, '_blank');
+      } else {
+        window.location.href = card.action.url;
+      }
+    }
+  }
+});
+
+// ─── Modal system ───
+const backdrop = document.getElementById('modal-backdrop');
+const panel = document.getElementById('modal-panel');
+const modalContent = document.getElementById('modal-content');
+const closeBtn = document.getElementById('modal-close');
+
+function openModal(id) {
+  const tpl = document.getElementById('tpl-' + id);
+  if (!tpl) return;
+  modalContent.innerHTML = tpl.innerHTML;
+  backdrop.classList.add('active');
+  panel.classList.add('active');
+  isModalOpen = true;
+}
+
+function closeModal() {
+  backdrop.classList.remove('active');
+  panel.classList.remove('active');
+  isModalOpen = false;
+}
+
+closeBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', closeModal);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ─── Animation loop ───
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Rotate sphere
+  group.rotation.y += isModalOpen ? ROTATION_SPEED * 0.2 : ROTATION_SPEED;
+
+  // Billboard cards (face camera)
+  cardMeshes.forEach(mesh => {
+    // Get world position of mesh
+    const worldPos = new THREE.Vector3();
+    mesh.getWorldPosition(worldPos);
+    // Look at camera from world position
+    const lookMatrix = new THREE.Matrix4();
+    lookMatrix.lookAt(worldPos, camera.position, camera.up);
+    const quat = new THREE.Quaternion();
+    quat.setFromRotationMatrix(lookMatrix);
+    // Convert to local space (undo group rotation)
+    const groupQuatInverse = new THREE.Quaternion();
+    group.getWorldQuaternion(groupQuatInverse);
+    groupQuatInverse.invert();
+    quat.premultiply(groupQuatInverse);
+    mesh.quaternion.copy(quat);
+  });
+
+  // Hover detection
+  if (!isModalOpen) {
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObjects(cardMeshes);
+    const hit = hits.length > 0 ? hits[0].object : null;
+
+    if (hoveredCard && hoveredCard !== hit) {
+      hoveredCard.scale.setScalar(hoveredCard.userData.baseScale);
+      hoveredCard.material.opacity = 1;
+    }
+
+    if (hit) {
+      hit.scale.setScalar(1.12);
+      renderer.domElement.style.cursor = 'pointer';
+      hoveredCard = hit;
+    } else {
+      renderer.domElement.style.cursor = 'default';
+      hoveredCard = null;
+    }
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// ─── Init ───
+document.getElementById('loading').classList.add('hidden');
+setTimeout(() => document.getElementById('hint')?.classList.add('hidden'), 4000);
+animate();
+
+// ─── Resize ───
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
