@@ -1,83 +1,68 @@
 ---
 home:
     title: Hi, I'm Hamza
-    subtitle: A Software Developer
+    subtitle: Software Engineer
     content: >
-        I'm a final year undergrad at BITS Pilani, India.
-        Currently exploring everything from WebDev to Blockchain.
-        This website is currently a work-in-progress. Please ignore any incomp
-    # button: Click Me!
+        Building things at Salesforce. Interested in systems, creative tech, and photography.
+        Based in India.
 
 about:
     title: About Me
-    subtitle: Because I like talking about myself
+    subtitle: A bit about what I do
     content: >
-        I'm currently working on my undergraduate thesis on Peer-to-peer trading systems through Smart Contracts on Blockchain
+        I'm a Software Engineer with 4+ years of experience, currently at Salesforce.
+        I graduated from BITS Pilani in 2022 with a B.E. in Electronics & Instrumentation.
+        Outside of work, I'm into photography, travel, and building side projects
+        — one of which got funded at a hackathon.
     stats:
         -
-            number: 1
-            line1: Year of
+            number: 4+
+            line1: Years of
             line2: Experience
         -
-            number: 1
-            line1: Follower 
-            line2: on Github
+            number: 3
+            line1: Roles at
+            line2: Salesforce
         -
-            number: 1 
-            line1: Hackathon
-            line2: Win
+            number: 1
+            line1: Funded
+            line2: Hackathon Project
     button: Check Out My Resume
-
-# skills:
-#     title: Skills
-#     subtitle: I'm good at these things
 
 skills-list:
     title: Skills
-    subtitle: I'm good at these things
+    subtitle: What I work with
     topics:
         Languages:
             - Python
-            - C
-            - C++
             - Java
             - Go
-        ML Frameworks:
-            - PyTorch
-            - Tensorflow & Keras
-            - NumPy
-            - Pandas
-            - MatPlotLib
-            - OpenCV
-        Web Frameworks:
-            - Flask
+            - JavaScript / TypeScript
+            - C / C++
+        Backend & Infrastructure:
+            - Microservices
+            - REST APIs
+            - Docker & Kubernetes
+            - CI/CD Pipelines
+        Frontend:
+            - React
+            - HTML / CSS
             - Jekyll & Liquid
+        Data & ML:
+            - PyTorch
+            - TensorFlow & Keras
+            - NumPy & Pandas
+            - PostgreSQL
         Tools:
-            - Bash
-            - Git & Github
-            - Docker
+            - Git & GitHub
+            - Bash / Shell
             - Postman
+            - Figma
 
 qualifications:
     title: Qualifications
-    subtitle: Where I've Been / Where I Am
+    subtitle: Where I've been
     tabs:
-    -
-        title: Education
-        icon: uil-graduation-cap
-        points:
-        -
-            title: B.E. Electronics & Instrumentation Engg.
-            subtitle: Birla Institute of Technology & Science, Pilani
-            dates: August, 2018 - July, 2022
-        -
-            title: Higher Secondary School Certificate
-            subtitle: Delhi Public School, Greater Noida
-            dates: July, 2015 - June, 2017
-        -
-            title: Secondary School Certificate
-            subtitle: Delhi Public School, Greater Noida
-            dates: July, 2013 - June, 2015
     -
         title: Work
         icon: uil-briefcase-alt
@@ -94,30 +79,31 @@ qualifications:
             title: Salesforce
             subtitle: SWE Summer Intern
             dates: June, 2021 - July, 2021
+    -
+        title: Education
+        icon: uil-graduation-cap
+        points:
+        -
+            title: B.E. Electronics & Instrumentation Engg.
+            subtitle: Birla Institute of Technology & Science, Pilani
+            dates: August, 2018 - July, 2022
+        -
+            title: Higher Secondary School Certificate
+            subtitle: Delhi Public School, Greater Noida
+            dates: July, 2015 - June, 2017
 
 blog:
     title: Blog
     subtitle: Words by me
 
-# portfolio:
-#     title: Portfolio
-#     subtitle: Most Recent Work
-#     projects:
-#     -
-#         title: Project 1
-#         description: Description 1
-#         image: portfolio1.jpg
-#         button: Clicky!
-#     -
-#         title: Project 2
-#         description: Description 2
-#         image: portfolio2.jpg
-#         button: Check it out!
-#     -
-#         title: Project 3
-#         description: Description 3
-#         image: portfolio3.jpg
-#         button: Yolo
-     
----
+itineraries:
+    title: Travel
+    subtitle: Places I'm going
+    trips:
+    -
+        title: Vietnam
+        emoji: "\U0001F1FB\U0001F1F3"
+        dates: March - April 2026
+        description: 5 cities, ~20 days — HCMC, Da Nang, Hanoi, Ha Giang, Phong Nha
+        link: /vietnam
 

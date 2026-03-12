@@ -3,7 +3,7 @@
         <div class="home__content grid">
             <div class="home__social">
             {%- if site.socials.twitter -%}
-                <a href="https://twitter.com/{{ site.socials.twitter | cgi_escape | escape }}" target="_blank" class="home__social-icon">
+                <a href="https://x.com/{{ site.socials.twitter | cgi_escape | escape }}" target="_blank" class="home__social-icon">
                     <i class="uil uil-twitter-alt" ></i>
                 </a>
             {%- endif -%}
@@ -15,6 +15,11 @@
             {%- if site.socials.github -%}
                 <a href="https://github.com/{{ site.socials.github | cgi_escape | escape }}" target="_blank" class="home__social-icon">
                     <i class="uil uil-github-alt"></i>
+                </a>
+            {%- endif -%}
+            {%- if site.socials.instagram -%}
+                <a href="https://instagram.com/{{ site.socials.instagram | cgi_escape | escape }}" target="_blank" class="home__social-icon">
+                    <i class="uil uil-instagram"></i>
                 </a>
             {%- endif -%}
             </div>
