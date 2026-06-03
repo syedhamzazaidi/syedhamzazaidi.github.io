@@ -100,7 +100,7 @@ function editorialStory(project) {
   const { width: w, height: h, slideCount } = project;
   const layers = [
     createLayer("shape", { name: "Warm paper", x: 0, y: 0, w: w * slideCount, h, fill: palette.paper, opacity: 1, shape: "rect" }),
-    createLayer("text", { name: "Deck title", text: "A visual story\\nin motion", x: w * .11, y: h * .15, w: w * .78, h: h * .25, fontFamily: "Playfair Display", fontSize: h * .105, fontWeight: 500, color: palette.ink, lineHeight: .94 }),
+    createLayer("text", { name: "Deck title", text: "A visual story\nin motion", x: w * .11, y: h * .15, w: w * .78, h: h * .25, fontFamily: "Playfair Display", fontSize: h * .105, fontWeight: 500, color: palette.ink, lineHeight: .94 }),
     createLayer("text", { name: "Deck subtitle", text: "Seamless slides · local media · platform exports", x: w * .13, y: h * .48, w: w * .72, h: h * .08, fontSize: h * .023, fontWeight: 700, color: "#6b5f64", align: "center" }),
     createLayer("placeholder", { name: "Wide hero media", x: w * 1.08, y: h * .12, w: w * 1.35, h: h * .52, border: 0 }),
     createLayer("placeholder", { name: "Detail 1", x: w * 2.62, y: h * .18, w: w * .58, h: h * .58, border: 22 }),
@@ -156,7 +156,7 @@ function quoteCards(project) {
   const layers = [createLayer("shape", { name: "Quote background", x: 0, y: 0, w: w * project.slideCount, h, fill: "#15111f", shape: "rect" })];
   for (let i = 0; i < project.slideCount; i++) {
     if (i % 2 === 0) {
-      layers.push(createLayer("text", { name: `Quote ${i + 1}`, text: "“Make the swipe\\nfeel intentional.”", x: i * w + w * .12, y: h * .28, w: w * .76, h: h * .3, fontFamily: "Playfair Display", fontSize: h * .085, fontWeight: 500, color: "#ffffff", align: "center", lineHeight: .98 }));
+      layers.push(createLayer("text", { name: `Quote ${i + 1}`, text: "“Make the swipe\nfeel intentional.”", x: i * w + w * .12, y: h * .28, w: w * .76, h: h * .3, fontFamily: "Playfair Display", fontSize: h * .085, fontWeight: 500, color: "#ffffff", align: "center", lineHeight: .98 }));
       layers.push(createLayer("shape", { name: `Quote accent ${i + 1}`, x: i * w + w * .25, y: h * .64, w: w * .5, h: h * .035, fill: palette.violet, radius: 40 }));
     } else {
       layers.push(createLayer("placeholder", { name: `Quote image ${i + 1}`, x: i * w + w * .12, y: h * .13, w: w * .76, h: h * .66, border: 18, borderColor: "#ffffff" }));
@@ -195,7 +195,7 @@ function verticalCover(project) {
     createLayer("shape", { name: "Vertical background", x: 0, y: 0, w: w * project.slideCount, h, fill: "#0a0712", shape: "rect" }),
     createLayer("placeholder", { name: "Full screen video/photo", x: 0, y: 0, w, h, border: 0 }),
     createLayer("shape", { name: "Caption shade", x: w * .08, y: h * .58, w: w * .84, h: h * .22, fill: "#000000", opacity: .58, radius: 46 }),
-    createLayer("text", { name: "Cover title", text: "HOOK\\nGOES HERE", x: w * .12, y: h * .61, w: w * .76, h: h * .16, fontSize: h * .063, fontWeight: 950, color: "#ffffff", align: "center", lineHeight: .92 }),
+    createLayer("text", { name: "Cover title", text: "HOOK\nGOES HERE", x: w * .12, y: h * .61, w: w * .76, h: h * .16, fontSize: h * .063, fontWeight: 950, color: "#ffffff", align: "center", lineHeight: .92 }),
     createLayer("text", { name: "Safe zone note", text: "Safe for TikTok/Reels UI", x: w * .12, y: h * .79, w: w * .76, h: h * .04, fontSize: h * .022, fontWeight: 700, color: "#d8b4fe", align: "center" })
   ];
 }
