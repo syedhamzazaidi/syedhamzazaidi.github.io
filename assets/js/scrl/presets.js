@@ -158,6 +158,7 @@ export const PLATFORM_PRESETS = [
 export const DEFAULT_PRESET_ID = "ig-portrait";
 export const FONT_OPTIONS = [
   "Inter",
+  "Manrope",
   "Plus Jakarta Sans",
   "DM Sans",
   "Space Grotesk",
