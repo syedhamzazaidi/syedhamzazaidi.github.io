@@ -28,14 +28,14 @@ function starterLayers(project) {
   const h = project.height;
   return [
     createLayer("shape", {
-      name: "Glow background",
+      name: "Ambient glow",
       x: w * .08,
       y: h * .08,
       w: w * 1.35,
       h: h * .58,
       rotation: -7,
-      opacity: .9,
-      fill: "#ff6bcb",
+      opacity: .85,
+      fill: "#16263f",
       stroke: "transparent",
       strokeWidth: 0,
       radius: 90
@@ -47,15 +47,15 @@ function starterLayers(project) {
       w: w * 1.2,
       h: h * .32,
       rotation: 4,
-      opacity: .78,
-      fill: "#67e8f9",
+      opacity: .7,
+      fill: "#5fe3ff",
       stroke: "transparent",
       strokeWidth: 0,
       radius: 80
     }),
     createLayer("text", {
       name: "Hero headline",
-      text: "Design a seamless\\ncarousel in your browser",
+      text: "Design a seamless\ncarousel in your browser",
       x: w * .12,
       y: h * .24,
       w: w * .74,
@@ -74,7 +74,7 @@ function starterLayers(project) {
       h: h * .12,
       fontSize: Math.round(h * .026),
       fontWeight: 600,
-      color: "#f7e7ff",
+      color: "#aab6c8",
       align: "center"
     })
   ];
@@ -216,6 +216,7 @@ export class ProjectStore extends EventTarget {
     const next = this.future.pop();
     this.project = duplicatePlain(next);
     this.history.push(duplicatePlain(next));
+    this.selectedId = this.project.layers.some((l) => l.id === this.selectedId) ? this.selectedId : null;
     this.persistMetadata();
     this.emit();
   }
