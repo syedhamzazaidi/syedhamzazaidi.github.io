@@ -46,10 +46,6 @@
           <button class="btn ghost" id="templatesBtn" title="Browse templates">Templates</button>
         </div>
         <div class="topbar-group">
-          <button class="btn ghost" id="undoBtn" title="Undo (Ctrl/Cmd+Z)">Undo</button>
-          <button class="btn ghost" id="redoBtn" title="Redo (Ctrl/Cmd+Shift+Z)">Redo</button>
-        </div>
-        <div class="topbar-group">
           <button class="btn" id="previewBtn">Preview</button>
           <button class="btn primary" id="exportBtn">Export / Share</button>
         </div>
@@ -82,15 +78,8 @@
       <section class="tab-panel" id="tab-tools">
         <div class="panel-head">
           <h2>Tools</h2>
-          <p>One-tap layouts and canvas settings. Create tools live on the canvas toolbar.</p>
+          <p>Canvas settings and pen options. Create tools live on the canvas toolbar.</p>
         </div>
-        <h3>Quick layouts</h3>
-        <div class="workflow-stack">
-          <button class="btn wide" id="panoramaBtn">Stretch panorama across slides</button>
-          <button class="btn wide" id="whiteBorderBtn">Auto white-border photo dump</button>
-          <button class="btn wide" id="duplicateSlideBtn">Duplicate this slide</button>
-        </div>
-        <hr>
         <h3>Canvas aids</h3>
         <label class="check"><input type="checkbox" id="showGrid" checked> Grid overlay</label>
         <label class="check"><input type="checkbox" id="showSafeZones" checked> Platform safe zones</label>
@@ -123,28 +112,42 @@
     <main class="workspace" id="workspace">
       <div class="canvas-toolbar">
         <div class="status-pill" id="projectMeta">Instagram · 1080×1350 · 5 slides</div>
-        <div class="status-pill warning" id="directPostNotice">Renders locally · never uploaded</div>
       </div>
       <div class="stage-wrap" id="stageWrap">
-        <div class="canvas-tools" id="canvasTools" role="toolbar" aria-label="Create tools">
+        <div class="canvas-tools" id="canvasTools" role="toolbar" aria-label="Tools">
           <button class="ctool active" data-tool="select" title="Select &amp; move — V" aria-label="Select and move (V)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/></svg>
+            <span class="ctool-key" aria-hidden="true">V</span>
           </button>
           <button class="ctool" data-tool="draw" title="Pen / draw — B" aria-label="Pen, draw (B)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 6l4 4"/></svg>
+            <span class="ctool-key" aria-hidden="true">B</span>
           </button>
           <span class="ctool-sep" aria-hidden="true"></span>
           <button class="ctool" id="addTextBtn" title="Add text — T" aria-label="Add text (T)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M12 5v14M9 19h6"/></svg>
+            <span class="ctool-key" aria-hidden="true">T</span>
           </button>
           <button class="ctool" id="addShapeBtn" title="Add shape — R" aria-label="Add shape (R)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
+            <span class="ctool-key" aria-hidden="true">R</span>
           </button>
           <button class="ctool" id="addStickerBtn" title="Add sticker — E" aria-label="Add sticker (E)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5.3L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5L8 12.9 4 9l5.6-.7z"/></svg>
+            <span class="ctool-key" aria-hidden="true">E</span>
           </button>
           <button class="ctool" id="addGridBtn" title="Add photo grid — G" aria-label="Add photo grid (G)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.4"/><rect x="13" y="4" width="7" height="7" rx="1.4"/><rect x="4" y="13" width="7" height="7" rx="1.4"/><rect x="13" y="13" width="7" height="7" rx="1.4"/></svg>
+            <span class="ctool-key" aria-hidden="true">G</span>
+          </button>
+          <span class="ctool-sep" aria-hidden="true"></span>
+          <button class="ctool" id="undoBtn" title="Undo — Ctrl/Cmd+Z" aria-label="Undo (Ctrl or Cmd + Z)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7L4 11l5 4"/><path d="M4 11h8.5a5.5 5.5 0 0 1 0 11H8"/></svg>
+            <span class="ctool-key" aria-hidden="true">⌘Z</span>
+          </button>
+          <button class="ctool" id="redoBtn" title="Redo — Ctrl/Cmd+Shift+Z" aria-label="Redo (Ctrl or Cmd + Shift + Z)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 4-5 4"/><path d="M20 11h-8.5a5.5 5.5 0 0 0 0 11H16"/></svg>
+            <span class="ctool-key" aria-hidden="true">⇧⌘Z</span>
           </button>
         </div>
         <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>

@@ -248,9 +248,6 @@ function bindTabsAndTools() {
   qs("#addShapeBtn").addEventListener("click", addShape);
   qs("#addStickerBtn").addEventListener("click", addSticker);
   qs("#addGridBtn").addEventListener("click", addGrid);
-  qs("#panoramaBtn").addEventListener("click", splitPanoramaFromFirstImage);
-  qs("#whiteBorderBtn").addEventListener("click", makeWhiteBorderDump);
-  qs("#duplicateSlideBtn").addEventListener("click", duplicateCurrentSlide);
   dom.undoBtn.addEventListener("click", () => store.undo());
   dom.redoBtn.addEventListener("click", () => store.redo());
   document.addEventListener("keydown", handleKeys);
@@ -828,78 +825,6 @@ function addGrid() {
   store.mutate((project) => {
     project.layers.push(...buildGrid(project, 2, 2, store.currentSlide, Math.round(project.width * .04)));
   });
-}
-
-function splitPanoramaFromFirstImage() {
-  const imageAsset = [...store.assets.values()].find((asset) => asset.type === "image");
-  if (!imageAsset) {
-    toast("Import a wide photo first, then stretch it across slides.");
-    dom.mediaInput.click();
-    return;
-  }
-  store.mutate((project) => {
-    project.layers = project.layers.filter((layer) => layer.type !== "placeholder");
-    project.layers.push(createLayer("image", {
-      name: "Seamless panorama",
-      assetId: imageAsset.id,
-      x: 0,
-      y: project.height * .14,
-      w: project.width * project.slideCount,
-      h: project.height * .66,
-      fit: "cover",
-      border: 0
-    }));
-  });
-  toast("Panorama spans all slides. Preview or export to slice it up.");
-}
-
-function makeWhiteBorderDump() {
-  const assets = [...store.assets.values()];
-  if (!assets.length) {
-    toast("Import some photos or videos first.");
-    dom.mediaInput.click();
-    return;
-  }
-  store.mutate((project) => {
-    project.layers = project.layers.filter((layer) => !["image", "video", "placeholder"].includes(layer.type));
-    assets.slice(0, project.slideCount).forEach((asset, index) => {
-      project.layers.push(createLayer(asset.type, {
-        name: asset.name,
-        assetId: asset.id,
-        x: index * project.width + project.width * .1,
-        y: project.height * .1,
-        w: project.width * .8,
-        h: project.height * .72,
-        border: project.width * .055,
-        borderColor: "#ffffff",
-        strokeWidth: 3,
-        strokeColor: "#e9e2dc",
-        rotation: index % 2 ? 1.8 : -1.2
-      }));
-    });
-  });
-  toast("Even white borders applied across your media.");
-}
-
-function duplicateCurrentSlide() {
-  const { width, height } = store.project;
-  if (store.project.slideCount >= 20) {
-    toast("Carousels are capped at 20 slides.");
-    return;
-  }
-  const from = store.currentSlide;
-  const to = from + 1;
-  store.mutate((project) => {
-    project.slideCount += 1;
-    project.layers.forEach((layer) => {
-      if (layer.x >= to * width) layer.x += width;
-    });
-    const copies = project.layers
-      .filter((layer) => !(layer.x + layer.w < from * width || layer.x > from * width + width))
-      .map((layer) => ({ ...structuredClone(layer), id: uid("layer"), name: `${layer.name} copy`, x: layer.x + width, z: Date.now() + Math.random() }));
-    project.layers.push(...copies);
-  });
-  store.currentSlide = to;
 }
 
 function resizeProject(newW, newH) {
