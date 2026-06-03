@@ -8,8 +8,8 @@
   <meta property="og:title" content="Swipe Studio — social carousel designer">
   <meta property="og:description" content="A private, client-side editor for Instagram/TikTok carousels, collages, templates, images, videos, and optimized exports.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#11111a">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2311111a'/%3E%3Cpath d='M18 54h38c11 0 20-9 20-20S67 14 56 14H34' fill='none' stroke='%23ff6bcb' stroke-width='9' stroke-linecap='round'/%3E%3Cpath d='M82 46H44c-11 0-20 9-20 20s9 20 20 20h22' fill='none' stroke='%2367e8f9' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#07080b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2307080b'/%3E%3Cpath d='M18 54h38c11 0 20-9 20-20S67 14 56 14H34' fill='none' stroke='%235fe3ff' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M82 46H44c-11 0-20 9-20 20s9 20 20 20h22' fill='none' stroke='%23f3f5f9' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="assets/css/social-design.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
         <div class="brand-mark" aria-hidden="true">S</div>
         <div>
           <h1>Swipe Studio</h1>
-          <p>Move fast. Build to last — locally in your browser.</p>
+          <p>Local · Private · Browser-native</p>
         </div>
       </div>
 
@@ -59,16 +59,16 @@
 
       <section class="tab-panel active" id="tab-templates">
         <div class="panel-head">
-          <h2>Starter templates</h2>
-          <p>Original layouts for seamless stories, collages, photo dumps, and full-screen posts.</p>
+          <h2>Templates</h2>
+          <p>Layouts for stories, collages, and photo dumps.</p>
         </div>
         <div class="template-grid" id="templateGrid"></div>
       </section>
 
       <section class="tab-panel" id="tab-media">
         <div class="panel-head">
-          <h2>Local media</h2>
-          <p>Images/videos stay in this browser. Drop files on the canvas or import here.</p>
+          <h2>Media</h2>
+          <p>Drop files on the canvas or import below.</p>
         </div>
         <input id="mediaInput" type="file" accept="image/*,video/*" multiple hidden>
         <button class="upload-box" id="uploadBtn">
@@ -84,7 +84,7 @@
       <section class="tab-panel" id="tab-tools">
         <div class="panel-head">
           <h2>Create</h2>
-          <p>Add layers and run quick workflows inspired by carousel and white-border tools.</p>
+          <p>Add layers and run quick workflows.</p>
         </div>
         <div class="tool-grid">
           <button class="tool active" data-tool="select">↖ Select</button>
@@ -125,7 +125,7 @@
       <section class="tab-panel" id="tab-layers">
         <div class="panel-head">
           <h2>Layers</h2>
-          <p>Top layers appear first. Lock or hide anything you do not want to move.</p>
+          <p>Top layers render first. Lock or hide to protect.</p>
         </div>
         <div class="layer-list" id="layerList"></div>
       </section>
@@ -134,7 +134,7 @@
     <main class="workspace" id="workspace">
       <div class="canvas-toolbar">
         <div class="status-pill" id="projectMeta">Instagram · 1080×1350 · 5 slides</div>
-        <div class="status-pill warning" id="directPostNotice">Direct posting needs a backend. This studio handles local design + export/share.</div>
+        <div class="status-pill warning" id="directPostNotice">Local design + export · no upload</div>
       </div>
       <div class="stage-wrap" id="stageWrap">
         <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>
@@ -146,7 +146,7 @@
     <aside class="right-panel panel">
       <div class="panel-head">
         <h2>Inspector</h2>
-        <p id="selectionLabel">Select a layer to edit position, filters, text, borders, timing, and visibility.</p>
+        <p id="selectionLabel">Select a layer to edit its properties.</p>
       </div>
 
       <div id="projectInspector" class="inspector-section">
