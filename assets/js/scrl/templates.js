@@ -14,57 +14,97 @@ export const TEMPLATES = [
   {
     id: "editorial-story",
     name: "Editorial story",
-    description: "Magazine-style carousel with headline, captions, and full-bleed media.",
-    accent: palette.pink,
+    description: "Big headline, captions, and full-bleed photos.",
+    accent: palette.cyan,
+    preview: [
+      { kind: "text", x: 10, y: 12, w: 58, h: 9 },
+      { kind: "text", x: 10, y: 26, w: 40, h: 6 },
+      { kind: "media", x: 10, y: 42, w: 80, h: 46 }
+    ],
     apply: (project) => editorialStory(project)
   },
   {
     id: "seamless-panorama",
     name: "Seamless panorama",
-    description: "A continuous band intended for one wide image or connected collage.",
+    description: "One wide photo flows across every slide.",
     accent: palette.cyan,
+    preview: [
+      { kind: "media", x: 6, y: 26, w: 88, h: 44 },
+      { kind: "accent", x: 6, y: 80, w: 66, h: 6 }
+    ],
     apply: (project) => seamlessPanorama(project)
   },
   {
     id: "white-border-dump",
-    name: "White-border photo dump",
-    description: "Gallery borders, outlines, and consistent feed-safe spacing.",
+    name: "White-border dump",
+    description: "Framed photos with even, feed-safe spacing.",
     accent: palette.paper,
+    preview: [
+      { kind: "frame", x: 14, y: 12, w: 72, h: 76 },
+      { kind: "media", x: 21, y: 20, w: 58, h: 60 }
+    ],
     apply: (project) => whiteBorderDump(project)
   },
   {
     id: "grid-collage",
     name: "Grid collage",
-    description: "Structured placeholders with gaps, frames, and rhythm.",
+    description: "Tidy photo grids with consistent gaps.",
     accent: palette.lime,
+    preview: [
+      { kind: "media", x: 10, y: 12, w: 36, h: 36 },
+      { kind: "media", x: 54, y: 12, w: 36, h: 36 },
+      { kind: "media", x: 10, y: 52, w: 36, h: 36 },
+      { kind: "media", x: 54, y: 52, w: 36, h: 36 }
+    ],
     apply: (project) => gridCollage(project)
   },
   {
     id: "quote-cards",
     name: "Quote + image",
-    description: "Alternating quotes and images for a swipeable story deck.",
+    description: "Alternate punchy quotes with photos.",
     accent: palette.violet,
+    preview: [
+      { kind: "text", x: 16, y: 26, w: 68, h: 8 },
+      { kind: "text", x: 26, y: 40, w: 48, h: 8 },
+      { kind: "accent", x: 30, y: 62, w: 40, h: 5 }
+    ],
     apply: (project) => quoteCards(project)
   },
   {
     id: "product-showcase",
     name: "Product showcase",
-    description: "Hero product, feature callouts, and clean commerce slides.",
+    description: "Hero shot, features, and a clear call to action.",
     accent: palette.amber,
+    preview: [
+      { kind: "media", x: 18, y: 12, w: 64, h: 44 },
+      { kind: "text", x: 22, y: 62, w: 56, h: 7 },
+      { kind: "accent", x: 28, y: 78, w: 44, h: 9 }
+    ],
     apply: (project) => productShowcase(project)
   },
   {
     id: "before-after",
     name: "Before / after",
-    description: "Split-screen comparison slides with bold labels.",
+    description: "Side-by-side comparison with bold labels.",
     accent: palette.cyan,
+    preview: [
+      { kind: "text", x: 10, y: 8, w: 30, h: 5 },
+      { kind: "text", x: 58, y: 8, w: 30, h: 5 },
+      { kind: "media", x: 8, y: 20, w: 38, h: 62 },
+      { kind: "media", x: 54, y: 20, w: 38, h: 62 }
+    ],
     apply: (project) => beforeAfter(project)
   },
   {
     id: "vertical-cover",
-    name: "TikTok/Reel cover",
-    description: "Full-screen vertical title, safe-zone friendly.",
-    accent: palette.pink,
+    name: "Story / Reel cover",
+    description: "Full-screen title that stays inside safe zones.",
+    accent: palette.violet,
+    preview: [
+      { kind: "media", x: 8, y: 8, w: 84, h: 84 },
+      { kind: "frame", x: 16, y: 60, w: 68, h: 24 },
+      { kind: "text", x: 26, y: 68, w: 48, h: 8 }
+    ],
     apply: (project) => verticalCover(project)
   }
 ];
