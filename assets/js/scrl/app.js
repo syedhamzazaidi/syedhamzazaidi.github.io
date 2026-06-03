@@ -34,6 +34,8 @@ const dom = {
   previewBtn: qs("#previewBtn"),
   exportBtn: qs("#exportBtn"),
   templateGrid: qs("#templateGrid"),
+  templateModal: qs("#templateModal"),
+  templatesBtn: qs("#templatesBtn"),
   mediaInput: qs("#mediaInput"),
   uploadBtn: qs("#uploadBtn"),
   mediaGrid: qs("#mediaGrid"),
@@ -143,9 +145,14 @@ function init() {
     fitCanvasToStage(false);
     requestRender();
   });
+  dom.templatesBtn.addEventListener("click", openTemplateChooser);
   fitCanvasToStage(true);
   renderAll();
-  toast("Ready — drop photos or videos, or pick a template to begin.");
+  if (!saved) {
+    openTemplateChooser();
+  } else {
+    toast("Welcome back — your last design was restored.");
+  }
 }
 
 function buildPresetOptions() {
@@ -162,13 +169,63 @@ function buildTemplateGrid() {
     </button>
   `;
   }).join("");
-  dom.templateGrid.addEventListener("click", (event) => {
+  dom.templateModal.addEventListener("click", (event) => {
     const button = event.target.closest("[data-template]");
     if (!button) return;
-    store.mutate((project) => applyTemplate(project, button.dataset.template));
-    store.selectedId = null;
-    toast("Template added. Drop your media into the placeholders.");
+    if (button.dataset.template === "__blank__") chooseBlank();
+    else chooseTemplate(button.dataset.template);
   });
+}
+
+function openTemplateChooser() {
+  if (!dom.templateModal.open) dom.templateModal.showModal();
+}
+
+function hasUnsavedDesign() {
+  return !store.project.pristine && store.project.layers.length > 0;
+}
+
+function chooseTemplate(id) {
+  if (hasUnsavedDesign() && !confirm("Replace your current design with this template?")) return;
+  store.mutate((project) => {
+    applyTemplate(project, id);
+    project.templateId = id;
+    project.pristine = true;
+  }, { markDirty: false });
+  store.selectedId = null;
+  store.currentSlide = 0;
+  dom.templateModal.close();
+  fitCanvasToStage(true);
+  toast("Template ready. Drop your media into the placeholders.");
+}
+
+function chooseBlank() {
+  if (hasUnsavedDesign() && !confirm("Clear your current design and start blank?")) return;
+  store.mutate((project) => {
+    project.layers = [];
+    project.templateId = null;
+    project.pristine = true;
+  }, { markDirty: false });
+  store.selectedId = null;
+  store.currentSlide = 0;
+  dom.templateModal.close();
+  fitCanvasToStage(true);
+  toast("Blank canvas ready. Add layers from the toolbar or import media.");
+}
+
+function applySlideCount(value) {
+  const next = Math.max(1, Math.min(20, Number(value) || 1));
+  const project = store.project;
+  if (project.pristine && project.templateId) {
+    store.mutate((proj) => {
+      proj.slideCount = next;
+      applyTemplate(proj, proj.templateId);
+      proj.pristine = true;
+    }, { markDirty: false });
+  } else {
+    store.setSlideCount(next);
+  }
+  fitCanvasToStage(true);
 }
 
 function buildFontOptions() {
@@ -204,26 +261,20 @@ function bindProjectControls() {
     store.applyPreset(dom.presetSelect.value);
     fitCanvasToStage(true);
   });
-  dom.slideCountInput.addEventListener("change", () => {
-    store.setSlideCount(dom.slideCountInput.value);
-    fitCanvasToStage(true);
-  });
+  dom.slideCountInput.addEventListener("change", () => applySlideCount(dom.slideCountInput.value));
   document.querySelectorAll(".stepper-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const step = Number(btn.dataset.step) || 0;
-      const next = Math.max(1, Math.min(20, (Number(dom.slideCountInput.value) || 1) + step));
-      dom.slideCountInput.value = next;
-      store.setSlideCount(next);
-      fitCanvasToStage(true);
+      applySlideCount((Number(dom.slideCountInput.value) || 1) + step);
     });
   });
-  dom.projectNameInput.addEventListener("input", () => store.mutate((project) => { project.name = dom.projectNameInput.value; }, { history: false }));
+  dom.projectNameInput.addEventListener("input", () => store.mutate((project) => { project.name = dom.projectNameInput.value; }, { history: false, markDirty: false }));
   dom.projectWidthInput.addEventListener("change", () => resizeProject(Number(dom.projectWidthInput.value), store.project.height));
   dom.projectHeightInput.addEventListener("change", () => resizeProject(store.project.width, Number(dom.projectHeightInput.value)));
-  dom.projectBgInput.addEventListener("input", () => store.mutate((project) => { project.background = dom.projectBgInput.value; }, { history: false }));
-  dom.showGrid.addEventListener("change", () => store.mutate((project) => { project.showGrid = dom.showGrid.checked; }, { history: false }));
-  dom.showSafeZones.addEventListener("change", () => store.mutate((project) => { project.showSafeZones = dom.showSafeZones.checked; }, { history: false }));
-  dom.snapToggle.addEventListener("change", () => store.mutate((project) => { project.snap = dom.snapToggle.checked; }, { history: false }));
+  dom.projectBgInput.addEventListener("input", () => store.mutate((project) => { project.background = dom.projectBgInput.value; }, { history: false, markDirty: false }));
+  dom.showGrid.addEventListener("change", () => store.mutate((project) => { project.showGrid = dom.showGrid.checked; }, { history: false, markDirty: false }));
+  dom.showSafeZones.addEventListener("change", () => store.mutate((project) => { project.showSafeZones = dom.showSafeZones.checked; }, { history: false, markDirty: false }));
+  dom.snapToggle.addEventListener("change", () => store.mutate((project) => { project.snap = dom.snapToggle.checked; }, { history: false, markDirty: false }));
   dom.zoomRange.addEventListener("input", () => {
     state.viewport.scale = Number(dom.zoomRange.value) / 100 * fitScale();
     centerViewport();
@@ -864,7 +915,7 @@ function resizeProject(newW, newH) {
       layer.x *= sx; layer.y *= sy; layer.w *= sx; layer.h *= sy;
       if (layer.fontSize) layer.fontSize *= sy;
     });
-  });
+  }, { markDirty: false });
   fitCanvasToStage(true);
 }
 

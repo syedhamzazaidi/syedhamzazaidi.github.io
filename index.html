@@ -43,6 +43,9 @@
           </label>
         </div>
         <div class="topbar-group">
+          <button class="btn ghost" id="templatesBtn" title="Browse templates">Templates</button>
+        </div>
+        <div class="topbar-group">
           <button class="btn ghost" id="undoBtn" title="Undo (Ctrl/Cmd+Z)">Undo</button>
           <button class="btn ghost" id="redoBtn" title="Redo (Ctrl/Cmd+Shift+Z)">Redo</button>
         </div>
@@ -55,21 +58,12 @@
 
     <aside class="left-panel panel">
       <div class="tabs" role="tablist" aria-label="Editor panels">
-        <button class="tab active" data-tab="templates">Templates</button>
-        <button class="tab" data-tab="media">Media</button>
+        <button class="tab active" data-tab="media">Media</button>
         <button class="tab" data-tab="tools">Tools</button>
         <button class="tab" data-tab="layers">Layers</button>
       </div>
 
-      <section class="tab-panel active" id="tab-templates">
-        <div class="panel-head">
-          <h2>Templates</h2>
-          <p>Pick a layout, then drop in your own photos and videos.</p>
-        </div>
-        <div class="template-grid" id="templateGrid"></div>
-      </section>
-
-      <section class="tab-panel" id="tab-media">
+      <section class="tab-panel active" id="tab-media">
         <div class="panel-head">
           <h2>Media</h2>
           <p>Drag files onto the canvas, or import them here.</p>
@@ -257,6 +251,23 @@
       </div>
     </aside>
   </div>
+
+  <dialog class="modal" id="templateModal">
+    <form method="dialog" class="modal-card wide chooser">
+      <header>
+        <div>
+          <h2>Start a new design</h2>
+          <p class="muted">Pick a layout to begin — you can swap media and tweak everything after.</p>
+        </div>
+        <button class="icon-btn" value="cancel" id="templateModalClose" aria-label="Close">×</button>
+      </header>
+      <button type="button" class="blank-card" data-template="__blank__">
+        <span class="blank-mark" aria-hidden="true">+</span>
+        <span><strong>Blank canvas</strong><span>Start from scratch with an empty board.</span></span>
+      </button>
+      <div class="template-grid chooser-grid" id="templateGrid"></div>
+    </form>
+  </dialog>
 
   <dialog class="modal" id="previewModal">
     <form method="dialog" class="modal-card wide">
