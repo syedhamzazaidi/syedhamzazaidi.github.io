@@ -266,6 +266,16 @@ export class ProjectStore extends EventTarget {
     this.addLayer(copy, true);
   }
 
+  reorderLayers(idsTopFirst) {
+    this.mutate((project) => {
+      const total = idsTopFirst.length;
+      idsTopFirst.forEach((id, index) => {
+        const layer = project.layers.find((item) => item.id === id);
+        if (layer) layer.z = total - index;
+      });
+    });
+  }
+
   moveLayer(id, delta) {
     this.mutate((project) => {
       const sorted = [...project.layers].sort((a, b) => a.z - b.z);
