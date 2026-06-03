@@ -1,7 +1,7 @@
 import { duplicatePlain, uid, clamp } from "./utils.js";
 import { DEFAULT_PRESET_ID, getPreset } from "./presets.js";
 
-const STORAGE_KEY = "swipe-studio-project-v1";
+const STORAGE_KEY = "swipe-studio-project-v2";
 
 export function createProject(presetId = DEFAULT_PRESET_ID) {
   const preset = getPreset(presetId);
