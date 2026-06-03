@@ -332,7 +332,19 @@ hr {
   display: block;
   width: 100%;
   height: 100%;
+  cursor: default;
+}
+
+.stage-wrap.tool-draw #editorCanvas {
   cursor: crosshair;
+}
+
+.stage-wrap.tool-hand #editorCanvas {
+  cursor: grab;
+}
+
+.stage-wrap.panning #editorCanvas {
+  cursor: grabbing;
 }
 
 .drop-hint {

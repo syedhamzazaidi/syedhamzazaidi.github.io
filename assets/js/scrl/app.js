@@ -122,6 +122,7 @@ const state = {
   tool: "select",
   viewport: { x: 0, y: 0, scale: 1 },
   dragging: null,
+  spacePan: false,
   previewSlide: 0,
   raf: 0,
   hasFitOnce: false,
@@ -251,6 +252,7 @@ function bindTabsAndTools() {
   dom.undoBtn.addEventListener("click", () => store.undo());
   dom.redoBtn.addEventListener("click", () => store.redo());
   document.addEventListener("keydown", handleKeys);
+  document.addEventListener("keyup", handleKeyUp);
 }
 
 function bindProjectControls() {
@@ -469,6 +471,12 @@ function screenToWorld(event) {
 
 function pointerDown(event) {
   dom.canvas.setPointerCapture(event.pointerId);
+  if (state.tool === "hand" || state.spacePan || event.button === 1) {
+    if (event.button === 1) event.preventDefault();
+    state.dragging = { kind: "pan", sx: event.clientX, sy: event.clientY, vx: state.viewport.x, vy: state.viewport.y };
+    dom.stageWrap.classList.add("panning");
+    return;
+  }
   const point = screenToWorld(event);
   store.currentSlide = currentSlideFromX(store.project, point.x);
   if (state.tool === "draw") {
@@ -502,6 +510,13 @@ function pointerDown(event) {
 }
 
 function pointerMove(event) {
+  if (state.dragging?.kind === "pan") {
+    const rect = dom.canvas.getBoundingClientRect();
+    state.viewport.x = state.dragging.vx + (event.clientX - state.dragging.sx) * (dom.canvas.width / rect.width);
+    state.viewport.y = state.dragging.vy + (event.clientY - state.dragging.sy) * (dom.canvas.height / rect.height);
+    requestRender();
+    return;
+  }
   const point = screenToWorld(event);
   if (!state.dragging) return;
   const layer = store.project.layers.find((item) => item.id === state.dragging.layerId || item.id === store.selectedId);
@@ -524,10 +539,13 @@ function pointerMove(event) {
 }
 
 function pointerUp() {
-  if (state.dragging) {
+  if (!state.dragging) return;
+  if (state.dragging.kind === "pan") {
+    dom.stageWrap.classList.remove("panning");
+  } else {
     store.saveHistory();
-    state.dragging = null;
   }
+  state.dragging = null;
 }
 
 function snapLayer(layer) {
@@ -804,6 +822,13 @@ function updateSelected(patch, options) {
 function setTool(tool) {
   state.tool = tool;
   document.querySelectorAll("[data-tool]").forEach((button) => button.classList.toggle("active", button.dataset.tool === tool));
+  updateCanvasCursor();
+}
+
+function updateCanvasCursor() {
+  const panning = state.tool === "hand" || state.spacePan;
+  dom.stageWrap.classList.toggle("tool-hand", panning);
+  dom.stageWrap.classList.toggle("tool-draw", state.tool === "draw" && !panning);
 }
 
 function addText() {
@@ -920,9 +945,18 @@ function handleKeys(event) {
     store.removeLayer(store.selectedId);
     return;
   }
+  if (!inInput && event.code === "Space") {
+    event.preventDefault();
+    if (!state.spacePan) {
+      state.spacePan = true;
+      updateCanvasCursor();
+    }
+    return;
+  }
   if (!inInput && !event.metaKey && !event.ctrlKey && !event.altKey) {
     const shortcuts = {
       v: () => setTool("select"),
+      h: () => setTool("hand"),
       b: () => setTool("draw"),
       t: addText,
       r: addShape,
@@ -934,6 +968,13 @@ function handleKeys(event) {
       event.preventDefault();
       handler();
     }
+  }
+}
+
+function handleKeyUp(event) {
+  if (event.code === "Space" && state.spacePan) {
+    state.spacePan = false;
+    updateCanvasCursor();
   }
 }
 
