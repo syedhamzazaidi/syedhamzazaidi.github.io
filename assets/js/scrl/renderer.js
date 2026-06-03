@@ -154,8 +154,8 @@ function drawElement(ctx, element, x, y, w, h) {
 
 function drawPlaceholder(ctx, layer, options) {
   const grad = ctx.createLinearGradient(0, 0, layer.w, layer.h);
-  grad.addColorStop(0, "rgba(255, 107, 203, .34)");
-  grad.addColorStop(1, "rgba(103, 232, 249, .2)");
+  grad.addColorStop(0, "rgba(95, 227, 255, .26)");
+  grad.addColorStop(1, "rgba(255, 255, 255, .08)");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, layer.w, layer.h);
   if (!options.exportMode) {
@@ -256,7 +256,7 @@ function drawSlideGuides(ctx, project, currentSlide) {
     ctx.strokeStyle = i === currentSlide ? "rgba(103,232,249,.95)" : "rgba(255,255,255,.24)";
     ctx.strokeRect(x, 0, project.width, project.height);
     if (i > 0) {
-      ctx.strokeStyle = "rgba(255,107,203,.82)";
+      ctx.strokeStyle = "rgba(95,227,255,.7)";
       ctx.setLineDash([22, 18]);
       ctx.beginPath();
       ctx.moveTo(x, 0);
