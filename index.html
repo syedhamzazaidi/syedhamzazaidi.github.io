@@ -35,7 +35,11 @@
           </label>
           <label class="field compact">
             <span>Slides</span>
-            <input id="slideCountInput" type="number" min="1" max="20" value="5" aria-label="Slide count">
+            <span class="stepper">
+              <button type="button" class="stepper-btn" data-step="-1" aria-label="Remove a slide">−</button>
+              <input id="slideCountInput" type="number" min="1" max="20" value="5" aria-label="Slide count">
+              <button type="button" class="stepper-btn" data-step="1" aria-label="Add a slide">+</button>
+            </span>
           </label>
         </div>
         <div class="topbar-group">
@@ -60,7 +64,7 @@
       <section class="tab-panel active" id="tab-templates">
         <div class="panel-head">
           <h2>Templates</h2>
-          <p>Layouts for stories, collages, and photo dumps.</p>
+          <p>Pick a layout, then drop in your own photos and videos.</p>
         </div>
         <div class="template-grid" id="templateGrid"></div>
       </section>
@@ -68,64 +72,55 @@
       <section class="tab-panel" id="tab-media">
         <div class="panel-head">
           <h2>Media</h2>
-          <p>Drop files on the canvas or import below.</p>
+          <p>Drag files onto the canvas, or import them here.</p>
         </div>
         <input id="mediaInput" type="file" accept="image/*,video/*" multiple hidden>
         <button class="upload-box" id="uploadBtn">
-          <strong>Import images & videos</strong>
-          <span>JPG, PNG, WebP, GIF, MP4, MOV, WebM</span>
+          <strong>Import photos &amp; videos</strong>
+          <span>JPG · PNG · WebP · GIF · MP4 · MOV · WebM</span>
         </button>
         <div class="media-grid" id="mediaGrid"></div>
         <div class="notice">
-          <strong>Privacy:</strong> media is loaded with local object URLs. It is not uploaded anywhere.
+          <strong>Private by default.</strong> Files stay in this browser and are never uploaded.
         </div>
       </section>
 
       <section class="tab-panel" id="tab-tools">
         <div class="panel-head">
-          <h2>Create</h2>
-          <p>Add layers and run quick workflows.</p>
+          <h2>Tools</h2>
+          <p>One-tap layouts and canvas settings. Create tools live on the canvas toolbar.</p>
         </div>
-        <div class="tool-grid">
-          <button class="tool active" data-tool="select">↖ Select</button>
-          <button class="tool" data-tool="draw">✎ Draw</button>
-          <button class="btn" id="addTextBtn">Add text</button>
-          <button class="btn" id="addShapeBtn">Add shape</button>
-          <button class="btn" id="addStickerBtn">Add sticker</button>
-          <button class="btn" id="addGridBtn">Add grid</button>
+        <h3>Quick layouts</h3>
+        <div class="workflow-stack">
+          <button class="btn wide" id="panoramaBtn">Stretch panorama across slides</button>
+          <button class="btn wide" id="whiteBorderBtn">Auto white-border photo dump</button>
+          <button class="btn wide" id="duplicateSlideBtn">Duplicate this slide</button>
         </div>
         <hr>
-        <div class="workflow-stack">
-          <button class="btn wide" id="panoramaBtn">Split panorama across slides</button>
-          <button class="btn wide" id="whiteBorderBtn">White-border photo dump</button>
-          <button class="btn wide" id="duplicateSlideBtn">Duplicate current slide</button>
-        </div>
-        <details class="panel-collapse">
-          <summary>Canvas aids and drawing settings</summary>
-          <div class="panel-collapse-body">
-            <label class="check"><input type="checkbox" id="showGrid" checked> Grid</label>
-            <label class="check"><input type="checkbox" id="showSafeZones" checked> Safe zones</label>
-            <label class="check"><input type="checkbox" id="snapToggle" checked> Smart snapping</label>
-            <label class="field">
-              <span>Zoom</span>
-              <input id="zoomRange" type="range" min="12" max="180" value="100">
-            </label>
-            <label class="field">
-              <span>Drawing color</span>
-              <input id="drawColor" type="color" value="#ffffff">
-            </label>
-            <label class="field">
-              <span>Drawing size</span>
-              <input id="drawSize" type="range" min="2" max="80" value="16">
-            </label>
-          </div>
-        </details>
+        <h3>Canvas aids</h3>
+        <label class="check"><input type="checkbox" id="showGrid" checked> Grid overlay</label>
+        <label class="check"><input type="checkbox" id="showSafeZones" checked> Platform safe zones</label>
+        <label class="check"><input type="checkbox" id="snapToggle" checked> Snap to edges &amp; centers</label>
+        <label class="field">
+          <span>Zoom</span>
+          <input id="zoomRange" type="range" min="12" max="180" value="100">
+        </label>
+        <hr>
+        <h3>Pen</h3>
+        <label class="field">
+          <span>Color</span>
+          <input id="drawColor" type="color" value="#ffffff">
+        </label>
+        <label class="field">
+          <span>Brush size</span>
+          <input id="drawSize" type="range" min="2" max="80" value="16">
+        </label>
       </section>
 
       <section class="tab-panel" id="tab-layers">
         <div class="panel-head">
           <h2>Layers</h2>
-          <p>Top layers render first. Lock or hide to protect.</p>
+          <p>Drag to reorder — the top layer sits in front.</p>
         </div>
         <div class="layer-list" id="layerList"></div>
       </section>
@@ -134,11 +129,32 @@
     <main class="workspace" id="workspace">
       <div class="canvas-toolbar">
         <div class="status-pill" id="projectMeta">Instagram · 1080×1350 · 5 slides</div>
-        <div class="status-pill warning" id="directPostNotice">Local design + export · no upload</div>
+        <div class="status-pill warning" id="directPostNotice">Renders locally · never uploaded</div>
       </div>
       <div class="stage-wrap" id="stageWrap">
+        <div class="canvas-tools" id="canvasTools" role="toolbar" aria-label="Create tools">
+          <button class="ctool active" data-tool="select" title="Select &amp; move — V" aria-label="Select and move (V)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/></svg>
+          </button>
+          <button class="ctool" data-tool="draw" title="Pen / draw — B" aria-label="Pen, draw (B)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 6l4 4"/></svg>
+          </button>
+          <span class="ctool-sep" aria-hidden="true"></span>
+          <button class="ctool" id="addTextBtn" title="Add text — T" aria-label="Add text (T)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M12 5v14M9 19h6"/></svg>
+          </button>
+          <button class="ctool" id="addShapeBtn" title="Add shape — R" aria-label="Add shape (R)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
+          </button>
+          <button class="ctool" id="addStickerBtn" title="Add sticker — E" aria-label="Add sticker (E)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5.3L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5L8 12.9 4 9l5.6-.7z"/></svg>
+          </button>
+          <button class="ctool" id="addGridBtn" title="Add photo grid — G" aria-label="Add photo grid (G)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.4"/><rect x="13" y="4" width="7" height="7" rx="1.4"/><rect x="4" y="13" width="7" height="7" rx="1.4"/><rect x="13" y="13" width="7" height="7" rx="1.4"/></svg>
+          </button>
+        </div>
         <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>
-        <div class="drop-hint" id="dropHint">Drop images/videos here</div>
+        <div class="drop-hint" id="dropHint">Drop images or videos to place them</div>
       </div>
       <div class="slide-strip" id="slideStrip" aria-label="Slide thumbnails"></div>
     </main>
@@ -239,21 +255,12 @@
           </details>
         </div>
       </div>
-
-      <details class="help-card">
-        <summary>Export notes</summary>
-        <ul>
-          <li>Instagram carousels export every slide at the same size.</li>
-          <li>TikTok/Reels use 1080×1920 with safe-zone overlays for editing only.</li>
-          <li>Video export is browser-dependent: MP4 where available, otherwise WebM/poster fallback.</li>
-        </ul>
-      </details>
     </aside>
   </div>
 
   <dialog class="modal" id="previewModal">
     <form method="dialog" class="modal-card wide">
-      <header><h2>Carousel preview</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></header>
+      <header><h2>Preview carousel</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></header>
       <div class="preview-body">
         <button class="icon-btn" id="prevSlidePreview" type="button">‹</button>
         <canvas id="previewCanvas"></canvas>
@@ -267,18 +274,27 @@
     <form method="dialog" class="modal-card">
       <header><h2>Export & share</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></header>
       <div class="export-grid">
-        <label class="field"><span>Still format</span><select id="exportImageType"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option></select></label>
+        <label class="field"><span>Image format</span><select id="exportImageType"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option></select></label>
         <label class="field"><span>JPEG quality</span><input id="exportQuality" type="range" min=".5" max="1" step=".01" value=".92"></label>
-        <label class="field"><span>Video FPS</span><input id="exportFps" type="number" min="12" max="60" value="30"></label>
-        <label class="field"><span>Video seconds</span><input id="exportSeconds" type="number" min="1" max="60" value="5"></label>
+        <label class="field"><span>Frame rate</span><input id="exportFps" type="number" min="12" max="60" value="30"></label>
+        <label class="field"><span>Clip length (s)</span><input id="exportSeconds" type="number" min="1" max="60" value="5"></label>
       </div>
       <div class="button-stack">
-        <button class="btn primary" id="downloadAllBtn" type="button">Export ZIP / files</button>
-        <button class="btn" id="shareAllBtn" type="button">Share to apps</button>
-        <button class="btn" id="downloadCurrentBtn" type="button">Download current slide</button>
+        <button class="btn primary" id="downloadAllBtn" type="button">Export all slides (ZIP)</button>
+        <button class="btn" id="shareAllBtn" type="button">Share to apps…</button>
+        <button class="btn" id="downloadCurrentBtn" type="button">Download this slide only</button>
       </div>
       <progress id="exportProgress" max="1" value="0" hidden></progress>
-      <div class="notice" id="exportLog">All exports are rendered locally in this browser. Direct Instagram/TikTok API publishing needs a backend, so this app exports or opens the native share sheet instead.</div>
+      <div class="notice" id="exportLog">Everything renders locally — nothing is uploaded. Pick an option above to get your files.</div>
+      <details class="help-card" open>
+        <summary>Export notes</summary>
+        <ul>
+          <li>Carousel slides export at one identical size, named in swipe order.</li>
+          <li>Stories &amp; Reels use 1080×1920; safe-zone guides are editor-only and never exported.</li>
+          <li>Video uses MP4 when your browser supports it, otherwise WebM or a still poster.</li>
+          <li>Direct posting needs a server, so Swipe Studio hands off to your share sheet or downloads.</li>
+        </ul>
+      </details>
     </form>
   </dialog>
 

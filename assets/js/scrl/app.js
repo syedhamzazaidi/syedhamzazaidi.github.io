@@ -5,6 +5,24 @@ import { currentSlideFromX, debounce, downloadBlob, fileExtensionForMime, format
 import { drawProject, hitTest, renderSlideToCanvas, selectionHandleAt, slideHasVideo } from "./renderer.js";
 import { downloadProject, exportCurrentSlide, shareProject } from "./exporters.js";
 
+const LAYER_TYPE_LABELS = { image: "Image", video: "Video", placeholder: "Placeholder", text: "Text", sticker: "Sticker", shape: "Shape", drawing: "Drawing" };
+
+const LAYER_ICONS = {
+  image: `<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M5 19l5-5 4 4 2-2 3 3"/></svg>`,
+  video: `<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>`,
+  placeholder: `<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" stroke-dasharray="3 3"/></svg>`,
+  text: `<svg viewBox="0 0 24 24"><path d="M5 6h14M12 6v12M9 18h6"/></svg>`,
+  sticker: `<svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.3L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5L8 12.9 4 9l5.6-.7z"/></svg>`,
+  shape: `<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>`,
+  drawing: `<svg viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16z"/></svg>`
+};
+
+const ICON_EYE = `<svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>`;
+const ICON_EYE_OFF = `<svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.7 9.7 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.8"/><path d="M6.5 6.6A16.6 16.6 0 0 0 2 12s4 7 10 7a9.5 9.5 0 0 0 3.9-.8"/></svg>`;
+const ICON_LOCK = `<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+const ICON_UNLOCK = `<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7.5A4 4 0 0 1 15.5 6"/></svg>`;
+const ICON_TRASH = `<svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V5.2A1.8 1.8 0 0 1 10.8 3.4h2.4A1.8 1.8 0 0 1 15 5.2V7M7 7l.9 12.4A1.7 1.7 0 0 0 9.6 21h4.8a1.7 1.7 0 0 0 1.7-1.6L17 7"/></svg>`;
+
 const saved = ProjectStore.loadMetadata();
 const store = new ProjectStore(saved || createProject(DEFAULT_PRESET_ID));
 
@@ -127,7 +145,7 @@ function init() {
   });
   fitCanvasToStage(true);
   renderAll();
-  toast("Ready. Drop images or videos to start designing.");
+  toast("Ready — drop photos or videos, or pick a template to begin.");
 }
 
 function buildPresetOptions() {
@@ -135,18 +153,21 @@ function buildPresetOptions() {
 }
 
 function buildTemplateGrid() {
-  dom.templateGrid.innerHTML = TEMPLATES.map((template) => `
+  dom.templateGrid.innerHTML = TEMPLATES.map((template) => {
+    const blocks = (template.preview || []).map((block) => `<i class="tpl-block tpl-${block.kind}" style="left:${block.x}%;top:${block.y}%;width:${block.w}%;height:${block.h}%"></i>`).join("");
+    return `
     <button class="template-card" data-template="${template.id}" style="--template-accent:${template.accent}">
-      <span class="template-mini"></span>
+      <span class="template-mini">${blocks}</span>
       <span><strong>${template.name}</strong><span>${template.description}</span></span>
     </button>
-  `).join("");
+  `;
+  }).join("");
   dom.templateGrid.addEventListener("click", (event) => {
     const button = event.target.closest("[data-template]");
     if (!button) return;
     store.mutate((project) => applyTemplate(project, button.dataset.template));
     store.selectedId = null;
-    toast("Template applied. Replace placeholders with local media.");
+    toast("Template added. Drop your media into the placeholders.");
   });
 }
 
@@ -186,6 +207,15 @@ function bindProjectControls() {
   dom.slideCountInput.addEventListener("change", () => {
     store.setSlideCount(dom.slideCountInput.value);
     fitCanvasToStage(true);
+  });
+  document.querySelectorAll(".stepper-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const step = Number(btn.dataset.step) || 0;
+      const next = Math.max(1, Math.min(20, (Number(dom.slideCountInput.value) || 1) + step));
+      dom.slideCountInput.value = next;
+      store.setSlideCount(next);
+      fitCanvasToStage(true);
+    });
   });
   dom.projectNameInput.addEventListener("input", () => store.mutate((project) => { project.name = dom.projectNameInput.value; }, { history: false }));
   dom.projectWidthInput.addEventListener("change", () => resizeProject(Number(dom.projectWidthInput.value), store.project.height));
@@ -252,7 +282,7 @@ function bindInspector() {
   inspector.delete.addEventListener("click", () => store.removeLayer(store.selectedId));
   inspector.videoTime.addEventListener("input", () => scrubSelectedVideo(Number(inspector.videoTime.value)));
   inspector.videoPlayPause.addEventListener("click", toggleSelectedVideo);
-  inspector.videoPoster.addEventListener("click", () => toast("The current frame is used automatically when exporting poster images."));
+  inspector.videoPoster.addEventListener("click", () => toast("The current frame becomes the still poster on export."));
 }
 
 function bindCanvas() {
@@ -499,7 +529,7 @@ async function importFiles(files) {
     imported.push(asset);
   }
   fillPlaceholdersOrAddLayers(imported);
-  toast(`Imported ${imported.length} file${imported.length === 1 ? "" : "s"}.`);
+    toast(`Imported ${imported.length} file${imported.length === 1 ? "" : "s"} — placed on the canvas.`);
 }
 
 function loadAsset(file) {
@@ -571,24 +601,65 @@ function renderMediaGrid() {
   });
 }
 
+let dragLayerId = null;
+
 function renderLayers() {
   const layers = [...store.project.layers].sort((a, b) => (b.z || 0) - (a.z || 0));
+  if (!layers.length) {
+    dom.layerList.innerHTML = `<div class="layer-empty">No layers yet — add text, a shape, or drop in media.</div>`;
+    return;
+  }
   dom.layerList.innerHTML = layers.map((layer) => `
-    <div class="layer-item ${layer.id === store.selectedId ? "active" : ""}" data-layer="${layer.id}">
-      <div><strong>${layer.visible ? "" : "🙈 "}${layer.locked ? "🔒 " : ""}${escapeHtml(layer.name)}</strong><small>${layer.type} · x${Math.round(layer.x)} y${Math.round(layer.y)}</small></div>
-      <button class="mini-btn" data-action="hide">${layer.visible ? "Hide" : "Show"}</button>
-      <button class="mini-btn" data-action="lock">${layer.locked ? "Unlock" : "Lock"}</button>
+    <div class="layer-item ${layer.id === store.selectedId ? "active" : ""} ${layer.visible ? "" : "is-hidden"} ${layer.locked ? "is-locked" : ""}" data-layer="${layer.id}" draggable="true">
+      <span class="layer-handle" aria-hidden="true">⠿</span>
+      <span class="layer-icon">${LAYER_ICONS[layer.type] || LAYER_ICONS.shape}</span>
+      <div class="layer-meta"><strong>${escapeHtml(layer.name)}</strong><small>${LAYER_TYPE_LABELS[layer.type] || layer.type}</small></div>
+      <div class="layer-actions">
+        <button class="mini-btn icon ${layer.visible ? "" : "on"}" data-action="hide" title="${layer.visible ? "Hide" : "Show"}" aria-label="${layer.visible ? "Hide layer" : "Show layer"}">${layer.visible ? ICON_EYE : ICON_EYE_OFF}</button>
+        <button class="mini-btn icon ${layer.locked ? "on" : ""}" data-action="lock" title="${layer.locked ? "Unlock" : "Lock"}" aria-label="${layer.locked ? "Unlock layer" : "Lock layer"}">${layer.locked ? ICON_LOCK : ICON_UNLOCK}</button>
+        <button class="mini-btn icon danger" data-action="delete" title="Delete" aria-label="Delete layer">${ICON_TRASH}</button>
+      </div>
     </div>
   `).join("");
   dom.layerList.querySelectorAll(".layer-item").forEach((item) => {
+    const id = item.dataset.layer;
     item.addEventListener("click", (event) => {
-      const action = event.target.dataset.action;
-      const id = item.dataset.layer;
+      const action = event.target.closest("[data-action]")?.dataset.action;
       const layer = store.project.layers.find((l) => l.id === id);
       if (!layer) return;
       if (action === "hide") store.updateLayer(id, { visible: !layer.visible });
       else if (action === "lock") store.updateLayer(id, { locked: !layer.locked });
+      else if (action === "delete") store.removeLayer(id);
       else store.select(id);
+    });
+    item.addEventListener("dragstart", (event) => {
+      dragLayerId = id;
+      item.classList.add("dragging");
+      event.dataTransfer.effectAllowed = "move";
+      try { event.dataTransfer.setData("text/plain", id); } catch { /* some browsers require a payload */ }
+    });
+    item.addEventListener("dragend", () => {
+      dragLayerId = null;
+      dom.layerList.querySelectorAll(".layer-item").forEach((el) => el.classList.remove("dragging", "drop-before", "drop-after"));
+    });
+    item.addEventListener("dragover", (event) => {
+      if (!dragLayerId || dragLayerId === id) return;
+      event.preventDefault();
+      const rect = item.getBoundingClientRect();
+      const after = event.clientY > rect.top + rect.height / 2;
+      item.classList.toggle("drop-before", !after);
+      item.classList.toggle("drop-after", after);
+    });
+    item.addEventListener("dragleave", () => item.classList.remove("drop-before", "drop-after"));
+    item.addEventListener("drop", (event) => {
+      event.preventDefault();
+      if (!dragLayerId || dragLayerId === id) return;
+      const rect = item.getBoundingClientRect();
+      const after = event.clientY > rect.top + rect.height / 2;
+      const order = [...dom.layerList.querySelectorAll(".layer-item")].map((el) => el.dataset.layer).filter((lid) => lid !== dragLayerId);
+      const targetIndex = order.indexOf(id);
+      order.splice(after ? targetIndex + 1 : targetIndex, 0, dragLayerId);
+      store.reorderLayers(order);
     });
   });
 }
@@ -711,7 +782,7 @@ function addGrid() {
 function splitPanoramaFromFirstImage() {
   const imageAsset = [...store.assets.values()].find((asset) => asset.type === "image");
   if (!imageAsset) {
-    toast("Import a wide image first, then run panorama split.");
+    toast("Import a wide photo first, then stretch it across slides.");
     dom.mediaInput.click();
     return;
   }
@@ -728,13 +799,13 @@ function splitPanoramaFromFirstImage() {
       border: 0
     }));
   });
-  toast("Panorama stretched across every slide. Preview/export to get slices.");
+  toast("Panorama spans all slides. Preview or export to slice it up.");
 }
 
 function makeWhiteBorderDump() {
   const assets = [...store.assets.values()];
   if (!assets.length) {
-    toast("Import photos or videos first.");
+    toast("Import some photos or videos first.");
     dom.mediaInput.click();
     return;
   }
@@ -756,13 +827,13 @@ function makeWhiteBorderDump() {
       }));
     });
   });
-  toast("Applied consistent white borders across imported media.");
+  toast("Even white borders applied across your media.");
 }
 
 function duplicateCurrentSlide() {
   const { width, height } = store.project;
   if (store.project.slideCount >= 20) {
-    toast("Instagram/SCRL-style carousels are capped at 20 slides.");
+    toast("Carousels are capped at 20 slides.");
     return;
   }
   const from = store.currentSlide;
@@ -871,6 +942,22 @@ function handleKeys(event) {
   if (!inInput && (event.key === "Delete" || event.key === "Backspace") && store.selectedId) {
     event.preventDefault();
     store.removeLayer(store.selectedId);
+    return;
+  }
+  if (!inInput && !event.metaKey && !event.ctrlKey && !event.altKey) {
+    const shortcuts = {
+      v: () => setTool("select"),
+      b: () => setTool("draw"),
+      t: addText,
+      r: addShape,
+      e: addSticker,
+      g: addGrid
+    };
+    const handler = shortcuts[event.key.toLowerCase()];
+    if (handler) {
+      event.preventDefault();
+      handler();
+    }
   }
 }
 
