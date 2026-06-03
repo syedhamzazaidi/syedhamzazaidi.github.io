@@ -17,6 +17,8 @@ export function createProject(presetId = DEFAULT_PRESET_ID) {
     showGrid: true,
     showSafeZones: true,
     snap: true,
+    templateId: null,
+    pristine: true,
     layers: []
   };
   project.layers = starterLayers(project);
@@ -192,10 +194,11 @@ export class ProjectStore extends EventTarget {
     this.future = [];
   }
 
-  mutate(fn, { history = true } = {}) {
+  mutate(fn, { history = true, markDirty = true } = {}) {
     fn(this.project);
     this.project.slideCount = clamp(this.project.slideCount, 1, 20);
     this.currentSlide = clamp(this.currentSlide, 0, this.project.slideCount - 1);
+    if (markDirty) this.project.pristine = false;
     if (history) this.saveHistory();
     this.persistMetadata();
     this.emit();
@@ -306,13 +309,13 @@ export class ProjectStore extends EventTarget {
         layer.h *= sy;
         if (layer.fontSize) layer.fontSize *= sy;
       });
-    });
+    }, { markDirty: false });
   }
 
   setSlideCount(count) {
     this.mutate((project) => {
       project.slideCount = clamp(count, 1, 20);
-    });
+    }, { markDirty: false });
   }
 
   addAsset(asset) {
