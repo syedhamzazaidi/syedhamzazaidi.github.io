@@ -28,18 +28,24 @@
       </div>
 
       <div class="topbar-actions">
-        <label class="field compact">
-          <span>Preset</span>
-          <select id="presetSelect" aria-label="Platform preset"></select>
-        </label>
-        <label class="field compact">
-          <span>Slides</span>
-          <input id="slideCountInput" type="number" min="1" max="20" value="5" aria-label="Slide count">
-        </label>
-        <button class="btn ghost" id="undoBtn" title="Undo (Ctrl/Cmd+Z)">Undo</button>
-        <button class="btn ghost" id="redoBtn" title="Redo (Ctrl/Cmd+Shift+Z)">Redo</button>
-        <button class="btn" id="previewBtn">Preview</button>
-        <button class="btn primary" id="exportBtn">Export / Share</button>
+        <div class="topbar-group">
+          <label class="field compact">
+            <span>Preset</span>
+            <select id="presetSelect" aria-label="Platform preset"></select>
+          </label>
+          <label class="field compact">
+            <span>Slides</span>
+            <input id="slideCountInput" type="number" min="1" max="20" value="5" aria-label="Slide count">
+          </label>
+        </div>
+        <div class="topbar-group">
+          <button class="btn ghost" id="undoBtn" title="Undo (Ctrl/Cmd+Z)">Undo</button>
+          <button class="btn ghost" id="redoBtn" title="Redo (Ctrl/Cmd+Shift+Z)">Redo</button>
+        </div>
+        <div class="topbar-group">
+          <button class="btn" id="previewBtn">Preview</button>
+          <button class="btn primary" id="exportBtn">Export / Share</button>
+        </div>
       </div>
     </header>
 
@@ -94,22 +100,26 @@
           <button class="btn wide" id="whiteBorderBtn">White-border photo dump</button>
           <button class="btn wide" id="duplicateSlideBtn">Duplicate current slide</button>
         </div>
-        <hr>
-        <label class="check"><input type="checkbox" id="showGrid" checked> Grid</label>
-        <label class="check"><input type="checkbox" id="showSafeZones" checked> Safe zones</label>
-        <label class="check"><input type="checkbox" id="snapToggle" checked> Smart snapping</label>
-        <label class="field">
-          <span>Zoom</span>
-          <input id="zoomRange" type="range" min="12" max="180" value="100">
-        </label>
-        <label class="field">
-          <span>Drawing color</span>
-          <input id="drawColor" type="color" value="#ffffff">
-        </label>
-        <label class="field">
-          <span>Drawing size</span>
-          <input id="drawSize" type="range" min="2" max="80" value="16">
-        </label>
+        <details class="panel-collapse">
+          <summary>Canvas aids and drawing settings</summary>
+          <div class="panel-collapse-body">
+            <label class="check"><input type="checkbox" id="showGrid" checked> Grid</label>
+            <label class="check"><input type="checkbox" id="showSafeZones" checked> Safe zones</label>
+            <label class="check"><input type="checkbox" id="snapToggle" checked> Smart snapping</label>
+            <label class="field">
+              <span>Zoom</span>
+              <input id="zoomRange" type="range" min="12" max="180" value="100">
+            </label>
+            <label class="field">
+              <span>Drawing color</span>
+              <input id="drawColor" type="color" value="#ffffff">
+            </label>
+            <label class="field">
+              <span>Drawing size</span>
+              <input id="drawSize" type="range" min="2" max="80" value="16">
+            </label>
+          </div>
+        </details>
       </section>
 
       <section class="tab-panel" id="tab-layers">
@@ -139,7 +149,7 @@
         <p id="selectionLabel">Select a layer to edit position, filters, text, borders, timing, and visibility.</p>
       </div>
 
-      <div id="projectInspector">
+      <div id="projectInspector" class="inspector-section">
         <h3>Project</h3>
         <label class="field"><span>Name</span><input id="projectNameInput" type="text"></label>
         <div class="two-col">
@@ -149,7 +159,7 @@
         <label class="field"><span>Background</span><input id="projectBgInput" type="color" value="#111111"></label>
       </div>
 
-      <div id="layerInspector" hidden>
+      <div id="layerInspector" class="inspector-section" hidden>
         <h3>Layer</h3>
         <label class="field"><span>Name</span><input id="layerName" type="text"></label>
         <div class="two-col">
@@ -168,55 +178,69 @@
           <button class="btn" id="layerDuplicate">Duplicate</button>
           <button class="btn danger" id="layerDelete">Delete</button>
         </div>
-        <label class="check"><input id="layerLocked" type="checkbox"> Locked</label>
-        <label class="check"><input id="layerVisible" type="checkbox"> Visible</label>
+        <div class="toggle-row">
+          <label class="check"><input id="layerLocked" type="checkbox"> Locked</label>
+          <label class="check"><input id="layerVisible" type="checkbox"> Visible</label>
+        </div>
 
-        <div id="mediaInspector" hidden>
-          <h3>Media</h3>
-          <label class="field"><span>Fit</span><select id="layerFit"><option value="cover">Cover</option><option value="contain">Contain</option><option value="fill">Fill</option></select></label>
-          <label class="field"><span>Border</span><input id="layerBorder" type="range" min="0" max="160" value="0"></label>
-          <label class="field"><span>Border color</span><input id="layerBorderColor" type="color"></label>
-          <label class="field"><span>Outline</span><input id="layerStroke" type="range" min="0" max="40"></label>
-          <label class="field"><span>Blur background</span><input id="layerBlurBg" type="range" min="0" max="40"></label>
-          <div class="two-col">
-            <label class="field"><span>Brightness</span><input id="filterBrightness" type="range" min="0" max="2" step=".01"></label>
-            <label class="field"><span>Contrast</span><input id="filterContrast" type="range" min="0" max="2" step=".01"></label>
-            <label class="field"><span>Saturation</span><input id="filterSaturate" type="range" min="0" max="2" step=".01"></label>
-            <label class="field"><span>Blur</span><input id="filterBlur" type="range" min="0" max="20" step=".5"></label>
-          </div>
-          <div id="videoControls" hidden>
-            <label class="field"><span>Video time</span><input id="videoTime" type="range" min="0" max="10" step=".01"></label>
-            <div class="button-row">
-              <button class="btn" id="videoPlayPause">Play / pause</button>
-              <button class="btn" id="videoPoster">Use frame as poster</button>
+        <div id="mediaInspector" class="inspector-subsection" hidden>
+          <details open>
+            <summary>Media controls</summary>
+            <div class="inspector-subsection-body">
+              <label class="field"><span>Fit</span><select id="layerFit"><option value="cover">Cover</option><option value="contain">Contain</option><option value="fill">Fill</option></select></label>
+              <label class="field"><span>Border</span><input id="layerBorder" type="range" min="0" max="160" value="0"></label>
+              <label class="field"><span>Border color</span><input id="layerBorderColor" type="color"></label>
+              <label class="field"><span>Outline</span><input id="layerStroke" type="range" min="0" max="40"></label>
+              <label class="field"><span>Blur background</span><input id="layerBlurBg" type="range" min="0" max="40"></label>
+              <div class="two-col">
+                <label class="field"><span>Brightness</span><input id="filterBrightness" type="range" min="0" max="2" step=".01"></label>
+                <label class="field"><span>Contrast</span><input id="filterContrast" type="range" min="0" max="2" step=".01"></label>
+                <label class="field"><span>Saturation</span><input id="filterSaturate" type="range" min="0" max="2" step=".01"></label>
+                <label class="field"><span>Blur</span><input id="filterBlur" type="range" min="0" max="20" step=".5"></label>
+              </div>
+              <div id="videoControls" hidden>
+                <label class="field"><span>Video time</span><input id="videoTime" type="range" min="0" max="10" step=".01"></label>
+                <div class="button-row">
+                  <button class="btn" id="videoPlayPause">Play / pause</button>
+                  <button class="btn" id="videoPoster">Use frame as poster</button>
+                </div>
+              </div>
             </div>
-          </div>
+          </details>
         </div>
 
-        <div id="textInspector" hidden>
-          <h3>Text</h3>
-          <label class="field"><span>Text</span><textarea id="textContent" rows="4"></textarea></label>
-          <label class="field"><span>Font</span><select id="textFont"></select></label>
-          <div class="two-col">
-            <label class="field"><span>Size</span><input id="textSize" type="number" min="4"></label>
-            <label class="field"><span>Weight</span><input id="textWeight" type="number" min="100" max="900" step="100"></label>
-            <label class="field"><span>Color</span><input id="textColor" type="color"></label>
-            <label class="field"><span>Align</span><select id="textAlign"><option>left</option><option>center</option><option>right</option></select></label>
-          </div>
+        <div id="textInspector" class="inspector-subsection" hidden>
+          <details open>
+            <summary>Text controls</summary>
+            <div class="inspector-subsection-body">
+              <label class="field"><span>Text</span><textarea id="textContent" rows="4"></textarea></label>
+              <label class="field"><span>Font</span><select id="textFont"></select></label>
+              <div class="two-col">
+                <label class="field"><span>Size</span><input id="textSize" type="number" min="4"></label>
+                <label class="field"><span>Weight</span><input id="textWeight" type="number" min="100" max="900" step="100"></label>
+                <label class="field"><span>Color</span><input id="textColor" type="color"></label>
+                <label class="field"><span>Align</span><select id="textAlign"><option>left</option><option>center</option><option>right</option></select></label>
+              </div>
+            </div>
+          </details>
         </div>
 
-        <div id="shapeInspector" hidden>
-          <h3>Shape</h3>
-          <label class="field"><span>Shape</span><select id="shapeKind"><option value="rect">Rectangle</option><option value="roundRect">Rounded</option><option value="circle">Circle</option><option value="line">Line</option></select></label>
-          <div class="two-col">
-            <label class="field"><span>Fill</span><input id="shapeFill" type="color"></label>
-            <label class="field"><span>Stroke</span><input id="shapeStroke" type="color"></label>
-          </div>
-          <label class="field"><span>Stroke width</span><input id="shapeStrokeWidth" type="range" min="0" max="40"></label>
+        <div id="shapeInspector" class="inspector-subsection" hidden>
+          <details open>
+            <summary>Shape controls</summary>
+            <div class="inspector-subsection-body">
+              <label class="field"><span>Shape</span><select id="shapeKind"><option value="rect">Rectangle</option><option value="roundRect">Rounded</option><option value="circle">Circle</option><option value="line">Line</option></select></label>
+              <div class="two-col">
+                <label class="field"><span>Fill</span><input id="shapeFill" type="color"></label>
+                <label class="field"><span>Stroke</span><input id="shapeStroke" type="color"></label>
+              </div>
+              <label class="field"><span>Stroke width</span><input id="shapeStrokeWidth" type="range" min="0" max="40"></label>
+            </div>
+          </details>
         </div>
       </div>
 
-      <details class="help-card" open>
+      <details class="help-card">
         <summary>Export notes</summary>
         <ul>
           <li>Instagram carousels export every slide at the same size.</li>

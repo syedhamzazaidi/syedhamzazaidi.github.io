@@ -100,7 +100,7 @@ function editorialStory(project) {
   const { width: w, height: h, slideCount } = project;
   const layers = [
     createLayer("shape", { name: "Warm paper", x: 0, y: 0, w: w * slideCount, h, fill: palette.paper, opacity: 1, shape: "rect" }),
-    createLayer("text", { name: "Deck title", text: "A visual story\\nin motion", x: w * .11, y: h * .15, w: w * .78, h: h * .25, fontFamily: "Instrument Serif", fontSize: h * .105, fontWeight: 400, color: palette.ink, lineHeight: .94 }),
+    createLayer("text", { name: "Deck title", text: "A visual story\\nin motion", x: w * .11, y: h * .15, w: w * .78, h: h * .25, fontFamily: "Playfair Display", fontSize: h * .105, fontWeight: 500, color: palette.ink, lineHeight: .94 }),
     createLayer("text", { name: "Deck subtitle", text: "Seamless slides · local media · platform exports", x: w * .13, y: h * .48, w: w * .72, h: h * .08, fontSize: h * .023, fontWeight: 700, color: "#6b5f64", align: "center" }),
     createLayer("placeholder", { name: "Wide hero media", x: w * 1.08, y: h * .12, w: w * 1.35, h: h * .52, border: 0 }),
     createLayer("placeholder", { name: "Detail 1", x: w * 2.62, y: h * .18, w: w * .58, h: h * .58, border: 22 }),
@@ -138,7 +138,7 @@ function whiteBorderDump(project) {
       strokeColor: "#e8e2da"
     }));
   }
-  layers.push(createLayer("text", { name: "Photo dump label", text: "photo dump", x: project.width * .15, y: project.height * .82, w: project.width * .7, h: project.height * .07, fontFamily: "Instrument Serif", fontSize: project.height * .065, color: "#18181b", align: "center" }));
+  layers.push(createLayer("text", { name: "Photo dump label", text: "photo dump", x: project.width * .15, y: project.height * .82, w: project.width * .7, h: project.height * .07, fontFamily: "Playfair Display", fontSize: project.height * .065, color: "#18181b", align: "center" }));
   return layers;
 }
 
@@ -156,7 +156,7 @@ function quoteCards(project) {
   const layers = [createLayer("shape", { name: "Quote background", x: 0, y: 0, w: w * project.slideCount, h, fill: "#15111f", shape: "rect" })];
   for (let i = 0; i < project.slideCount; i++) {
     if (i % 2 === 0) {
-      layers.push(createLayer("text", { name: `Quote ${i + 1}`, text: "“Make the swipe\\nfeel intentional.”", x: i * w + w * .12, y: h * .28, w: w * .76, h: h * .3, fontFamily: "Instrument Serif", fontSize: h * .085, fontWeight: 400, color: "#ffffff", align: "center", lineHeight: .98 }));
+      layers.push(createLayer("text", { name: `Quote ${i + 1}`, text: "“Make the swipe\\nfeel intentional.”", x: i * w + w * .12, y: h * .28, w: w * .76, h: h * .3, fontFamily: "Playfair Display", fontSize: h * .085, fontWeight: 500, color: "#ffffff", align: "center", lineHeight: .98 }));
       layers.push(createLayer("shape", { name: `Quote accent ${i + 1}`, x: i * w + w * .25, y: h * .64, w: w * .5, h: h * .035, fill: palette.violet, radius: 40 }));
     } else {
       layers.push(createLayer("placeholder", { name: `Quote image ${i + 1}`, x: i * w + w * .12, y: h * .13, w: w * .76, h: h * .66, border: 18, borderColor: "#ffffff" }));

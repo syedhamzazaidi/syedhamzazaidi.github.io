@@ -158,16 +158,19 @@ export const PLATFORM_PRESETS = [
 export const DEFAULT_PRESET_ID = "ig-portrait";
 export const FONT_OPTIONS = [
   "Inter",
-  "Instrument Serif",
+  "Plus Jakarta Sans",
+  "DM Sans",
+  "Space Grotesk",
+  "Playfair Display",
+  "Merriweather",
   "Arial",
+  "Helvetica",
+  "Trebuchet MS",
+  "Verdana",
   "Georgia",
   "Times New Roman",
-  "Helvetica",
-  "Verdana",
-  "Trebuchet MS",
-  "Impact",
-  "Courier New",
-  "JetBrains Mono"
+  "JetBrains Mono",
+  "Courier New"
 ];
 
 export function getPreset(id) {
