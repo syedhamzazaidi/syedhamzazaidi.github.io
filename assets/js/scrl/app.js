@@ -553,12 +553,15 @@ function fillPlaceholdersOrAddLayers(assets) {
 
 function renderMediaGrid() {
   const assets = [...store.assets.values()];
-  dom.mediaGrid.innerHTML = assets.map((asset) => `
-    <button class="media-card" data-asset="${asset.id}" title="${asset.name}">
+  dom.mediaGrid.innerHTML = assets.map((asset) => {
+    const name = escapeHtml(asset.name);
+    return `
+    <button class="media-card" data-asset="${asset.id}" title="${name}">
       ${asset.type === "image" ? `<img src="${asset.url}" alt="">` : `<video src="${asset.url}" muted playsinline></video>`}
-      <span>${asset.type === "video" ? "▶ " : ""}${asset.name}</span>
+      <span>${asset.type === "video" ? "▶ " : ""}${name}</span>
     </button>
-  `).join("");
+  `;
+  }).join("");
   dom.mediaGrid.querySelectorAll("[data-asset]").forEach((button) => {
     button.addEventListener("click", () => {
       const asset = store.getAsset(button.dataset.asset);
@@ -595,7 +598,7 @@ function updateInspector() {
   dom.projectInspector.hidden = Boolean(layer);
   dom.layerInspector.hidden = !layer;
   if (!layer) {
-    dom.selectionLabel.textContent = "Select a layer to edit position, filters, text, borders, timing, and visibility.";
+    dom.selectionLabel.textContent = "Select a layer to edit its properties.";
     return;
   }
   dom.selectionLabel.textContent = `${layer.name} (${layer.type})`;
