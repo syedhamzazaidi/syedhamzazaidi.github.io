@@ -1,0 +1,175 @@
+export const PLATFORM_PRESETS = [
+  {
+    id: "ig-portrait",
+    platform: "Instagram",
+    name: "Instagram carousel portrait",
+    short: "IG 4:5",
+    width: 1080,
+    height: 1350,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Safe feed/carousel default. Every exported slide shares 1080×1350.",
+    safeZones: { top: 72, right: 72, bottom: 120, left: 72 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  },
+  {
+    id: "ig-tall",
+    platform: "Instagram",
+    name: "Instagram tall/original carousel",
+    short: "IG 3:4",
+    width: 1080,
+    height: 1440,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Modern taller feed export for 3:4/original workflows.",
+    safeZones: { top: 100, right: 120, bottom: 180, left: 120 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  },
+  {
+    id: "ig-square",
+    platform: "Instagram",
+    name: "Instagram square",
+    short: "IG 1:1",
+    width: 1080,
+    height: 1080,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Square carousel/post for cross-posting.",
+    safeZones: { top: 64, right: 64, bottom: 96, left: 64 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 5_000_000 }
+  },
+  {
+    id: "ig-landscape",
+    platform: "Instagram",
+    name: "Instagram landscape",
+    short: "IG 1.91:1",
+    width: 1080,
+    height: 566,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Wide carousel for screenshots, data, and panoramas.",
+    safeZones: { top: 42, right: 54, bottom: 54, left: 54 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 5_000_000 }
+  },
+  {
+    id: "ig-story",
+    platform: "Instagram",
+    name: "Instagram Story/Reel",
+    short: "IG 9:16",
+    width: 1080,
+    height: 1920,
+    slideCount: 1,
+    maxSlides: 20,
+    kind: "story",
+    description: "Full-screen Story/Reel-safe design.",
+    safeZones: { top: 250, right: 120, bottom: 320, left: 120 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 8_000_000 }
+  },
+  {
+    id: "tiktok",
+    platform: "TikTok",
+    name: "TikTok video / photo mode",
+    short: "TikTok 9:16",
+    width: 1080,
+    height: 1920,
+    slideCount: 1,
+    maxSlides: 20,
+    kind: "video",
+    description: "1080×1920 vertical export with right/bottom UI safe zones.",
+    safeZones: { top: 150, right: 180, bottom: 450, left: 80 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 8_000_000 }
+  },
+  {
+    id: "linkedin-square",
+    platform: "LinkedIn",
+    name: "LinkedIn square carousel",
+    short: "LinkedIn 1:1",
+    width: 1200,
+    height: 1200,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Square professional carousel deck.",
+    safeZones: { top: 80, right: 80, bottom: 80, left: 80 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  },
+  {
+    id: "linkedin-portrait",
+    platform: "LinkedIn",
+    name: "LinkedIn portrait",
+    short: "LinkedIn 4:5",
+    width: 1200,
+    height: 1500,
+    slideCount: 5,
+    maxSlides: 20,
+    kind: "carousel",
+    description: "Portrait professional carousel deck.",
+    safeZones: { top: 90, right: 90, bottom: 110, left: 90 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  },
+  {
+    id: "youtube-thumb",
+    platform: "YouTube",
+    name: "YouTube thumbnail",
+    short: "YouTube 16:9",
+    width: 1280,
+    height: 720,
+    slideCount: 1,
+    maxSlides: 1,
+    kind: "thumbnail",
+    description: "High-impact thumbnail canvas.",
+    safeZones: { top: 48, right: 48, bottom: 48, left: 48 },
+    export: { image: ["image/png", "image/jpeg"], video: "webm", fps: 30, bitrate: 5_000_000 }
+  },
+  {
+    id: "pinterest",
+    platform: "Pinterest",
+    name: "Pinterest pin",
+    short: "Pin 2:3",
+    width: 1000,
+    height: 1500,
+    slideCount: 1,
+    maxSlides: 10,
+    kind: "pin",
+    description: "Vertical pin layout.",
+    safeZones: { top: 70, right: 70, bottom: 90, left: 70 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  },
+  {
+    id: "custom",
+    platform: "Custom",
+    name: "Custom canvas",
+    short: "Custom",
+    width: 1080,
+    height: 1350,
+    slideCount: 3,
+    maxSlides: 20,
+    kind: "custom",
+    description: "Set your own dimensions and slide count.",
+    safeZones: { top: 80, right: 80, bottom: 80, left: 80 },
+    export: { image: ["image/png", "image/jpeg"], video: "mp4-or-webm", fps: 30, bitrate: 6_000_000 }
+  }
+];
+
+export const DEFAULT_PRESET_ID = "ig-portrait";
+export const FONT_OPTIONS = [
+  "Inter",
+  "Instrument Serif",
+  "Arial",
+  "Georgia",
+  "Times New Roman",
+  "Helvetica",
+  "Verdana",
+  "Trebuchet MS",
+  "Impact",
+  "Courier New",
+  "JetBrains Mono"
+];
+
+export function getPreset(id) {
+  return PLATFORM_PRESETS.find((preset) => preset.id === id) || PLATFORM_PRESETS[0];
+}
