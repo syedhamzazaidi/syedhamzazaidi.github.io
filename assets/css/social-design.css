@@ -139,6 +139,10 @@ textarea {
   letter-spacing: -0.01em;
 }
 
+.brand-accent {
+  color: #e5322d;
+}
+
 .brand p {
   margin: 1px 0 0;
   color: var(--dim);

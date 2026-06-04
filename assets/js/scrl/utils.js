@@ -90,12 +90,12 @@ export function createRoundRectPath(ctx, x, y, w, h, radius) {
 }
 
 export function safeFilename(name) {
-  return String(name || "swipe-studio")
+  return String(name || "ilovecarousel")
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "")
-    .slice(0, 80) || "swipe-studio";
+    .slice(0, 80) || "ilovecarousel";
 }
 
 export function canNativeShareFiles(files) {
