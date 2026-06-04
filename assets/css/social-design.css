@@ -132,10 +132,11 @@ textarea {
   border-radius: 10px;
   border: 1px solid var(--line-2);
   background: var(--surface-2);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.92rem;
+}
+
+.brand-mark svg {
+  width: 21px;
+  height: 21px;
 }
 
 .brand h1 {
