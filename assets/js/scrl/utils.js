@@ -90,12 +90,12 @@ export function createRoundRectPath(ctx, x, y, w, h, radius) {
 }
 
 export function safeFilename(name) {
-  return String(name || "ilovecarousel")
+  return String(name || "carousel-builder")
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "")
-    .slice(0, 80) || "ilovecarousel";
+    .slice(0, 80) || "carousel-builder";
 }
 
 export function canNativeShareFiles(files) {

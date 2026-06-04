@@ -1,4 +1,4 @@
-# iLoveCarousel
+# carouselBuilder
 
 A private, client-side designer for social carousels, collages, panoramas, and slide decks. Build multi-slide layouts for Instagram, TikTok, LinkedIn, Pinterest, and more, then export platform-ready images and video — entirely in the browser.
 
@@ -87,7 +87,7 @@ assets/js/scrl/
 
 ## Privacy
 
-iLoveCarousel is local-first. Media never leaves the browser; direct posting to social platforms is intentionally out of scope because it would require a server. Exports are produced locally and handed to a download or the native share sheet.
+carouselBuilder is local-first. Media never leaves the browser; direct posting to social platforms is intentionally out of scope because it would require a server. Exports are produced locally and handed to a download or the native share sheet.
 
 ## Browser support
 

@@ -48,7 +48,7 @@ export async function downloadProject(project, store, options = {}) {
     const zip = new JSZip();
     files.forEach((file) => zip.file(file.name, file));
     const readme = [
-      "iLoveCarousel export",
+      "carouselBuilder export",
       "",
       `Project: ${project.name}`,
       `Canvas: ${project.width}x${project.height}`,
@@ -77,7 +77,7 @@ export async function shareProject(project, store, options = {}) {
   if (navigator.canShare && navigator.canShare({ files })) {
     await navigator.share({
       title: project.name,
-      text: "Created with iLoveCarousel. Upload in slide order for a seamless carousel.",
+      text: "Created with carouselBuilder. Upload in slide order for a seamless carousel.",
       files
     });
     return { shared: true, files };

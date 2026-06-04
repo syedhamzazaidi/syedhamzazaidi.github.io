@@ -43,14 +43,14 @@ function starterLayers(project) {
       radius: 90
     }),
     createLayer("shape", {
-      name: "Red accent",
+      name: "Cyan accent",
       x: w * 2.7,
       y: h * .55,
       w: w * 1.2,
       h: h * .32,
       rotation: 4,
       opacity: .7,
-      fill: "#e5322d",
+      fill: "#5fe3ff",
       stroke: "transparent",
       strokeWidth: 0,
       radius: 80
