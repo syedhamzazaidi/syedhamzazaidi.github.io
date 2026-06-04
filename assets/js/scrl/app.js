@@ -127,6 +127,10 @@ const state = {
   dragging: null,
   spacePan: false,
   shiftSnapping: false,
+  penDraft: null,
+  penCursor: null,
+  penDragNode: null,
+  penDown: false,
   previewSlide: 0,
   raf: 0,
   hasFitOnce: false
@@ -343,6 +347,10 @@ function bindCanvas() {
   canvas.addEventListener("pointerup", pointerUp);
   canvas.addEventListener("pointercancel", pointerUp);
   canvas.addEventListener("dblclick", () => {
+    if (state.penDraft) {
+      finishPen();
+      return;
+    }
     const layer = store.selectedLayer();
     if (layer?.type === "text" || layer?.type === "sticker") inspector.textContent.focus();
   });
@@ -425,6 +433,7 @@ function requestRender() {
       currentSlide: store.currentSlide,
       showGrid: store.project.showGrid || state.shiftSnapping
     });
+    if (state.penDraft) drawPenOverlay(ctx);
   });
 }
 
@@ -498,6 +507,10 @@ function pointerDown(event) {
   }
   const point = screenToWorld(event);
   store.currentSlide = currentSlideFromX(store.project, point.x);
+  if (state.tool === "pen") {
+    penPointerDown(point);
+    return;
+  }
   if (state.tool === "draw") {
     const layer = createLayer("drawing", {
       name: `Drawing ${store.project.layers.filter((l) => l.type === "drawing").length + 1}`,
@@ -537,6 +550,18 @@ function pointerMove(event) {
     return;
   }
   const point = screenToWorld(event);
+  if (state.tool === "pen" && state.penDraft) {
+    state.penCursor = point;
+    if (state.penDown && state.penDragNode != null) {
+      const node = penDraftLayer()?.nodes[state.penDragNode];
+      if (node) {
+        node.hOut = { x: point.x, y: point.y };
+        node.hIn = { x: node.x * 2 - point.x, y: node.y * 2 - point.y };
+      }
+    }
+    requestRender();
+    return;
+  }
   if (!state.dragging) return;
   const layer = store.project.layers.find((item) => item.id === state.dragging.layerId || item.id === store.selectedId);
   if (!layer || layer.locked) return;
@@ -567,6 +592,11 @@ function pointerMove(event) {
 }
 
 function pointerUp() {
+  if (state.tool === "pen" && state.penDown) {
+    state.penDown = false;
+    state.penDragNode = null;
+    return;
+  }
   if (!state.dragging) return;
   if (state.dragging.kind === "pan") {
     dom.stageWrap.classList.remove("panning");
@@ -578,6 +608,140 @@ function pointerUp() {
     state.shiftSnapping = false;
     requestRender();
   }
+}
+
+function penDraftLayer() {
+  return state.penDraft ? store.project.layers.find((l) => l.id === state.penDraft.layerId) : null;
+}
+
+function penPointerDown(point) {
+  const layer = penDraftLayer();
+  if (!layer) {
+    const draft = createLayer("vector", {
+      name: `Path ${store.project.layers.filter((l) => l.type === "vector").length + 1}`,
+      x: 0,
+      y: 0,
+      w: store.project.width * store.project.slideCount,
+      h: store.project.height,
+      nodes: [{ x: point.x, y: point.y }],
+      closed: false,
+      stroke: dom.drawColor.value,
+      strokeWidth: Number(dom.drawSize.value),
+      fill: "transparent"
+    });
+    store.project.layers.push(draft);
+    store.selectedId = draft.id;
+    state.penDraft = { layerId: draft.id };
+    state.penDragNode = 0;
+    state.penDown = true;
+    state.penCursor = point;
+    store.emit();
+    return;
+  }
+  const nodes = layer.nodes;
+  const closeDist = 10 / state.viewport.scale;
+  if (nodes.length > 1 && Math.hypot(point.x - nodes[0].x, point.y - nodes[0].y) <= closeDist) {
+    layer.closed = true;
+    finishPen();
+    return;
+  }
+  nodes.push({ x: point.x, y: point.y });
+  state.penDragNode = nodes.length - 1;
+  state.penDown = true;
+  state.penCursor = point;
+  store.emit();
+}
+
+function finishPen(commit = true) {
+  const layer = penDraftLayer();
+  state.penDraft = null;
+  state.penCursor = null;
+  state.penDragNode = null;
+  state.penDown = false;
+  if (!layer) return;
+  if (!commit || (layer.nodes || []).length < 2) {
+    store.removeLayer(layer.id);
+    return;
+  }
+  rebaseVectorLayer(layer);
+  store.mutate(() => {});
+}
+
+function rebaseVectorLayer(layer) {
+  const xs = [];
+  const ys = [];
+  for (const node of layer.nodes) {
+    for (const pt of [node, node.hIn, node.hOut]) {
+      if (!pt) continue;
+      xs.push(pt.x);
+      ys.push(pt.y);
+    }
+  }
+  if (!xs.length) return;
+  const pad = (layer.strokeWidth || 4) / 2 + 2;
+  const minX = Math.min(...xs) - pad;
+  const minY = Math.min(...ys) - pad;
+  const maxX = Math.max(...xs) + pad;
+  const maxY = Math.max(...ys) + pad;
+  for (const node of layer.nodes) {
+    for (const pt of [node, node.hIn, node.hOut]) {
+      if (!pt) continue;
+      pt.x -= minX;
+      pt.y -= minY;
+    }
+  }
+  layer.x = minX;
+  layer.y = minY;
+  layer.w = Math.max(1, maxX - minX);
+  layer.h = Math.max(1, maxY - minY);
+}
+
+function drawPenOverlay(ctx) {
+  const layer = penDraftLayer();
+  if (!layer) return;
+  const nodes = layer.nodes || [];
+  const s = state.viewport.scale;
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.translate(state.viewport.x, state.viewport.y);
+  ctx.scale(s, s);
+  if (nodes.length && state.penCursor) {
+    const last = nodes[nodes.length - 1];
+    ctx.beginPath();
+    ctx.moveTo(last.x, last.y);
+    ctx.lineTo(state.penCursor.x, state.penCursor.y);
+    ctx.strokeStyle = "rgba(95,227,255,.7)";
+    ctx.lineWidth = 1.5 / s;
+    ctx.setLineDash([6 / s, 5 / s]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  for (const node of nodes) {
+    for (const h of [node.hIn, node.hOut]) {
+      if (!h) continue;
+      ctx.beginPath();
+      ctx.moveTo(node.x, node.y);
+      ctx.lineTo(h.x, h.y);
+      ctx.strokeStyle = "rgba(95,227,255,.5)";
+      ctx.lineWidth = 1 / s;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(h.x, h.y, 3 / s, 0, Math.PI * 2);
+      ctx.fillStyle = "#5fe3ff";
+      ctx.fill();
+    }
+  }
+  nodes.forEach((node, index) => {
+    const r = 4 / s;
+    ctx.beginPath();
+    ctx.rect(node.x - r, node.y - r, r * 2, r * 2);
+    ctx.fillStyle = index === 0 ? "#5fe3ff" : "#0a0c11";
+    ctx.fill();
+    ctx.strokeStyle = "#5fe3ff";
+    ctx.lineWidth = 1.5 / s;
+    ctx.stroke();
+  });
+  ctx.restore();
 }
 
 function snapLayer(layer) {
@@ -842,16 +1006,17 @@ function updateSelected(patch, options) {
 }
 
 function setTool(tool) {
+  if (state.penDraft && tool !== "pen") finishPen();
   state.tool = tool;
   document.querySelectorAll("[data-tool]").forEach((button) => button.classList.toggle("active", button.dataset.tool === tool));
-  dom.penPopover.hidden = tool !== "draw";
+  dom.penPopover.hidden = tool !== "draw" && tool !== "pen";
   updateCanvasCursor();
 }
 
 function updateCanvasCursor() {
   const panning = state.tool === "hand" || state.spacePan;
   dom.stageWrap.classList.toggle("tool-hand", panning);
-  dom.stageWrap.classList.toggle("tool-draw", state.tool === "draw" && !panning);
+  dom.stageWrap.classList.toggle("tool-draw", (state.tool === "draw" || state.tool === "pen") && !panning);
 }
 
 function addText() {
@@ -963,6 +1128,21 @@ function handleKeys(event) {
     store.duplicateLayer(store.selectedId);
     return;
   }
+  if (state.penDraft && !inInput) {
+    if (event.key === "Enter") { event.preventDefault(); finishPen(true); return; }
+    if (event.key === "Escape") { event.preventDefault(); finishPen(false); return; }
+    if (event.key === "Backspace") {
+      event.preventDefault();
+      const layer = penDraftLayer();
+      if (layer) {
+        layer.nodes.pop();
+        state.penDragNode = null;
+        if (!layer.nodes.length) finishPen(false);
+        else store.emit();
+      }
+      return;
+    }
+  }
   if (!inInput && (event.key === "Delete" || event.key === "Backspace") && store.selectedId) {
     event.preventDefault();
     store.removeLayer(store.selectedId);
@@ -981,6 +1161,7 @@ function handleKeys(event) {
       v: () => setTool("select"),
       h: () => setTool("hand"),
       b: () => setTool("draw"),
+      p: () => setTool("pen"),
       t: addText,
       r: addShape,
       e: addSticker,

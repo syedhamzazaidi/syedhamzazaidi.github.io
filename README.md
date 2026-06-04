@@ -9,7 +9,8 @@ A private, client-side designer for social carousels, collages, panoramas, and s
 - **Template chooser** — start from a layout (editorial story, full-bleed panorama, white-border dump, grid collage, quote cards, product showcase, before/after, Story/Reel cover) or a blank canvas.
 - **Smart slide reflow** — while a design is untouched, changing the slide count re-flows the chosen template to fit; once you start editing, your work is preserved.
 - **Full-bleed panorama** — drop one wide photo and have it split edge-to-edge across every slide.
-- **Floating canvas toolbar** — select, hand/pan, pen, text, shape, sticker, and photo-grid tools, each with a keyboard shortcut.
+- **Floating canvas toolbar** — select, hand/pan, freehand brush, vector pen, text, shape, sticker, and photo-grid tools, each with a keyboard shortcut.
+- **Two drawing tools** — a freehand **Brush** and a **Pen** that builds editable vector paths from anchor points (click to add points, drag to curve, click the first point or press Enter to finish).
 - **Layers panel** — type icons, show/hide, lock, delete, and drag-to-reorder.
 - **Inspector** — position, size, rotation, opacity, fit, borders, outlines, background blur, image filters, text and shape styling, and video scrubbing.
 - **Canvas aids** — grid overlay, platform safe-zone guides, smart edge/center snapping, and hold-Shift snap-to-grid.
@@ -23,7 +24,8 @@ A private, client-side designer for social carousels, collages, panoramas, and s
 | --- | --- |
 | `V` | Select & move |
 | `H` | Hand / pan |
-| `B` | Pen / draw |
+| `B` | Brush (freehand draw) |
+| `P` | Pen (vector path) |
 | `T` | Add text |
 | `R` | Add shape |
 | `E` | Add sticker |

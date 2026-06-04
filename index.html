@@ -116,9 +116,13 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5V4.5a1.5 1.5 0 0 1 3 0V10m0-.5a1.5 1.5 0 0 1 3 0V10"/><path d="M8 11V8.5a1.5 1.5 0 0 0-3 0V13c0 4 2.5 7 6.5 7s6.5-2.5 6.5-7v-3"/></svg>
             <span class="ctool-key" aria-hidden="true">H</span>
           </button>
-          <button class="ctool" data-tool="draw" title="Pen / draw — B" aria-label="Pen, draw (B)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 6l4 4"/></svg>
+          <button class="ctool" data-tool="draw" title="Brush — freehand drawing (B)" aria-label="Brush, freehand drawing (B)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15q3 -6 6 0t6 0t6 0"/></svg>
             <span class="ctool-key" aria-hidden="true">B</span>
+          </button>
+          <button class="ctool" data-tool="pen" title="Pen — vector path; click to add points, drag to curve, Enter to finish (P)" aria-label="Pen, vector path (P)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c6 0 6-12 14-12"/><circle cx="4" cy="18" r="2"/><circle cx="18" cy="6" r="2"/></svg>
+            <span class="ctool-key" aria-hidden="true">P</span>
           </button>
           <span class="ctool-sep" aria-hidden="true"></span>
           <button class="ctool" id="addTextBtn" title="Add text — T" aria-label="Add text (T)">
@@ -146,8 +150,8 @@
           </button>
         </div>
         <div class="pen-popover" id="penPopover" hidden>
-          <label class="field"><span>Pen color</span><input id="drawColor" type="color" value="#ffffff"></label>
-          <label class="field"><span>Brush size</span><input id="drawSize" type="range" min="2" max="80" value="16"></label>
+          <label class="field"><span>Stroke color</span><input id="drawColor" type="color" value="#ffffff"></label>
+          <label class="field"><span>Stroke size</span><input id="drawSize" type="range" min="2" max="80" value="16"></label>
         </div>
         <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>
         <div class="drop-hint" id="dropHint">Drop images or videos to place them</div>
