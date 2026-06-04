@@ -19,7 +19,7 @@ export function drawProject(ctx, project, store, options = {}) {
   ctx.translate(viewport.x, viewport.y);
   ctx.scale(viewport.scale, viewport.scale);
   drawWorldBackground(ctx, project, worldW, worldH);
-  if (editor && showGrid) drawGrid(ctx, project);
+  if (editor && showGrid) drawGrid(ctx, project, viewport.scale);
   drawLayers(ctx, project, store, { editor });
   if (editor) {
     drawSlideGuides(ctx, project, currentSlide);
@@ -356,12 +356,12 @@ function pointNearStroke(layer, local) {
   return false;
 }
 
-function drawGrid(ctx, project) {
+function drawGrid(ctx, project, scale = 1) {
   const step = gridStep(project);
   const worldW = project.width * project.slideCount;
   ctx.save();
-  ctx.strokeStyle = "rgba(255,255,255,.045)";
-  ctx.lineWidth = 1;
+  ctx.strokeStyle = "rgba(255,255,255,.14)";
+  ctx.lineWidth = 1 / (scale || 1);
   for (let x = 0; x <= worldW; x += step) {
     ctx.beginPath();
     ctx.moveTo(x, 0);
