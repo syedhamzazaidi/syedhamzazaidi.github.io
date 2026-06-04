@@ -359,10 +359,11 @@ function bindCanvas() {
   });
   canvas.addEventListener("wheel", (event) => {
     event.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const sx = (event.clientX - rect.left) * (canvas.width / rect.width);
+    const sy = (event.clientY - rect.top) * (canvas.height / rect.height);
     const factor = event.deltaY > 0 ? .92 : 1.08;
-    state.viewport.scale = Math.max(.02, Math.min(4, state.viewport.scale * factor));
-    updateZoomLabel();
-    requestRender();
+    zoomAround(state.viewport.scale * factor, sx, sy);
   }, { passive: false });
   dom.stageWrap.addEventListener("dragover", (event) => {
     event.preventDefault();
@@ -504,8 +505,16 @@ function currentZoomPercent() {
 
 function setZoomPercent(percent) {
   const clamped = Math.max(12, Math.min(400, percent));
-  state.viewport.scale = clamped / 100 * fitScale();
-  centerViewport();
+  zoomAround(clamped / 100 * fitScale(), dom.canvas.width / 2, dom.canvas.height / 2);
+}
+
+function zoomAround(newScale, sx, sy) {
+  const scale = Math.max(.02, Math.min(4, newScale));
+  const worldX = (sx - state.viewport.x) / state.viewport.scale;
+  const worldY = (sy - state.viewport.y) / state.viewport.scale;
+  state.viewport.scale = scale;
+  state.viewport.x = sx - worldX * scale;
+  state.viewport.y = sy - worldY * scale;
   updateZoomLabel();
   requestRender();
 }
