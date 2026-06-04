@@ -1230,18 +1230,24 @@ textarea {
 }
 
 .inspector-section {
-  margin-bottom: var(--space-3);
-  padding: var(--space-4);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.inspector-section > h3 {
+  margin-bottom: var(--space-4);
+}
+
+.button-row {
+  margin-bottom: var(--space-2);
 }
 
 .toggle-row {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  margin-bottom: var(--space-2);
+  margin: var(--space-3) 0 var(--space-2);
 }
 
 .toggle-row .check {
