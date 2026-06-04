@@ -26,11 +26,12 @@ export const TEMPLATES = [
   {
     id: "seamless-panorama",
     name: "Seamless panorama",
-    description: "One wide photo flows across every slide.",
+    description: "One wide photo, full-bleed and split edge-to-edge across every slide.",
     accent: palette.cyan,
     preview: [
-      { kind: "media", x: 6, y: 26, w: 88, h: 44 },
-      { kind: "accent", x: 6, y: 80, w: 66, h: 6 }
+      { kind: "media", x: 0, y: 0, w: 100, h: 100 },
+      { kind: "frame", x: 33, y: 0, w: 1.5, h: 100 },
+      { kind: "frame", x: 66, y: 0, w: 1.5, h: 100 }
     ],
     apply: (project) => seamlessPanorama(project)
   },
@@ -154,10 +155,16 @@ function editorialStory(project) {
 function seamlessPanorama(project) {
   const { width: w, height: h, slideCount } = project;
   return [
-    createLayer("shape", { name: "Night background", x: 0, y: 0, w: w * slideCount, h, fill: "#08080f", shape: "rect" }),
-    createLayer("placeholder", { name: "Continuous panorama placeholder", x: w * .08, y: h * .19, w: w * (slideCount - .16), h: h * .54, border: 0 }),
-    createLayer("shape", { name: "Gradient trail", x: w * .3, y: h * .68, w: w * (slideCount - .6), h: h * .08, fill: palette.cyan, opacity: .72, radius: 80 }),
-    createLayer("text", { name: "Panorama instruction", text: "Drop a wide photo, then export sliced slides.", x: w * .18, y: h * .78, w: w * 1.2, h: h * .09, fontSize: h * .034, fontWeight: 800, color: "#ffffff" })
+    createLayer("placeholder", {
+      name: "Panorama photo",
+      placeholder: "Drop one wide photo",
+      x: 0,
+      y: 0,
+      w: w * slideCount,
+      h,
+      fit: "cover",
+      border: 0
+    })
   ];
 }
 
