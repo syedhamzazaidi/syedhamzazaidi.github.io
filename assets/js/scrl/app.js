@@ -43,6 +43,8 @@ const dom = {
   canvas: qs("#editorCanvas"),
   workspace: qs("#workspace"),
   stageWrap: qs("#stageWrap"),
+  canvasTools: qs("#canvasTools"),
+  toolsGrip: qs("#toolsGrip"),
   projectMeta: qs("#projectMeta"),
   selectionLabel: qs("#selectionLabel"),
   projectInspector: qs("#projectInspector"),
@@ -148,6 +150,7 @@ function init() {
   bindCanvas();
   bindMediaImport();
   bindExports();
+  bindToolbarDrag();
   store.addEventListener("change", renderAll);
   window.addEventListener("resize", () => {
     fitCanvasToStage(false);
@@ -370,6 +373,39 @@ function bindCanvas() {
     event.preventDefault();
     dom.stageWrap.classList.remove("dragging");
     await importFiles([...event.dataTransfer.files]);
+  });
+}
+
+function bindToolbarDrag() {
+  const grip = dom.toolsGrip;
+  const tb = dom.canvasTools;
+  grip.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    const stage = dom.stageWrap.getBoundingClientRect();
+    const rect = tb.getBoundingClientRect();
+    const offX = rect.left - stage.left;
+    const offY = rect.top - stage.top;
+    const startX = event.clientX;
+    const startY = event.clientY;
+    tb.style.left = `${offX}px`;
+    tb.style.top = `${offY}px`;
+    tb.style.bottom = "auto";
+    tb.style.transform = "none";
+    tb.classList.add("dragging");
+    grip.setPointerCapture(event.pointerId);
+    const move = (ev) => {
+      const maxX = Math.max(4, stage.width - rect.width - 4);
+      const maxY = Math.max(4, stage.height - rect.height - 4);
+      tb.style.left = `${Math.max(4, Math.min(maxX, offX + (ev.clientX - startX)))}px`;
+      tb.style.top = `${Math.max(4, Math.min(maxY, offY + (ev.clientY - startY)))}px`;
+    };
+    const up = () => {
+      tb.classList.remove("dragging");
+      grip.removeEventListener("pointermove", move);
+      grip.removeEventListener("pointerup", up);
+    };
+    grip.addEventListener("pointermove", move);
+    grip.addEventListener("pointerup", up);
   });
 }
 

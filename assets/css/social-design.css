@@ -415,11 +415,13 @@ hr {
 
 .canvas-tools {
   position: absolute;
-  top: var(--space-4);
-  left: var(--space-4);
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 6;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   gap: 3px;
   padding: 5px;
   border: 1px solid var(--line-2);
@@ -428,6 +430,35 @@ hr {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+}
+
+.canvas-tools.dragging {
+  cursor: grabbing;
+}
+
+.ctool-grip {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 38px;
+  color: var(--dim);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.ctool-grip:hover {
+  color: var(--muted);
+}
+
+.ctool-grip:active {
+  cursor: grabbing;
+}
+
+.ctool-grip svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .ctool {
@@ -487,15 +518,17 @@ hr {
 }
 
 .ctool-sep {
-  height: 1px;
-  margin: 3px 5px;
+  width: 1px;
+  height: 22px;
+  margin: 0 4px;
   background: var(--line-2);
 }
 
 .pen-popover {
   position: absolute;
-  top: var(--space-4);
-  left: 78px;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 7;
   width: 196px;
   padding: var(--space-3) var(--space-3) 4px;
@@ -561,22 +594,6 @@ hr {
 
 .zoom-pct:hover {
   background: var(--surface-3);
-}
-
-@media (max-width: 820px) {
-  .canvas-tools {
-    flex-direction: row;
-    top: auto;
-    bottom: var(--space-3);
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .ctool-sep {
-    width: 1px;
-    height: auto;
-    margin: 5px 3px;
-  }
 }
 
 .btn,
