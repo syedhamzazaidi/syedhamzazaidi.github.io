@@ -1,7 +1,7 @@
 import { DEFAULT_PRESET_ID, FONT_OPTIONS, getPreset, PLATFORM_PRESETS } from "./presets.js";
 import { applyTemplate, buildGrid, TEMPLATES } from "./templates.js";
 import { createLayer, createProject, ProjectStore } from "./state.js";
-import { currentSlideFromX, debounce, downloadBlob, fileExtensionForMime, formatBytes, raf, safeFilename, slideRect, uid } from "./utils.js";
+import { currentSlideFromX, downloadBlob, fileExtensionForMime, formatBytes, raf, safeFilename, slideRect, uid } from "./utils.js";
 import { drawProject, gridStep, hitTest, renderSlideToCanvas, selectionHandleAt, slideHasVideo } from "./renderer.js";
 import { downloadProject, exportCurrentSlide, shareProject } from "./exporters.js";
 
@@ -43,7 +43,6 @@ const dom = {
   canvas: qs("#editorCanvas"),
   workspace: qs("#workspace"),
   stageWrap: qs("#stageWrap"),
-  slideStrip: qs("#slideStrip"),
   projectMeta: qs("#projectMeta"),
   selectionLabel: qs("#selectionLabel"),
   projectInspector: qs("#projectInspector"),
@@ -130,8 +129,7 @@ const state = {
   shiftSnapping: false,
   previewSlide: 0,
   raf: 0,
-  hasFitOnce: false,
-  renderThumbnailsSoon: debounce(renderThumbnails, 220)
+  hasFitOnce: false
 };
 
 init();
@@ -406,13 +404,12 @@ function renderAll() {
   dom.showSafeZones.checked = project.showSafeZones;
   dom.snapToggle.checked = project.snap;
   const preset = getPreset(project.presetId);
-  dom.projectMeta.textContent = `${preset.platform} · ${project.width}×${project.height} · ${project.slideCount} slide${project.slideCount === 1 ? "" : "s"}`;
+  const slideLabel = project.slideCount === 1 ? "1 slide" : `slide ${store.currentSlide + 1} of ${project.slideCount}`;
+  dom.projectMeta.textContent = `${preset.platform} · ${project.width}×${project.height} · ${slideLabel}`;
   updateInspector();
   renderLayers();
   renderMediaGrid();
-  renderSlideStrip();
   requestRender();
-  state.renderThumbnailsSoon();
 }
 
 function requestRender() {
@@ -837,33 +834,6 @@ function updateInspector() {
     inspector.shapeStroke.value = normalizeColor(layer.stroke || "#ffffff");
     inspector.shapeStrokeWidth.value = layer.strokeWidth || 0;
   }
-}
-
-function renderSlideStrip() {
-  if (dom.slideStrip.children.length !== store.project.slideCount) {
-    dom.slideStrip.innerHTML = Array.from({ length: store.project.slideCount }, (_, index) => `
-      <button class="slide-thumb" data-slide="${index}"><canvas width="120" height="150"></canvas><span>${index + 1}</span></button>
-    `).join("");
-    dom.slideStrip.querySelectorAll("[data-slide]").forEach((button) => {
-      button.addEventListener("click", () => {
-        store.currentSlide = Number(button.dataset.slide);
-        renderAll();
-      });
-    });
-  }
-  dom.slideStrip.querySelectorAll(".slide-thumb").forEach((button, index) => button.classList.toggle("active", index === store.currentSlide));
-}
-
-function renderThumbnails() {
-  dom.slideStrip.querySelectorAll(".slide-thumb canvas").forEach((canvas, index) => {
-    const source = renderSlideToCanvas(store.project, store, index);
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const scale = Math.min(canvas.width / source.width, canvas.height / source.height);
-    const w = source.width * scale;
-    const h = source.height * scale;
-    ctx.drawImage(source, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
-  });
 }
 
 function updateSelected(patch, options) {
