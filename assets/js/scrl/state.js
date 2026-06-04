@@ -1,7 +1,7 @@
 import { duplicatePlain, uid, clamp } from "./utils.js";
 import { DEFAULT_PRESET_ID, getPreset } from "./presets.js";
 
-const STORAGE_KEY = "swipe-studio-project-v2";
+const STORAGE_KEY = "ilovecarousel-project-v1";
 
 export function createProject(presetId = DEFAULT_PRESET_ID) {
   const preset = getPreset(presetId);
@@ -43,14 +43,14 @@ function starterLayers(project) {
       radius: 90
     }),
     createLayer("shape", {
-      name: "Cyan accent",
+      name: "Red accent",
       x: w * 2.7,
       y: h * .55,
       w: w * 1.2,
       h: h * .32,
       rotation: 4,
       opacity: .7,
-      fill: "#5fe3ff",
+      fill: "#e5322d",
       stroke: "transparent",
       strokeWidth: 0,
       radius: 80

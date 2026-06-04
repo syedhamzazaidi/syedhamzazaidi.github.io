@@ -382,10 +382,10 @@ function drawSlideGuides(ctx, project, currentSlide) {
   for (let i = 0; i < project.slideCount; i++) {
     const x = i * project.width;
     ctx.lineWidth = i === currentSlide ? 8 : 3;
-    ctx.strokeStyle = i === currentSlide ? "rgba(103,232,249,.95)" : "rgba(255,255,255,.24)";
+    ctx.strokeStyle = i === currentSlide ? "rgba(229,50,45,.95)" : "rgba(255,255,255,.24)";
     ctx.strokeRect(x, 0, project.width, project.height);
     if (i > 0) {
-      ctx.strokeStyle = "rgba(95,227,255,.7)";
+      ctx.strokeStyle = "rgba(229,50,45,.7)";
       ctx.setLineDash([22, 18]);
       ctx.beginPath();
       ctx.moveTo(x, 0);
@@ -423,14 +423,14 @@ function drawSafeZones(ctx, project) {
 
 function drawSelection(ctx, layer) {
   ctx.save();
-  ctx.strokeStyle = "#67e8f9";
+  ctx.strokeStyle = "#e5322d";
   ctx.lineWidth = 4;
   ctx.setLineDash([18, 10]);
   ctx.strokeRect(layer.x, layer.y, layer.w, layer.h);
   ctx.setLineDash([]);
   for (const handle of selectionHandles(layer)) {
     ctx.fillStyle = "#0b1020";
-    ctx.strokeStyle = "#67e8f9";
+    ctx.strokeStyle = "#e5322d";
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.arc(handle.x, handle.y, 11, 0, Math.PI * 2);

@@ -746,7 +746,7 @@ function drawPenOverlay(ctx) {
     ctx.beginPath();
     ctx.moveTo(last.x, last.y);
     ctx.lineTo(state.penCursor.x, state.penCursor.y);
-    ctx.strokeStyle = "rgba(95,227,255,.7)";
+    ctx.strokeStyle = "rgba(229,50,45,.8)";
     ctx.lineWidth = 1.5 / s;
     ctx.setLineDash([6 / s, 5 / s]);
     ctx.stroke();
@@ -758,12 +758,12 @@ function drawPenOverlay(ctx) {
       ctx.beginPath();
       ctx.moveTo(node.x, node.y);
       ctx.lineTo(h.x, h.y);
-      ctx.strokeStyle = "rgba(95,227,255,.5)";
+      ctx.strokeStyle = "rgba(229,50,45,.55)";
       ctx.lineWidth = 1 / s;
       ctx.stroke();
       ctx.beginPath();
       ctx.arc(h.x, h.y, 3 / s, 0, Math.PI * 2);
-      ctx.fillStyle = "#5fe3ff";
+      ctx.fillStyle = "#e5322d";
       ctx.fill();
     }
   }
@@ -771,9 +771,9 @@ function drawPenOverlay(ctx) {
     const r = 4 / s;
     ctx.beginPath();
     ctx.rect(node.x - r, node.y - r, r * 2, r * 2);
-    ctx.fillStyle = index === 0 ? "#5fe3ff" : "#0a0c11";
+    ctx.fillStyle = index === 0 ? "#e5322d" : "#0a0c11";
     ctx.fill();
-    ctx.strokeStyle = "#5fe3ff";
+    ctx.strokeStyle = "#e5322d";
     ctx.lineWidth = 1.5 / s;
     ctx.stroke();
   });
@@ -1062,7 +1062,7 @@ function addText() {
 
 function addShape() {
   const r = slideRect(store.project, store.currentSlide);
-  store.addLayer(createLayer("shape", { name: "Shape", x: r.x + store.project.width * .2, y: store.project.height * .25, w: store.project.width * .6, h: store.project.height * .28, fill: "#67e8f9", opacity: .85 }));
+  store.addLayer(createLayer("shape", { name: "Shape", x: r.x + store.project.width * .2, y: store.project.height * .25, w: store.project.width * .6, h: store.project.height * .28, fill: "#e5322d", opacity: .85 }));
 }
 
 function addSticker() {

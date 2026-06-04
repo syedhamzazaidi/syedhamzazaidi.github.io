@@ -82,7 +82,7 @@ assets/js/scrl/
 
 - **No framework, no build step.** Plain ES modules, the Canvas 2D API, and CSS custom properties.
 - **Rendering.** The editor and exports share the same drawing code, so what you see matches what you export. Safe-zone and grid overlays are editor-only and never exported.
-- **Persistence.** Projects are stored under the `localStorage` key `swipe-studio-project-v2`.
+- **Persistence.** Projects are stored under the `localStorage` key `ilovecarousel-project-v1`.
 - **Video export** depends on the browser's `MediaRecorder` support: MP4 where available, otherwise WebM, with a still-poster fallback.
 
 ## Privacy
