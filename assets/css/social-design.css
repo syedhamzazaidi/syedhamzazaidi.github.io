@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Merriweather:wght@400;700&family=Playfair+Display:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
 
-/* =========================================================
-   Swipe Studio — futuristic minimalist design system
-   Monochrome surfaces, hairline borders, a single cool accent.
-   Class names + IDs are load-bearing for app.js; do not rename.
-   ========================================================= */
-
 :root {
   --bg: #07080b;
   --bg-2: #0a0c11;
@@ -94,8 +88,6 @@ textarea {
   font-weight: 600;
 }
 
-/* ---------- Shell / layout ---------- */
-
 .app-shell {
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr) 332px;
@@ -170,13 +162,10 @@ textarea {
   gap: var(--space-2);
 }
 
-/* thin divider between top-bar groups */
 .topbar-group + .topbar-group {
   padding-left: var(--space-3);
   border-left: 1px solid var(--line);
 }
-
-/* ---------- Panels ---------- */
 
 .panel {
   overflow: auto;
@@ -276,8 +265,6 @@ hr {
   border-top: 1px solid var(--line);
 }
 
-/* ---------- Workspace / canvas ---------- */
-
 .workspace {
   position: relative;
   display: grid;
@@ -368,7 +355,6 @@ hr {
   display: grid;
 }
 
-/* Floating create-tools toolbar over the canvas */
 .canvas-tools {
   position: absolute;
   top: var(--space-4);
@@ -518,8 +504,6 @@ hr {
   font-size: 0.6rem;
 }
 
-/* ---------- Buttons / controls ---------- */
-
 .btn,
 .upload-box {
   border: 1px solid var(--line-2);
@@ -598,8 +582,6 @@ hr {
   flex-direction: column;
 }
 
-/* ---------- Collapsibles ---------- */
-
 .panel-collapse {
   margin-top: var(--space-4);
   border: 1px solid var(--line);
@@ -647,8 +629,6 @@ hr {
   padding: var(--space-3) 13px;
 }
 
-/* ---------- Form fields ---------- */
-
 .field {
   display: grid;
   gap: 6px;
@@ -680,7 +660,6 @@ hr {
   width: 70px;
 }
 
-/* Slides stepper (replaces clipped native number spinners) */
 .stepper {
   display: inline-flex;
   align-items: center;
@@ -832,8 +811,6 @@ kbd {
   line-height: 1.4;
 }
 
-/* ---------- Templates ---------- */
-
 .template-grid {
   display: grid;
   gap: var(--space-2);
@@ -912,8 +889,6 @@ kbd {
   line-height: 1.4;
 }
 
-/* ---------- Media ---------- */
-
 .upload-box {
   display: grid;
   place-items: center;
@@ -979,8 +954,6 @@ kbd {
   font-family: var(--mono);
   font-size: 0.56rem;
 }
-
-/* ---------- Layers ---------- */
 
 .layer-list {
   display: grid;
@@ -1160,8 +1133,6 @@ kbd {
   background: rgba(255, 122, 147, 0.12);
 }
 
-/* ---------- Inspector ---------- */
-
 .inspector-section {
   margin-bottom: var(--space-3);
   padding: var(--space-4);
@@ -1210,8 +1181,6 @@ kbd {
   padding: var(--space-3) 12px;
 }
 
-/* ---------- Notices / help ---------- */
-
 .notice,
 .help-card {
   padding: var(--space-3);
@@ -1252,8 +1221,6 @@ kbd {
 .help-card li {
   margin-bottom: 4px;
 }
-
-/* ---------- Modals ---------- */
 
 .modal {
   border: 0;
@@ -1341,7 +1308,6 @@ kbd {
   margin-bottom: var(--space-4);
 }
 
-/* Template chooser modal */
 .modal-card.chooser header {
   align-items: flex-start;
 }
@@ -1430,8 +1396,6 @@ progress::-webkit-progress-value {
   border-radius: 999px;
 }
 
-/* ---------- Toast ---------- */
-
 .toast {
   position: fixed;
   left: 50%;
@@ -1456,8 +1420,6 @@ progress::-webkit-progress-value {
   transform: translate(-50%, 0);
 }
 
-/* ---------- Scrollbars ---------- */
-
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;
@@ -1475,8 +1437,6 @@ progress::-webkit-progress-value {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
-
-/* ---------- Responsive ---------- */
 
 @media (max-width: 1280px) {
   .field.compact select {

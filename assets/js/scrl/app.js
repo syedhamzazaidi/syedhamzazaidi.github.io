@@ -734,7 +734,7 @@ function renderLayers() {
       dragLayerId = id;
       item.classList.add("dragging");
       event.dataTransfer.effectAllowed = "move";
-      try { event.dataTransfer.setData("text/plain", id); } catch { /* some browsers require a payload */ }
+      try { event.dataTransfer.setData("text/plain", id); } catch (_) {}
     });
     item.addEventListener("dragend", () => {
       dragLayerId = null;

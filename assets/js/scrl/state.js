@@ -331,9 +331,7 @@ export class ProjectStore extends EventTarget {
     try {
       const metadata = duplicatePlain(this.project);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(metadata));
-    } catch {
-      // Storage may be disabled/private. The editor should keep working.
-    }
+    } catch (_) {}
   }
 
   static loadMetadata() {
