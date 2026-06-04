@@ -62,12 +62,20 @@ export function drawLayer(ctx, layer, store, options = {}) {
   else if (layer.type === "text" || layer.type === "sticker") drawTextLayer(ctx, layer);
   else if (layer.type === "shape") drawShapeLayer(ctx, layer);
   else if (layer.type === "drawing") drawDrawingLayer(ctx, layer);
+  else if (layer.type === "vector") drawVectorLayer(ctx, layer);
   ctx.restore();
 }
 
 export function hitTest(project, point, includeLocked = false) {
   const layers = [...project.layers].sort((a, b) => (b.z || 0) - (a.z || 0));
-  return layers.find((layer) => layer.visible && (includeLocked || !layer.locked) && pointInRotatedLayer(point, layer)) || null;
+  return layers.find((layer) => layer.visible && (includeLocked || !layer.locked) && layerHit(layer, point)) || null;
+}
+
+function layerHit(layer, point) {
+  if (layer.type === "drawing" || layer.type === "vector") {
+    return pointNearStroke(layer, toLayerLocal(point, layer));
+  }
+  return pointInRotatedLayer(point, layer);
 }
 
 export function selectionHandleAt(layer, point, screenScale = 1) {
@@ -229,6 +237,119 @@ function drawDrawingLayer(ctx, layer) {
 
 export function gridStep(project) {
   return Math.max(40, Math.round(project.width / 12));
+}
+
+function vectorSegment(ctx, a, b) {
+  if (a.hOut || b.hIn) {
+    const c1 = a.hOut || a;
+    const c2 = b.hIn || b;
+    ctx.bezierCurveTo(c1.x, c1.y, c2.x, c2.y, b.x, b.y);
+  } else {
+    ctx.lineTo(b.x, b.y);
+  }
+}
+
+function drawVectorLayer(ctx, layer) {
+  const nodes = layer.nodes || [];
+  if (!nodes.length) return;
+  ctx.beginPath();
+  ctx.moveTo(nodes[0].x, nodes[0].y);
+  for (let i = 1; i < nodes.length; i++) vectorSegment(ctx, nodes[i - 1], nodes[i]);
+  if (layer.closed && nodes.length > 2) {
+    vectorSegment(ctx, nodes[nodes.length - 1], nodes[0]);
+    ctx.closePath();
+  }
+  if (layer.closed && layer.fill && layer.fill !== "transparent") {
+    ctx.fillStyle = layer.fill;
+    ctx.fill();
+  }
+  if ((layer.strokeWidth || 0) > 0) {
+    ctx.lineWidth = layer.strokeWidth;
+    ctx.strokeStyle = layer.stroke || "#fff";
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.stroke();
+  }
+}
+
+function toLayerLocal(point, layer) {
+  const c = layerCenter(layer);
+  const angle = -(layer.rotation || 0) * Math.PI / 180;
+  const dx = point.x - c.x;
+  const dy = point.y - c.y;
+  return {
+    x: Math.cos(angle) * dx - Math.sin(angle) * dy + layer.w / 2,
+    y: Math.sin(angle) * dx + Math.cos(angle) * dy + layer.h / 2
+  };
+}
+
+function distToSegment(p, a, b) {
+  const vx = b.x - a.x;
+  const vy = b.y - a.y;
+  const lenSq = vx * vx + vy * vy;
+  let t = lenSq ? ((p.x - a.x) * vx + (p.y - a.y) * vy) / lenSq : 0;
+  t = Math.max(0, Math.min(1, t));
+  const dx = p.x - (a.x + t * vx);
+  const dy = p.y - (a.y + t * vy);
+  return Math.hypot(dx, dy);
+}
+
+function cubicPoint(p0, c1, c2, p1, t) {
+  const mt = 1 - t;
+  const a = mt * mt * mt;
+  const b = 3 * mt * mt * t;
+  const c = 3 * mt * t * t;
+  const d = t * t * t;
+  return {
+    x: a * p0.x + b * c1.x + c * c2.x + d * p1.x,
+    y: a * p0.y + b * c1.y + c * c2.y + d * p1.y
+  };
+}
+
+function segmentNear(point, a, b, tol) {
+  if (a.hOut || b.hIn) {
+    const c1 = a.hOut || a;
+    const c2 = b.hIn || b;
+    let prev = a;
+    for (let i = 1; i <= 12; i++) {
+      const cur = cubicPoint(a, c1, c2, b, i / 12);
+      if (distToSegment(point, prev, cur) <= tol) return true;
+      prev = cur;
+    }
+    return false;
+  }
+  return distToSegment(point, a, b) <= tol;
+}
+
+function pointInPolygon(point, nodes) {
+  let inside = false;
+  for (let i = 0, j = nodes.length - 1; i < nodes.length; j = i++) {
+    const xi = nodes[i].x, yi = nodes[i].y, xj = nodes[j].x, yj = nodes[j].y;
+    if (((yi > point.y) !== (yj > point.y)) && (point.x < (xj - xi) * (point.y - yi) / (yj - yi) + xi)) inside = !inside;
+  }
+  return inside;
+}
+
+function pointNearStroke(layer, local) {
+  if (layer.type === "drawing") {
+    for (const path of layer.paths || []) {
+      const pts = path.points || [];
+      const tol = Math.max((path.strokeWidth || layer.strokeWidth || 4) / 2, 8) + 4;
+      if (pts.length === 1) { if (Math.hypot(local.x - pts[0].x, local.y - pts[0].y) <= tol) return true; continue; }
+      for (let i = 1; i < pts.length; i++) if (distToSegment(local, pts[i - 1], pts[i]) <= tol) return true;
+    }
+    return false;
+  }
+  const nodes = layer.nodes || [];
+  if (!nodes.length) return false;
+  const tol = Math.max((layer.strokeWidth || 4) / 2, 8) + 4;
+  if (nodes.length === 1) return Math.hypot(local.x - nodes[0].x, local.y - nodes[0].y) <= tol;
+  for (let i = 1; i < nodes.length; i++) if (segmentNear(local, nodes[i - 1], nodes[i], tol)) return true;
+  if (layer.closed && nodes.length > 2) {
+    if (segmentNear(local, nodes[nodes.length - 1], nodes[0], tol)) return true;
+    if (layer.fill && layer.fill !== "transparent" && pointInPolygon(local, nodes)) return true;
+  }
+  return false;
 }
 
 function drawGrid(ctx, project) {

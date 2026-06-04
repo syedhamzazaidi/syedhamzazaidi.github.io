@@ -157,6 +157,13 @@ export function createLayer(type, overrides = {}) {
       stroke: "#ffffff",
       strokeWidth: 16
     },
+    vector: {
+      nodes: [],
+      closed: false,
+      stroke: "#ffffff",
+      strokeWidth: 8,
+      fill: "transparent"
+    },
     placeholder: {
       placeholder: "Drop media",
       fit: "cover",
