@@ -6,7 +6,7 @@ A private, client-side designer for social carousels, collages, panoramas, and s
 
 ## Features
 
-- **Template chooser** — start from a layout (editorial story, full-bleed panorama, white-border dump, grid collage, quote cards, product showcase, before/after, Story/Reel cover) or a blank canvas.
+- **Template chooser** — start from a layout (editorial story, full-bleed panorama, white-border dump, grid collage, quote cards, product showcase, before/after, Story/Reel cover, plus marketing-style decks: how-to playbook, results story, weekly diary, and personal brand) or a blank canvas.
 - **Smart slide reflow** — while a design is untouched, changing the slide count re-flows the chosen template to fit; once you start editing, your work is preserved.
 - **Full-bleed panorama** — drop one wide photo and have it split edge-to-edge across every slide.
 - **Floating canvas toolbar** — select, hand/pan, freehand brush, vector pen, text, shape, sticker, and photo-grid tools, each with a keyboard shortcut.

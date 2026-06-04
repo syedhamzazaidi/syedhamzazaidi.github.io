@@ -7,8 +7,77 @@ const palette = {
   cyan: "#67e8f9",
   lime: "#bef264",
   amber: "#fde68a",
-  violet: "#a78bfa"
+  violet: "#a78bfa",
+  red: "#cf1f2e",
+  redDeep: "#a8121f",
+  blush: "#f3c4cb",
+  blushDeep: "#e08a98",
+  cream: "#f7f1e6",
+  noir: "#141118"
 };
+
+const SERIF = "Playfair Display";
+const SANS = "Plus Jakarta Sans";
+
+function pill(text, x, y, w, h, opts = {}) {
+  return createLayer("text", {
+    name: opts.name || "Label",
+    text,
+    x, y, w, h,
+    background: opts.bg || palette.red,
+    radius: h / 2,
+    color: opts.color || "#ffffff",
+    fontFamily: opts.font || SANS,
+    fontWeight: opts.weight || 700,
+    fontSize: opts.size || h * 0.42,
+    align: "center",
+    valign: "middle",
+    lineHeight: 1.05
+  });
+}
+
+function heading(text, x, y, w, h, opts = {}) {
+  return createLayer("text", {
+    name: opts.name || "Heading",
+    text,
+    x, y, w, h,
+    fontFamily: opts.font || SERIF,
+    fontWeight: opts.weight || 700,
+    fontSize: opts.size || h * 0.5,
+    color: opts.color || "#ffffff",
+    align: opts.align || "left",
+    valign: opts.valign || "top",
+    lineHeight: opts.lh || 0.98
+  });
+}
+
+function body(text, x, y, w, h, opts = {}) {
+  return createLayer("text", {
+    name: opts.name || "Text",
+    text,
+    x, y, w, h,
+    fontFamily: opts.font || SANS,
+    fontWeight: opts.weight || 600,
+    fontSize: opts.size || h * 0.16,
+    color: opts.color || "#ffffff",
+    align: opts.align || "left",
+    valign: opts.valign || "top",
+    lineHeight: opts.lh || 1.3,
+    background: opts.bg || "transparent",
+    radius: opts.radius || 0
+  });
+}
+
+function framedPhoto(name, x, y, w, h, opts = {}) {
+  return createLayer("placeholder", {
+    name,
+    x, y, w, h,
+    border: opts.border ?? 0,
+    borderColor: opts.borderColor || "#ffffff",
+    rotation: opts.rotation || 0,
+    radius: opts.radius ?? 16
+  });
+}
 
 export const TEMPLATES = [
   {
@@ -107,6 +176,56 @@ export const TEMPLATES = [
       { kind: "text", x: 26, y: 68, w: 48, h: 8 }
     ],
     apply: (project) => verticalCover(project)
+  },
+  {
+    id: "howto-playbook",
+    name: "How-to playbook",
+    description: "Bold red editorial how-to with step pills and swipe arrows.",
+    accent: palette.red,
+    preview: [
+      { kind: "accent", x: 10, y: 12, w: 30, h: 8 },
+      { kind: "text", x: 10, y: 26, w: 72, h: 9 },
+      { kind: "text", x: 10, y: 40, w: 52, h: 7 },
+      { kind: "media", x: 12, y: 56, w: 76, h: 34 }
+    ],
+    apply: (project) => howToPlaybook(project)
+  },
+  {
+    id: "results-story",
+    name: "Results story",
+    description: "Dark, serif claim with photo cut-outs and number badges.",
+    accent: palette.red,
+    preview: [
+      { kind: "text", x: 10, y: 14, w: 64, h: 9 },
+      { kind: "text", x: 10, y: 30, w: 40, h: 7 },
+      { kind: "media", x: 10, y: 46, w: 80, h: 30 },
+      { kind: "accent", x: 64, y: 64, w: 22, h: 22 }
+    ],
+    apply: (project) => resultsStory(project)
+  },
+  {
+    id: "weekly-diary",
+    name: "Weekly diary",
+    description: "Soft-pink day-by-day diary with taped photos and notes.",
+    accent: palette.blushDeep,
+    preview: [
+      { kind: "media", x: 14, y: 12, w: 66, h: 44 },
+      { kind: "accent", x: 12, y: 62, w: 34, h: 9 },
+      { kind: "text", x: 12, y: 76, w: 74, h: 12 }
+    ],
+    apply: (project) => weeklyDiary(project)
+  },
+  {
+    id: "personal-brand",
+    name: "Personal brand",
+    description: "Blush announcement with a boxed headline and comment CTA.",
+    accent: palette.red,
+    preview: [
+      { kind: "text", x: 10, y: 12, w: 70, h: 9 },
+      { kind: "accent", x: 10, y: 28, w: 52, h: 13 },
+      { kind: "media", x: 14, y: 48, w: 72, h: 42 }
+    ],
+    apply: (project) => personalBrand(project)
   }
 ];
 
@@ -245,4 +364,81 @@ function verticalCover(project) {
     createLayer("text", { name: "Cover title", text: "HOOK\nGOES HERE", x: w * .12, y: h * .61, w: w * .76, h: h * .16, fontSize: h * .063, fontWeight: 950, color: "#ffffff", align: "center", lineHeight: .92 }),
     createLayer("text", { name: "Safe zone note", text: "Safe for TikTok/Reels UI", x: w * .12, y: h * .79, w: w * .76, h: h * .04, fontSize: h * .022, fontWeight: 700, color: "#d8b4fe", align: "center" })
   ];
+}
+
+function howToPlaybook(project) {
+  const { width: w, height: h, slideCount: n } = project;
+  const layers = [createLayer("shape", { name: "Red background", x: 0, y: 0, w: w * n, h, fill: palette.red, shape: "rect" })];
+  layers.push(pill("HOW TO", w * .08, h * .1, w * .34, h * .05, { bg: palette.noir, size: h * .024 }));
+  layers.push(heading("Transform\nyour brand\nin 30 days", w * .08, h * .18, w * .84, h * .38, { size: h * .085, color: "#ffffff", lh: 1.0 }));
+  layers.push(body("Save this — then keep swiping →", w * .08, h * .62, w * .76, h * .05, { color: palette.cream, size: h * .026 }));
+  layers.push(framedPhoto("Hero media", w * .18, h * .7, w * .64, h * .24, { radius: 22 }));
+  const steps = [["STEP 01", "Pick one clear offer"], ["STEP 02", "Post with intention"], ["STEP 03", "Show real results"], ["STEP 04", "Make a simple ask"]];
+  for (let i = 1; i < n; i++) {
+    const x = i * w;
+    const step = steps[(i - 1) % steps.length];
+    layers.push(pill(step[0], x + w * .08, h * .1, w * .4, h * .06, { bg: palette.noir, size: h * .026 }));
+    layers.push(heading(step[1], x + w * .08, h * .2, w * .84, h * .2, { size: h * .058, color: "#ffffff", lh: 1.02 }));
+    layers.push(framedPhoto(`Media ${i}`, x + w * .12, h * .44, w * .76, h * .4, { radius: 22 }));
+    layers.push(createLayer("sticker", { name: "Swipe arrow", text: "→", x: x + w * .78, y: h * .87, w: w * .16, h: h * .08, fontSize: h * .06, color: palette.cream, align: "center" }));
+  }
+  return layers;
+}
+
+function resultsStory(project) {
+  const { width: w, height: h, slideCount: n } = project;
+  const layers = [createLayer("shape", { name: "Charcoal background", x: 0, y: 0, w: w * n, h, fill: palette.noir, shape: "rect" })];
+  layers.push(heading("I tripled\nmy sales\nin 30 days", w * .08, h * .14, w * .84, h * .34, { size: h * .085, color: "#ffffff", lh: 1.0 }));
+  layers.push(heading("because…", w * .08, h * .5, w * .7, h * .08, { weight: 500, size: h * .05, color: palette.blushDeep }));
+  layers.push(framedPhoto("Hero portrait", w * .1, h * .6, w * .8, h * .34, { radius: 18 }));
+  const claims = ["I shifted my focus to email", "I stopped posting daily", "I built a repeatable system", "I finally made the ask"];
+  const badges = ["+200", "+2K", "3x", "#1"];
+  for (let i = 1; i < n; i++) {
+    const x = i * w;
+    layers.push(framedPhoto(`Photo ${i}`, x + w * .08, h * .08, w * .84, h * .48, { radius: 18 }));
+    layers.push(pill(claims[(i - 1) % claims.length], x + w * .08, h * .6, w * .84, h * .07, { bg: palette.red, size: h * .026 }));
+    const bw = w * .26;
+    layers.push(createLayer("shape", { name: "Badge", shape: "circle", x: x + w * .6, y: h * .72, w: bw, h: bw, fill: palette.red }));
+    layers.push(createLayer("text", { name: "Badge number", text: badges[(i - 1) % badges.length], x: x + w * .6, y: h * .72, w: bw, h: bw, fontFamily: SANS, fontWeight: 800, fontSize: h * .045, color: "#ffffff", align: "center", valign: "middle" }));
+  }
+  return layers;
+}
+
+function weeklyDiary(project) {
+  const { width: w, height: h, slideCount: n } = project;
+  const layers = [createLayer("shape", { name: "Pink background", x: 0, y: 0, w: w * n, h, fill: palette.blush, shape: "rect" })];
+  layers.push(pill("DIARIES", w * .08, h * .08, w * .34, h * .05, { bg: palette.red, size: h * .024 }));
+  layers.push(heading("this\nweek", w * .08, h * .16, w * .8, h * .26, { size: h * .11, color: palette.noir, lh: .9 }));
+  layers.push(body("a week as a social media manager", w * .08, h * .46, w * .8, h * .06, { color: palette.redDeep, size: h * .026 }));
+  layers.push(framedPhoto("Hero media", w * .1, h * .56, w * .8, h * .36, { border: Math.round(h * .012), rotation: -2, radius: 8 }));
+  const days = ["MON.", "TUE.", "WED.", "THU.", "FRI.", "SAT.", "SUN."];
+  for (let i = 1; i < n; i++) {
+    const x = i * w;
+    const odd = i % 2;
+    layers.push(framedPhoto(`Photo ${i}`, x + w * (odd ? .16 : .1), h * .1, w * .72, h * .5, { border: Math.round(h * .012), rotation: odd ? 2.5 : -2, radius: 8 }));
+    layers.push(heading(days[(i - 1) % days.length], x + w * .1, h * .64, w * .6, h * .1, { weight: 800, size: h * .07, color: palette.red }));
+    layers.push(body("The best part of this week was…", x + w * .1, h * .76, w * .8, h * .16, { color: palette.noir, size: h * .026, bg: palette.cream, radius: 18, lh: 1.3 }));
+  }
+  return layers;
+}
+
+function personalBrand(project) {
+  const { width: w, height: h, slideCount: n } = project;
+  const layers = [createLayer("shape", { name: "Blush background", x: 0, y: 0, w: w * n, h, fill: palette.blush, shape: "rect" })];
+  layers.push(heading("2025 is the\nyear of the", w * .08, h * .12, w * .84, h * .2, { weight: 600, size: h * .06, color: palette.noir, lh: 1.0 }));
+  layers.push(createLayer("text", { name: "Boxed word", text: "PERSONAL\nBRAND", x: w * .08, y: h * .34, w: w * .72, h: h * .18, background: palette.red, radius: 8, color: "#ffffff", fontFamily: SERIF, fontWeight: 800, fontSize: h * .062, align: "center", valign: "middle", lineHeight: .98 }));
+  layers.push(framedPhoto("Hero portrait", w * .12, h * .56, w * .76, h * .36, { border: Math.round(h * .012), radius: 10 }));
+  for (let i = 1; i < n; i++) {
+    const x = i * w;
+    if (i === n - 1) {
+      layers.push(heading("comment", x + w * .1, h * .15, w * .8, h * .07, { weight: 600, size: h * .045, color: palette.noir, align: "center" }));
+      layers.push(createLayer("shape", { name: "CTA oval", shape: "circle", x: x + w * .2, y: h * .25, w: w * .6, h: h * .15, fill: "#ffffff", stroke: palette.red, strokeWidth: 6 }));
+      layers.push(createLayer("text", { name: "CTA word", text: "BRAND", x: x + w * .2, y: h * .25, w: w * .6, h: h * .15, fontFamily: SERIF, fontWeight: 800, fontSize: h * .05, color: palette.red, align: "center", valign: "middle" }));
+      layers.push(framedPhoto("Closing media", x + w * .18, h * .48, w * .64, h * .42, { border: Math.round(h * .012), radius: 10 }));
+    } else {
+      layers.push(framedPhoto(`Photo ${i}`, x + w * .1, h * .1, w * .8, h * .5, { border: Math.round(h * .012), radius: 10 }));
+      layers.push(body("Show your audience the results, the numbers, the transformations.", x + w * .12, h * .66, w * .76, h * .24, { color: palette.noir, size: h * .03, align: "center", lh: 1.35 }));
+    }
+  }
+  return layers;
 }

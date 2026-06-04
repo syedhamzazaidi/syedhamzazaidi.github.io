@@ -193,7 +193,11 @@ function drawTextLayer(ctx, layer) {
   const lines = wrapText(ctx, layer.text || "", layer.w, layer.fontSize || 72);
   const lineH = (layer.fontSize || 72) * (layer.lineHeight || 1.15);
   const x = layer.align === "center" ? layer.w / 2 : layer.align === "right" ? layer.w : 0;
-  lines.forEach((line, index) => ctx.fillText(line, x, index * lineH));
+  const blockH = lines.length * lineH;
+  let startY = 0;
+  if (layer.valign === "middle") startY = Math.max(0, (layer.h - blockH) / 2);
+  else if (layer.valign === "bottom") startY = Math.max(0, layer.h - blockH);
+  lines.forEach((line, index) => ctx.fillText(line, x, startY + index * lineH));
 }
 
 function drawShapeLayer(ctx, layer) {
