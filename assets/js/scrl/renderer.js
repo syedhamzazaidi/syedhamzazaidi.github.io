@@ -227,8 +227,12 @@ function drawDrawingLayer(ctx, layer) {
   }
 }
 
+export function gridStep(project) {
+  return Math.max(40, Math.round(project.width / 12));
+}
+
 function drawGrid(ctx, project) {
-  const step = Math.max(40, Math.round(project.width / 12));
+  const step = gridStep(project);
   const worldW = project.width * project.slideCount;
   ctx.save();
   ctx.strokeStyle = "rgba(255,255,255,.045)";

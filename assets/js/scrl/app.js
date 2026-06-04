@@ -2,7 +2,7 @@ import { DEFAULT_PRESET_ID, FONT_OPTIONS, getPreset, PLATFORM_PRESETS } from "./
 import { applyTemplate, buildGrid, TEMPLATES } from "./templates.js";
 import { createLayer, createProject, ProjectStore } from "./state.js";
 import { currentSlideFromX, debounce, downloadBlob, fileExtensionForMime, formatBytes, raf, safeFilename, slideRect, uid } from "./utils.js";
-import { drawProject, hitTest, renderSlideToCanvas, selectionHandleAt, slideHasVideo } from "./renderer.js";
+import { drawProject, gridStep, hitTest, renderSlideToCanvas, selectionHandleAt, slideHasVideo } from "./renderer.js";
 import { downloadProject, exportCurrentSlide, shareProject } from "./exporters.js";
 
 const LAYER_TYPE_LABELS = { image: "Image", video: "Video", placeholder: "Placeholder", text: "Text", sticker: "Sticker", shape: "Shape", drawing: "Drawing" };
@@ -123,6 +123,7 @@ const state = {
   viewport: { x: 0, y: 0, scale: 1 },
   dragging: null,
   spacePan: false,
+  shiftSnapping: false,
   previewSlide: 0,
   raf: 0,
   hasFitOnce: false,
@@ -422,7 +423,8 @@ function requestRender() {
       viewport: state.viewport,
       selectedId: store.selectedId,
       editor: true,
-      currentSlide: store.currentSlide
+      currentSlide: store.currentSlide,
+      showGrid: store.project.showGrid || state.shiftSnapping
     });
   });
 }
@@ -529,11 +531,20 @@ function pointerMove(event) {
   }
   const dx = point.x - state.dragging.start.x;
   const dy = point.y - state.dragging.start.y;
+  state.shiftSnapping = event.shiftKey && (state.dragging.kind === "move" || state.dragging.kind === "resize");
   if (state.dragging.kind === "move") {
-    const patch = snapLayer({ ...state.dragging.layer, x: state.dragging.layer.x + dx, y: state.dragging.layer.y + dy });
-    store.updateLayer(layer.id, { x: patch.x, y: patch.y }, { history: false });
+    let moved = { ...state.dragging.layer, x: state.dragging.layer.x + dx, y: state.dragging.layer.y + dy };
+    if (event.shiftKey) {
+      const step = gridStep(store.project);
+      moved.x = Math.round(moved.x / step) * step;
+      moved.y = Math.round(moved.y / step) * step;
+    } else {
+      moved = snapLayer(moved);
+    }
+    store.updateLayer(layer.id, { x: moved.x, y: moved.y }, { history: false });
   } else if (state.dragging.kind === "resize") {
-    const patch = resizeFromHandle(state.dragging.layer, state.dragging.handle, dx, dy);
+    let patch = resizeFromHandle(state.dragging.layer, state.dragging.handle, dx, dy);
+    if (event.shiftKey) patch = snapResizeToGrid(patch, state.dragging.handle, gridStep(store.project));
     store.updateLayer(layer.id, patch, { history: false });
   }
 }
@@ -546,6 +557,10 @@ function pointerUp() {
     store.saveHistory();
   }
   state.dragging = null;
+  if (state.shiftSnapping) {
+    state.shiftSnapping = false;
+    requestRender();
+  }
 }
 
 function snapLayer(layer) {
@@ -581,6 +596,23 @@ function resizeFromHandle(layer, handle, dx, dy) {
   if (handle.includes("n")) {
     patch.y = layer.y + dy;
     patch.h = Math.max(24, layer.h - dy);
+  }
+  return patch;
+}
+
+function snapResizeToGrid(patch, handle, step) {
+  const snap = (value) => Math.round(value / step) * step;
+  if (handle.includes("e")) patch.w = Math.max(step, snap(patch.x + patch.w) - patch.x);
+  if (handle.includes("s")) patch.h = Math.max(step, snap(patch.y + patch.h) - patch.y);
+  if (handle.includes("w")) {
+    const right = patch.x + patch.w;
+    patch.x = snap(patch.x);
+    patch.w = Math.max(step, right - patch.x);
+  }
+  if (handle.includes("n")) {
+    const bottom = patch.y + patch.h;
+    patch.y = snap(patch.y);
+    patch.h = Math.max(step, bottom - patch.y);
   }
   return patch;
 }
