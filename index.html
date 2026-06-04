@@ -57,7 +57,6 @@
     <aside class="left-panel panel">
       <div class="tabs" role="tablist" aria-label="Editor panels">
         <button class="tab active" data-tab="media">Media</button>
-        <button class="tab" data-tab="tools">Tools</button>
         <button class="tab" data-tab="layers">Layers</button>
       </div>
 
@@ -77,32 +76,6 @@
         </div>
       </section>
 
-      <section class="tab-panel" id="tab-tools">
-        <div class="panel-head">
-          <h2>Tools</h2>
-          <p>Canvas settings and pen options. Create tools live on the canvas toolbar.</p>
-        </div>
-        <h3>Canvas aids</h3>
-        <label class="check"><input type="checkbox" id="showGrid" checked> Grid overlay</label>
-        <label class="check"><input type="checkbox" id="showSafeZones" checked> Platform safe zones</label>
-        <label class="check"><input type="checkbox" id="snapToggle" checked> Snap to edges &amp; centers</label>
-        <p class="aid-hint">Hold <kbd>Shift</kbd> while dragging to snap to the grid.</p>
-        <label class="field">
-          <span>Zoom</span>
-          <input id="zoomRange" type="range" min="12" max="180" value="100">
-        </label>
-        <hr>
-        <h3>Pen</h3>
-        <label class="field">
-          <span>Color</span>
-          <input id="drawColor" type="color" value="#ffffff">
-        </label>
-        <label class="field">
-          <span>Brush size</span>
-          <input id="drawSize" type="range" min="2" max="80" value="16">
-        </label>
-      </section>
-
       <section class="tab-panel" id="tab-layers">
         <div class="panel-head">
           <h2>Layers</h2>
@@ -115,6 +88,23 @@
     <main class="workspace" id="workspace">
       <div class="canvas-toolbar">
         <div class="status-pill" id="projectMeta">Instagram · 1080×1350 · 5 slides</div>
+        <div class="view-toggles" role="group" aria-label="View options">
+          <label class="view-toggle" title="Grid overlay">
+            <input type="checkbox" id="showGrid" checked>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            <span>Grid</span>
+          </label>
+          <label class="view-toggle" title="Platform safe zones">
+            <input type="checkbox" id="showSafeZones" checked>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" stroke-dasharray="3 3"/></svg>
+            <span>Safe&nbsp;zones</span>
+          </label>
+          <label class="view-toggle" title="Snap to edges &amp; centers — hold Shift while dragging to snap to the grid">
+            <input type="checkbox" id="snapToggle" checked>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg>
+            <span>Snap</span>
+          </label>
+        </div>
       </div>
       <div class="stage-wrap" id="stageWrap">
         <div class="canvas-tools" id="canvasTools" role="toolbar" aria-label="Tools">
@@ -155,8 +145,17 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 4-5 4"/><path d="M20 11h-8.5a5.5 5.5 0 0 0 0 11H16"/></svg>
           </button>
         </div>
+        <div class="pen-popover" id="penPopover" hidden>
+          <label class="field"><span>Pen color</span><input id="drawColor" type="color" value="#ffffff"></label>
+          <label class="field"><span>Brush size</span><input id="drawSize" type="range" min="2" max="80" value="16"></label>
+        </div>
         <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>
         <div class="drop-hint" id="dropHint">Drop images or videos to place them</div>
+        <div class="zoom-widget" id="zoomWidget">
+          <button type="button" class="zoom-btn" id="zoomOut" aria-label="Zoom out">−</button>
+          <button type="button" class="zoom-pct" id="zoomReset" title="Reset to fit" aria-label="Zoom level, click to fit"><span id="zoomLabel">100%</span></button>
+          <button type="button" class="zoom-btn" id="zoomIn" aria-label="Zoom in">+</button>
+        </div>
       </div>
       <div class="slide-strip" id="slideStrip" aria-label="Slide thumbnails"></div>
     </main>

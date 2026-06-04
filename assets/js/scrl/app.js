@@ -55,7 +55,11 @@ const dom = {
   showGrid: qs("#showGrid"),
   showSafeZones: qs("#showSafeZones"),
   snapToggle: qs("#snapToggle"),
-  zoomRange: qs("#zoomRange"),
+  zoomLabel: qs("#zoomLabel"),
+  zoomIn: qs("#zoomIn"),
+  zoomOut: qs("#zoomOut"),
+  zoomReset: qs("#zoomReset"),
+  penPopover: qs("#penPopover"),
   drawColor: qs("#drawColor"),
   drawSize: qs("#drawSize"),
   previewModal: qs("#previewModal"),
@@ -275,11 +279,9 @@ function bindProjectControls() {
   dom.showGrid.addEventListener("change", () => store.mutate((project) => { project.showGrid = dom.showGrid.checked; }, { history: false, markDirty: false }));
   dom.showSafeZones.addEventListener("change", () => store.mutate((project) => { project.showSafeZones = dom.showSafeZones.checked; }, { history: false, markDirty: false }));
   dom.snapToggle.addEventListener("change", () => store.mutate((project) => { project.snap = dom.snapToggle.checked; }, { history: false, markDirty: false }));
-  dom.zoomRange.addEventListener("input", () => {
-    state.viewport.scale = Number(dom.zoomRange.value) / 100 * fitScale();
-    centerViewport();
-    requestRender();
-  });
+  dom.zoomIn.addEventListener("click", () => setZoomPercent(currentZoomPercent() * 1.25));
+  dom.zoomOut.addEventListener("click", () => setZoomPercent(currentZoomPercent() / 1.25));
+  dom.zoomReset.addEventListener("click", () => fitCanvasToStage(true));
 }
 
 function bindInspector() {
@@ -350,7 +352,7 @@ function bindCanvas() {
     event.preventDefault();
     const factor = event.deltaY > 0 ? .92 : 1.08;
     state.viewport.scale = Math.max(.02, Math.min(4, state.viewport.scale * factor));
-    dom.zoomRange.value = Math.round((state.viewport.scale / fitScale()) * 100);
+    updateZoomLabel();
     requestRender();
   }, { passive: false });
   dom.stageWrap.addEventListener("dragover", (event) => {
@@ -447,9 +449,27 @@ function fitCanvasToStage(force = false) {
   resizeEditorCanvas();
   if (!force && state.hasFitOnce) return;
   state.viewport.scale = fitScale();
-  dom.zoomRange.value = 100;
   centerViewport();
   state.hasFitOnce = true;
+  updateZoomLabel();
+  requestRender();
+}
+
+function currentZoomPercent() {
+  const fit = fitScale();
+  return fit ? (state.viewport.scale / fit) * 100 : 100;
+}
+
+function setZoomPercent(percent) {
+  const clamped = Math.max(12, Math.min(400, percent));
+  state.viewport.scale = clamped / 100 * fitScale();
+  centerViewport();
+  updateZoomLabel();
+  requestRender();
+}
+
+function updateZoomLabel() {
+  if (dom.zoomLabel) dom.zoomLabel.textContent = `${Math.round(currentZoomPercent())}%`;
 }
 
 function fitScale() {
@@ -854,6 +874,7 @@ function updateSelected(patch, options) {
 function setTool(tool) {
   state.tool = tool;
   document.querySelectorAll("[data-tool]").forEach((button) => button.classList.toggle("active", button.dataset.tool === tool));
+  dom.penPopover.hidden = tool !== "draw";
   updateCanvasCursor();
 }
 
