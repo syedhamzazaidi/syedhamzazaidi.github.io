@@ -981,13 +981,9 @@ function renderLayers() {
 
 function updateInspector() {
   const layer = store.selectedLayer();
-  dom.projectInspector.hidden = Boolean(layer);
   dom.layerInspector.hidden = !layer;
-  if (!layer) {
-    dom.selectionLabel.textContent = "Select a layer to edit its properties.";
-    return;
-  }
-  dom.selectionLabel.textContent = `${layer.name} (${layer.type})`;
+  if (!layer) return;
+  dom.selectionLabel.textContent = `${layer.name} · ${layer.type}`;
   inspector.name.value = layer.name || "";
   inspector.x.value = Math.round(layer.x);
   inspector.y.value = Math.round(layer.y);

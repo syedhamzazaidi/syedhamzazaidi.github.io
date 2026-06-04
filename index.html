@@ -32,10 +32,6 @@
       <div class="topbar-actions">
         <div class="topbar-group">
           <label class="field compact">
-            <span>Preset</span>
-            <select id="presetSelect" aria-label="Platform preset"></select>
-          </label>
-          <label class="field compact">
             <span>Slides</span>
             <span class="stepper">
               <button type="button" class="stepper-btn" data-step="-1" aria-label="Remove a slide">−</button>
@@ -45,7 +41,7 @@
           </label>
         </div>
         <div class="topbar-group">
-          <button class="btn ghost" id="templatesBtn" title="Browse templates">Templates</button>
+          <button class="btn ghost" id="templatesBtn" title="Templates &amp; format">Templates</button>
         </div>
         <div class="topbar-group">
           <button class="btn" id="previewBtn">Preview</button>
@@ -55,33 +51,18 @@
     </header>
 
     <aside class="left-panel panel">
-      <div class="tabs" role="tablist" aria-label="Editor panels">
-        <button class="tab active" data-tab="media">Media</button>
-        <button class="tab" data-tab="layers">Layers</button>
-      </div>
-
       <section class="tab-panel active" id="tab-media">
         <div class="panel-head">
           <h2>Media</h2>
-          <p>Drag files onto the canvas, or import them here.</p>
+          <p>Drag files onto the canvas, or add them below. Private by default — files stay in this browser and are never uploaded.</p>
         </div>
         <input id="mediaInput" type="file" accept="image/*,video/*" multiple hidden>
         <button class="upload-box" id="uploadBtn">
-          <strong>Import photos &amp; videos</strong>
+          <span class="upload-plus" aria-hidden="true">+</span>
+          <strong>Add photos &amp; videos</strong>
           <span>JPG · PNG · WebP · GIF · MP4 · MOV · WebM</span>
         </button>
         <div class="media-grid" id="mediaGrid"></div>
-        <div class="notice">
-          <strong>Private by default.</strong> Files stay in this browser and are never uploaded.
-        </div>
-      </section>
-
-      <section class="tab-panel" id="tab-layers">
-        <div class="panel-head">
-          <h2>Layers</h2>
-          <p>Drag to reorder — the top layer sits in front.</p>
-        </div>
-        <div class="layer-list" id="layerList"></div>
       </section>
     </aside>
 
@@ -169,22 +150,13 @@
 
     <aside class="right-panel panel">
       <div class="panel-head">
-        <h2>Inspector</h2>
-        <p id="selectionLabel">Select a layer to edit its properties.</p>
+        <h2>Layers</h2>
+        <p>Drag to reorder — the top layer sits in front.</p>
       </div>
-
-      <div id="projectInspector" class="inspector-section">
-        <h3>Project</h3>
-        <label class="field"><span>Name</span><input id="projectNameInput" type="text"></label>
-        <div class="two-col">
-          <label class="field"><span>Width</span><input id="projectWidthInput" type="number" min="100"></label>
-          <label class="field"><span>Height</span><input id="projectHeightInput" type="number" min="100"></label>
-        </div>
-        <label class="field"><span>Background</span><input id="projectBgInput" type="color" value="#111111"></label>
-      </div>
+      <div class="layer-list" id="layerList"></div>
 
       <div id="layerInspector" class="inspector-section" hidden>
-        <h3>Layer</h3>
+        <h3 id="selectionLabel">Layer</h3>
         <label class="field"><span>Name</span><input id="layerName" type="text"></label>
         <div class="two-col">
           <label class="field"><span>X</span><input id="layerX" type="number"></label>
@@ -263,6 +235,18 @@
           </details>
         </div>
       </div>
+
+      <details class="panel-collapse" id="projectInspector">
+        <summary>Canvas</summary>
+        <div class="panel-collapse-body">
+          <label class="field"><span>Name</span><input id="projectNameInput" type="text"></label>
+          <div class="two-col">
+            <label class="field"><span>Width</span><input id="projectWidthInput" type="number" min="100"></label>
+            <label class="field"><span>Height</span><input id="projectHeightInput" type="number" min="100"></label>
+          </div>
+          <label class="field"><span>Background</span><input id="projectBgInput" type="color" value="#111111"></label>
+        </div>
+      </details>
     </aside>
   </div>
 
@@ -271,10 +255,11 @@
       <header>
         <div>
           <h2>Start a new design</h2>
-          <p class="muted">Pick a layout to begin — you can swap media and tweak everything after.</p>
+          <p class="muted">Choose a format and a layout — you can swap media and tweak everything after.</p>
         </div>
         <button class="icon-btn" value="cancel" id="templateModalClose" aria-label="Close">×</button>
       </header>
+      <label class="field chooser-format"><span>Format</span><select id="presetSelect" aria-label="Platform format"></select></label>
       <button type="button" class="blank-card" data-template="__blank__">
         <span class="blank-mark" aria-hidden="true">+</span>
         <span><strong>Blank canvas</strong><span>Start from scratch with an empty board.</span></span>

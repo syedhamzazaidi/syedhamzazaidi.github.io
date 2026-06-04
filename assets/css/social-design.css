@@ -988,6 +988,26 @@ textarea {
   font-weight: 400;
 }
 
+.upload-plus {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 2px;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.upload-box:hover .upload-plus {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
 .media-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1390,6 +1410,20 @@ textarea {
 
 .modal-card.chooser header .muted {
   margin-top: 4px;
+}
+
+.chooser-format {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.chooser-format > span {
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
 .chooser-grid {
