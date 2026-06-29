@@ -71,6 +71,8 @@ html[data-theme="blueprint"] .theme-hint {
 }
 
 html[data-theme="blueprint"] .paper-aside-card {
+  /* position:relative anchors ::before/::after corner brackets; overridden to
+     absolute for --margin cards at ≥1180px (see chained rule below). */
   position: relative;
   width: 11.5rem;
   padding: 0.65rem 0.75rem 0.7rem;
@@ -118,7 +120,7 @@ html[data-theme="blueprint"] .paper-aside-card li::before {
   font-size: 0.65rem;
 }
 
-/* Margin callout connector — Salesforce awards */
+/* Margin callout connectors */
 html[data-theme="blueprint"] .paper-callout-dot {
   fill: rgba(56, 189, 248, 0.95);
 }
@@ -150,9 +152,6 @@ html[data-theme="blueprint"] .paper-callout-arrow {
   stroke-linejoin: round;
 }
 
-/* Pin margin cards to the top of their section so the leader line actually
-   connects to them. Chained selectors outrank the base .paper-aside-card /
-   .face-scan-diagram position:relative rules for both card types. */
 @media (min-width: 1180px) {
   html[data-theme="blueprint"] .paper-aside-card.paper-aside-card--margin,
   html[data-theme="blueprint"] .face-scan-diagram.paper-aside-card--margin {

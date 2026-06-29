@@ -164,13 +164,6 @@ body {
   margin-bottom: 0.3rem;
 }
 
-.paper-subsection-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.75rem 1.25rem;
-  align-items: start;
-}
-
 .paper-aside-card,
 .face-scan-diagram {
   margin-top: 0.35rem;
@@ -200,6 +193,12 @@ body {
 
 .paper-aside-card li:last-child {
   margin-bottom: 0;
+}
+
+.paper-aside-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 /* Margin callout — awards card outside paper column (desktop) */
@@ -444,10 +443,6 @@ body {
   .paper-subsection-header {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .paper-subsection-content {
-    grid-template-columns: 1fr;
   }
 
   .paper-aside-card,
