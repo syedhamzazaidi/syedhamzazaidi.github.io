@@ -1,13 +1,11 @@
 /* Style 7 - Blueprint */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
 html[data-theme="blueprint"] {
-  --font-body: 'IBM Plex Sans', Arial, sans-serif;
-  --font-title: 'IBM Plex Sans', Arial, sans-serif;
-  --font-heading: 'IBM Plex Mono', monospace;
-  --font-meta: 'IBM Plex Mono', monospace;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-body: 'DM Sans', Arial, sans-serif;
+  --font-title: 'DM Sans', Arial, sans-serif;
+  --font-heading: 'DM Mono', monospace;
+  --font-meta: 'DM Mono', monospace;
+  --font-mono: 'DM Mono', monospace;
 
   --color-bg: #102a43;
   --color-text: #dbeafe;
@@ -24,7 +22,8 @@ html[data-theme="blueprint"] {
   --title-align: left;
   --heading-size: 0.82rem;
   --heading-weight: 700;
-  --body-line-height: 1.75;
+  --body-line-height: 1.58;
+  --section-gap: 2.15rem;
   --paper-width: 760px;
 }
 
@@ -46,12 +45,42 @@ html[data-theme="blueprint"] .paper-section > h2 {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   border-bottom: 1px solid var(--color-rule);
-  padding-bottom: 0.45rem;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.55rem;
+}
+
+html[data-theme="blueprint"] .paper-abstract p {
+  margin-top: 0.25rem;
+}
+
+html[data-theme="blueprint"] .paper-references {
+  margin-top: var(--section-gap);
 }
 
 html[data-theme="blueprint"] .paper-subsection {
   border-left: 3px solid var(--color-accent);
   padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="blueprint"] .paper-subsection-header {
+  margin-bottom: 0.3rem;
+}
+
+html[data-theme="blueprint"] .paper-subsection ul {
+  margin-top: 0.25rem;
+}
+
+html[data-theme="blueprint"] .paper-subsection li {
+  font-size: 0.875rem;
+  line-height: 1.48;
+  margin-bottom: 0.1rem;
+}
+
+html[data-theme="blueprint"] .paper-aside-card li {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  margin-bottom: 0.28rem;
 }
 
 html[data-theme="blueprint"] .skills-inline,
@@ -62,12 +91,6 @@ html[data-theme="blueprint"] .skills-table {
 html[data-theme="blueprint"] .skills-group {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-}
-
-html[data-theme="blueprint"] .theme-hint {
-  --hint-bg: rgba(16, 42, 67, 0.95);
-  --hint-color: #bfdbfe;
-  --hint-border: rgba(191, 219, 254, 0.3);
 }
 
 html[data-theme="blueprint"] .paper-aside-card {

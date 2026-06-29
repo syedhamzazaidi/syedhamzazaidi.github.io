@@ -30,13 +30,19 @@ To try another theme, change both:
 1. `data-theme` on the `<html>` element in `index.html`
 2. The theme `<link rel="stylesheet">` in `<head>`
 
-`js/theme.js` currently locks the site to `blueprint` and persists that choice in `localStorage`. To preview other themes locally, comment out or adjust `theme.js`, or swap the stylesheet link as above.
+`js/theme.js` locks the site to `blueprint` and persists that choice in `localStorage`. To preview other themes locally, comment out or adjust `theme.js`, or swap the stylesheet link as above.
 
 ## Blueprint theme features
 
+- **Typography** — DM Sans (body/titles) and DM Mono (headings/meta), loaded from Google Fonts in `index.html`
 - **`.paper-shell`** — outer wrapper that reserves left/right gutters for margin callouts on wide viewports (≥1180px)
-- **Margin callout cards** — annotated subsections (`paper-subsection--annotated`) with REF·A/B/C tags, dashed SVG connector lines, and aside cards floated into the page margins
-- **3D face scan diagram** — animated wireframe head with a sweeping scan line on the Secure Face Recognition project (REF·B)
+- **Margin callout cards** — annotated subsections (`paper-subsection--annotated`) with REF·A–E tags, dashed SVG connector lines, and aside cards floated into the page margins:
+  - **REF·A** — faff company context note
+  - **REF·B** — Salesforce awards
+  - **REF·C** — freelance role context
+  - **REF·D** — Secure Face Recognition hackathon award
+  - **REF·E** — 3D face scan liveness diagram
+- **Section order** — Experience → Projects → Education → Technical Skills → References
 
 Other themes use the same HTML; blueprint-specific styling (connectors, face scan, grid background) is scoped under `html[data-theme="blueprint"]`.
 

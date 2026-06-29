@@ -344,38 +344,6 @@ body {
   color: var(--color-link-hover, var(--color-link));
 }
 
-/* Theme hint bar */
-.theme-hint {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.6rem 1rem;
-  text-align: center;
-  font-family: var(--font-meta, monospace);
-  font-size: 0.75rem;
-  color: var(--hint-color, rgba(0, 0, 0, 0.45));
-  background: var(--hint-bg, rgba(255, 255, 255, 0.92));
-  border-top: 1px solid var(--hint-border, rgba(0, 0, 0, 0.08));
-  z-index: 100;
-  transition: opacity 0.6s, transform 0.6s;
-}
-
-.theme-hint.hidden {
-  opacity: 0;
-  transform: translateY(100%);
-  pointer-events: none;
-}
-
-.theme-hint kbd {
-  display: inline-block;
-  padding: 0.1rem 0.35rem;
-  border: 1px solid currentColor;
-  border-radius: 3px;
-  font-size: 0.7rem;
-  margin: 0 0.1rem;
-}
-
 .skills-table {
   width: 100%;
   border-collapse: collapse;
@@ -401,10 +369,6 @@ body {
 
 /* Print */
 @media print {
-  .theme-hint {
-    display: none !important;
-  }
-
   body {
     background: #fff;
     color: #000;

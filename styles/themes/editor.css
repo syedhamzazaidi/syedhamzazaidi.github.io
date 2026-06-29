@@ -237,9 +237,3 @@ html[data-theme="editor"] .paper-references li {
 html[data-theme="editor"] .paper-references li::before {
   color: #858585;
 }
-
-html[data-theme="editor"] .theme-hint {
-  --hint-bg: rgba(30, 30, 30, 0.95);
-  --hint-color: #858585;
-  --hint-border: #3c3c3c;
-}

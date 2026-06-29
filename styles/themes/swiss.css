@@ -171,7 +171,3 @@ html[data-theme="swiss"] .paper-references a {
 html[data-theme="swiss"] .paper-references a:hover {
   border-color: #000;
 }
-
-html[data-theme="swiss"] .theme-hint {
-  --hint-bg: rgba(255, 255, 255, 0.95);
-}

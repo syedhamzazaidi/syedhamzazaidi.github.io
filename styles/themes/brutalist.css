@@ -220,15 +220,3 @@ html[data-theme="brutalist"] .paper-references a {
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
-
-html[data-theme="brutalist"] .theme-hint {
-  --hint-bg: #000;
-  --hint-color: #ffff00;
-  --hint-border: #ffff00;
-}
-
-html[data-theme="brutalist"] .theme-hint kbd {
-  background: #ffff00;
-  color: #000;
-  border-color: #ffff00;
-}

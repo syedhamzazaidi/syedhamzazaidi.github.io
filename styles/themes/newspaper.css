@@ -183,8 +183,3 @@ html[data-theme="newspaper"] .paper-references a {
   text-decoration: none;
   border-bottom: 1px solid #999;
 }
-
-html[data-theme="newspaper"] .theme-hint {
-  --hint-bg: rgba(247, 244, 239, 0.95);
-  --hint-color: #777;
-}

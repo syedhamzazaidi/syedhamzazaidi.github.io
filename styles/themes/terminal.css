@@ -173,9 +173,3 @@ html[data-theme="terminal"] .paper-references li::before {
   content: "[" counter(ref) "]";
   color: var(--color-accent);
 }
-
-html[data-theme="terminal"] .theme-hint {
-  --hint-bg: rgba(22, 27, 34, 0.95);
-  --hint-color: #8b949e;
-  --hint-border: #30363d;
-}
