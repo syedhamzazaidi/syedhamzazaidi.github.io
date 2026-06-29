@@ -1,0 +1,97 @@
+/* Style 1 — arXiv Preprint */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400&display=swap');
+
+html[data-theme="arxiv"] {
+  --font-body: 'IBM Plex Serif', 'Times New Roman', serif;
+  --font-title: 'IBM Plex Serif', serif;
+  --font-heading: 'IBM Plex Serif', serif;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --color-bg: #fafafa;
+  --color-text: #111;
+  --color-title: #111;
+  --color-heading: #111;
+  --color-muted: #444;
+  --color-meta: #333;
+  --color-rule: #ccc;
+  --color-link: #1a0dab;
+  --color-link-hover: #609;
+
+  --title-size: 1.65rem;
+  --title-weight: 700;
+  --title-align: center;
+  --heading-size: 1.05rem;
+  --body-line-height: 1.6;
+  --section-gap: 1.5rem;
+}
+
+html[data-theme="arxiv"] .paper-meta-id::after {
+  content: " [cs.SE]";
+}
+
+html[data-theme="arxiv"] .paper-abstract {
+  margin-left: 2rem;
+  margin-right: 0;
+}
+
+html[data-theme="arxiv"] .paper-abstract-label {
+  display: inline;
+}
+
+html[data-theme="arxiv"] .paper-abstract p {
+  display: inline;
+}
+
+html[data-theme="arxiv"] .paper {
+  counter-reset: section;
+}
+
+html[data-theme="arxiv"] .paper-section > h2 {
+  counter-increment: section;
+  counter-reset: subsection;
+}
+
+html[data-theme="arxiv"] .paper-section > h2::before {
+  content: counter(section) "  ";
+}
+
+html[data-theme="arxiv"] .paper-subsection {
+  counter-increment: subsection;
+}
+
+html[data-theme="arxiv"] .paper-subsection-title::before {
+  content: counter(section) "." counter(subsection) "  ";
+  font-weight: 700;
+}
+
+html[data-theme="arxiv"] .paper-section:nth-of-type(1) { counter-reset: subsection; }
+html[data-theme="arxiv"] .paper-section:nth-of-type(2) { counter-reset: subsection; }
+html[data-theme="arxiv"] .paper-section:nth-of-type(3) { counter-reset: subsection; }
+html[data-theme="arxiv"] .paper-section:nth-of-type(4) { counter-reset: subsection; }
+html[data-theme="arxiv"] .paper-section:nth-of-type(5) { counter-reset: subsection; }
+
+html[data-theme="arxiv"] .skills-group {
+  display: none;
+}
+
+html[data-theme="arxiv"] .skills-inline {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+html[data-theme="arxiv"] .skills-table {
+  display: none;
+}
+
+html[data-theme="arxiv"] .paper-contact {
+  display: none;
+}
+
+html[data-theme="arxiv"] .theme-hint {
+  --hint-bg: rgba(250, 250, 250, 0.95);
+  --hint-color: #555;
+}

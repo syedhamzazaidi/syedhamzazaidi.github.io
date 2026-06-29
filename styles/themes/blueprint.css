@@ -1,0 +1,71 @@
+/* Style 7 - Blueprint */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+html[data-theme="blueprint"] {
+  --font-body: 'IBM Plex Sans', Arial, sans-serif;
+  --font-title: 'IBM Plex Sans', Arial, sans-serif;
+  --font-heading: 'IBM Plex Mono', monospace;
+  --font-meta: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --color-bg: #102a43;
+  --color-text: #dbeafe;
+  --color-title: #ffffff;
+  --color-heading: #93c5fd;
+  --color-muted: #bad7f5;
+  --color-meta: #7dd3fc;
+  --color-rule: rgba(191, 219, 254, 0.34);
+  --color-link: #bfdbfe;
+  --color-accent: #38bdf8;
+
+  --title-size: 2.1rem;
+  --title-weight: 700;
+  --title-align: left;
+  --heading-size: 0.82rem;
+  --heading-weight: 700;
+  --body-line-height: 1.75;
+  --paper-width: 760px;
+}
+
+html[data-theme="blueprint"] body {
+  background-image:
+    linear-gradient(rgba(147, 197, 253, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 197, 253, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+html[data-theme="blueprint"] .paper {
+  border: 1px solid rgba(191, 219, 254, 0.32);
+  background: rgba(15, 42, 67, 0.92);
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+html[data-theme="blueprint"] .paper-section > h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border-bottom: 1px solid var(--color-rule);
+  padding-bottom: 0.45rem;
+}
+
+html[data-theme="blueprint"] .paper-subsection {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+}
+
+html[data-theme="blueprint"] .skills-inline,
+html[data-theme="blueprint"] .skills-table {
+  display: none;
+}
+
+html[data-theme="blueprint"] .skills-group {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+html[data-theme="blueprint"] .theme-hint {
+  --hint-bg: rgba(16, 42, 67, 0.95);
+  --hint-color: #bfdbfe;
+  --hint-border: rgba(191, 219, 254, 0.3);
+}

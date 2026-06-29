@@ -1,0 +1,190 @@
+/* Style 5 — Newspaper / Editorial */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;600;700&display=swap');
+
+html[data-theme="newspaper"] {
+  --font-body: 'Libre Baskerville', Georgia, serif;
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-meta: 'Libre Baskerville', serif;
+
+  --color-bg: #f7f4ef;
+  --color-text: #1a1a1a;
+  --color-title: #1a1a1a;
+  --color-heading: #1a1a1a;
+  --color-muted: #555;
+  --color-meta: #777;
+  --color-rule: #1a1a1a;
+  --color-link: #1a1a1a;
+  --color-accent: #8b0000;
+
+  --title-size: 2.5rem;
+  --title-weight: 700;
+  --title-align: center;
+  --heading-size: 1.15rem;
+  --heading-weight: 600;
+  --body-line-height: 1.8;
+  --section-gap: 2rem;
+  --paper-width: 700px;
+  --org-style: normal;
+}
+
+html[data-theme="newspaper"] .paper {
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem 3rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+html[data-theme="newspaper"] .paper-meta {
+  text-align: center;
+  border-bottom: 3px double #1a1a1a;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0;
+}
+
+html[data-theme="newspaper"] .paper-meta-id {
+  display: none;
+}
+
+html[data-theme="newspaper"] .paper-meta-row {
+  justify-content: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+html[data-theme="newspaper"] .paper-meta-row::before {
+  content: "The Portfolio Gazette  ·  ";
+}
+
+html[data-theme="newspaper"] .paper-title {
+  font-size: 3rem;
+  padding: 1rem 0 0.5rem;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="newspaper"] .paper-authors {
+  display: none;
+}
+
+html[data-theme="newspaper"] .paper-affiliations {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: 0.35rem;
+}
+
+html[data-theme="newspaper"] .paper-affiliations sup {
+  color: var(--color-accent);
+}
+
+html[data-theme="newspaper"] .paper-contact {
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+html[data-theme="newspaper"] .paper-rule {
+  display: none;
+}
+
+html[data-theme="newspaper"] .paper-abstract-label {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  color: var(--color-accent);
+}
+
+html[data-theme="newspaper"] .paper-abstract p::first-letter {
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  line-height: 0.85;
+  padding-right: 0.5rem;
+  padding-top: 0.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+html[data-theme="newspaper"] .paper-abstract p {
+  text-align: justify;
+  margin-top: 0;
+}
+
+html[data-theme="newspaper"] .paper-section > h2 {
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="newspaper"] .paper-subsection-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+}
+
+html[data-theme="newspaper"] .paper-subsection-org {
+  color: var(--color-muted);
+}
+
+html[data-theme="newspaper"] .paper-subsection-date {
+  font-style: italic;
+  font-family: 'Libre Baskerville', serif;
+}
+
+html[data-theme="newspaper"] .paper-subsection ul {
+  text-align: justify;
+}
+
+html[data-theme="newspaper"] .skills-inline,
+html[data-theme="newspaper"] .skills-table {
+  display: none;
+}
+
+html[data-theme="newspaper"] .skills-group {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted #ccc;
+}
+
+html[data-theme="newspaper"] .skills-group-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+html[data-theme="newspaper"] .paper-references {
+  border-top: 3px double #1a1a1a;
+  padding-top: 1.5rem;
+}
+
+html[data-theme="newspaper"] .paper-references h2 {
+  font-size: 1rem;
+  border: none;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="newspaper"] .paper-references a {
+  text-decoration: none;
+  border-bottom: 1px solid #999;
+}
+
+html[data-theme="newspaper"] .theme-hint {
+  --hint-bg: rgba(247, 244, 239, 0.95);
+  --hint-color: #777;
+}

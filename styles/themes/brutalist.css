@@ -1,0 +1,234 @@
+/* Style 6 — Brutalist */
+
+html[data-theme="brutalist"] {
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-title: Arial, Helvetica, sans-serif;
+  --font-heading: Arial, Helvetica, sans-serif;
+  --font-meta: Arial, Helvetica, sans-serif;
+
+  --color-bg: #fff;
+  --color-text: #000;
+  --color-title: #000;
+  --color-heading: #fff;
+  --color-muted: #333;
+  --color-meta: #000;
+  --color-rule: #000;
+  --color-link: #000;
+  --color-accent: #ffff00;
+  --link-decoration: none;
+
+  --title-size: 2.25rem;
+  --title-weight: 900;
+  --title-align: left;
+  --heading-size: 0.85rem;
+  --heading-weight: 900;
+  --body-line-height: 1.6;
+  --section-gap: 2rem;
+  --paper-width: 700px;
+  --org-style: normal;
+  --subsection-weight: 900;
+}
+
+html[data-theme="brutalist"] body {
+  background: #ffff00;
+}
+
+html[data-theme="brutalist"] .paper {
+  background: #fff;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0 #000;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  padding: 2rem 1.75rem 2.5rem;
+}
+
+html[data-theme="brutalist"] .paper-meta {
+  background: #000;
+  color: #ffff00;
+  padding: 0.5rem 0.75rem;
+  margin: -2rem -1.75rem 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+html[data-theme="brutalist"] .paper-meta-id {
+  display: none;
+}
+
+html[data-theme="brutalist"] .paper-meta-row span:last-child {
+  display: none;
+}
+
+html[data-theme="brutalist"] .paper-meta-row::before {
+  content: "RESUME / PORTFOLIO / 2026";
+}
+
+html[data-theme="brutalist"] .paper-authors {
+  display: none;
+}
+
+html[data-theme="brutalist"] .paper-title {
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="brutalist"] .paper-affiliations {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-left: 6px solid #ffff00;
+  padding-left: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="brutalist"] .paper-affiliations sup {
+  color: #000;
+  font-weight: 900;
+}
+
+html[data-theme="brutalist"] .paper-contact {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+html[data-theme="brutalist"] .paper-contact a {
+  background: #000;
+  color: #ffff00;
+  padding: 0.15rem 0.4rem;
+}
+
+html[data-theme="brutalist"] .paper-contact a:hover {
+  background: #ffff00;
+  color: #000;
+  outline: 2px solid #000;
+}
+
+html[data-theme="brutalist"] .paper-rule {
+  border-top-width: 4px;
+  margin: 1.5rem 0;
+}
+
+html[data-theme="brutalist"] .paper-abstract {
+  border: 3px solid #000;
+  padding: 1rem;
+  background: #ffff00;
+}
+
+html[data-theme="brutalist"] .paper-abstract-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[data-theme="brutalist"] .paper-abstract p {
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+html[data-theme="brutalist"] .paper-section > h2 {
+  display: inline-block;
+  background: #000;
+  color: #ffff00;
+  padding: 0.35rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[data-theme="brutalist"] .paper-subsection {
+  border: 3px solid #000;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="brutalist"] .paper-subsection-title {
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+html[data-theme="brutalist"] .paper-subsection-org {
+  font-weight: 700;
+  color: #000;
+}
+
+html[data-theme="brutalist"] .paper-subsection-date {
+  font-weight: 900;
+  color: #000;
+  background: #ffff00;
+  padding: 0.1rem 0.35rem;
+  border: 2px solid #000;
+}
+
+html[data-theme="brutalist"] .paper-subsection ul {
+  list-style: square;
+  margin-left: 1.25rem;
+}
+
+html[data-theme="brutalist"] .paper-subsection li {
+  font-weight: 500;
+}
+
+html[data-theme="brutalist"] .skills-inline,
+html[data-theme="brutalist"] .skills-table {
+  display: none;
+}
+
+html[data-theme="brutalist"] .skills-group {
+  border: 2px solid #000;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #f5f5f5;
+}
+
+html[data-theme="brutalist"] .skills-group-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  background: #000;
+  color: #ffff00;
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  margin-right: 0.5rem;
+}
+
+html[data-theme="brutalist"] .paper-references {
+  border: 4px solid #000;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+}
+
+html[data-theme="brutalist"] .paper-references h2 {
+  color: #ffff00;
+  background: none;
+  padding: 0;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="brutalist"] .paper-references li::before {
+  color: #ffff00;
+}
+
+html[data-theme="brutalist"] .paper-references a {
+  color: #ffff00;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+html[data-theme="brutalist"] .theme-hint {
+  --hint-bg: #000;
+  --hint-color: #ffff00;
+  --hint-border: #ffff00;
+}
+
+html[data-theme="brutalist"] .theme-hint kbd {
+  background: #ffff00;
+  color: #000;
+  border-color: #ffff00;
+}

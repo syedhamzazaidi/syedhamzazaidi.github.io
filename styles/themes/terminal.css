@@ -1,0 +1,181 @@
+/* Style 2 — Terminal */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+html[data-theme="terminal"] {
+  --font-body: 'JetBrains Mono', monospace;
+  --font-title: 'JetBrains Mono', monospace;
+  --font-heading: 'JetBrains Mono', monospace;
+  --font-meta: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-bg: #0d1117;
+  --color-text: #c9d1d9;
+  --color-title: #3fb950;
+  --color-heading: #58a6ff;
+  --color-muted: #8b949e;
+  --color-meta: #6e7681;
+  --color-rule: #21262d;
+  --color-link: #79c0ff;
+  --color-accent: #3fb950;
+
+  --title-size: 1.35rem;
+  --title-weight: 600;
+  --title-align: left;
+  --heading-size: 0.95rem;
+  --heading-weight: 600;
+  --body-size: 0.875rem;
+  --body-line-height: 1.7;
+  --section-gap: 1.5rem;
+  --paper-width: 720px;
+}
+
+html[data-theme="terminal"] body {
+  min-height: 100vh;
+}
+
+html[data-theme="terminal"] .paper {
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #161b22;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  padding: 1.75rem 1.5rem 2.5rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="terminal"] .paper::before {
+  content: "● ● ●   hamza@portfolio — zsh";
+  display: block;
+  font-size: 0.75rem;
+  color: #8b949e;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #21262d;
+}
+
+html[data-theme="terminal"] .paper-meta-id,
+html[data-theme="terminal"] .paper-meta-row span:last-child {
+  display: none;
+}
+
+html[data-theme="terminal"] .paper-meta-row::before {
+  content: "$ cat ~/resume.txt";
+  color: var(--color-accent);
+}
+
+html[data-theme="terminal"] .paper-authors {
+  display: none;
+}
+
+html[data-theme="terminal"] .paper-title::before {
+  content: "# ";
+  color: var(--color-accent);
+}
+
+html[data-theme="terminal"] .paper-affiliations {
+  text-align: left;
+  font-size: 0.8rem;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="terminal"] .paper-contact {
+  text-align: left;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="terminal"] .paper-contact::before {
+  content: "$ contact --author ";
+  color: var(--color-muted);
+}
+
+html[data-theme="terminal"] .paper-rule {
+  border-color: #30363d;
+}
+
+html[data-theme="terminal"] .paper-abstract-label::before {
+  content: "/* ";
+  color: var(--color-muted);
+}
+
+html[data-theme="terminal"] .paper-abstract-label::after {
+  content: " */";
+  color: var(--color-muted);
+}
+
+html[data-theme="terminal"] .paper-abstract {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+html[data-theme="terminal"] .paper-abstract p {
+  color: #8b949e;
+  font-style: italic;
+  margin-top: 0;
+}
+
+html[data-theme="terminal"] .paper-section > h2::before {
+  content: "## ";
+  color: var(--color-accent);
+}
+
+html[data-theme="terminal"] .paper-subsection-title::before {
+  content: "### ";
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+html[data-theme="terminal"] .paper-subsection-org {
+  font-style: normal;
+  color: #58a6ff;
+}
+
+html[data-theme="terminal"] .paper-subsection-date {
+  color: #6e7681;
+}
+
+html[data-theme="terminal"] .paper-subsection-date::before {
+  content: "// ";
+  color: #484f58;
+}
+
+html[data-theme="terminal"] .paper-subsection ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+html[data-theme="terminal"] .paper-subsection li::before {
+  content: "→ ";
+  color: var(--color-accent);
+}
+
+html[data-theme="terminal"] .skills-group,
+html[data-theme="terminal"] .skills-table {
+  display: none;
+}
+
+html[data-theme="terminal"] .skills-inline {
+  display: block;
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #ffa657;
+}
+
+html[data-theme="terminal"] .paper-references li::before {
+  content: "[" counter(ref) "]";
+  color: var(--color-accent);
+}
+
+html[data-theme="terminal"] .theme-hint {
+  --hint-bg: rgba(22, 27, 34, 0.95);
+  --hint-color: #8b949e;
+  --hint-border: #30363d;
+}

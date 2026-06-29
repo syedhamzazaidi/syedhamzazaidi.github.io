@@ -1,0 +1,177 @@
+/* Style 3 — Swiss / International Typographic */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html[data-theme="swiss"] {
+  --font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-title: 'Inter', sans-serif;
+  --font-heading: 'Inter', sans-serif;
+  --font-meta: 'Inter', sans-serif;
+
+  --color-bg: #fff;
+  --color-text: #111;
+  --color-title: #000;
+  --color-heading: #000;
+  --color-muted: #666;
+  --color-meta: #999;
+  --color-rule: #000;
+  --color-link: #000;
+  --link-decoration: none;
+
+  --title-size: 2.75rem;
+  --title-weight: 700;
+  --title-align: left;
+  --title-line-height: 1.05;
+  --heading-size: 0.7rem;
+  --heading-weight: 600;
+  --body-line-height: 1.75;
+  --section-gap: 2.5rem;
+  --paper-width: 640px;
+  --paper-padding-y: 4rem;
+  --org-style: normal;
+}
+
+html[data-theme="swiss"] .paper-meta {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-meta);
+  margin-bottom: 2rem;
+}
+
+html[data-theme="swiss"] .paper-meta-id {
+  display: none;
+}
+
+html[data-theme="swiss"] .paper-title {
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="swiss"] .paper-authors {
+  display: none;
+}
+
+html[data-theme="swiss"] .paper-affiliations {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="swiss"] .paper-affiliations sup {
+  display: none;
+}
+
+html[data-theme="swiss"] .paper-contact {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+html[data-theme="swiss"] .paper-contact a {
+  border-bottom: 1px solid #000;
+}
+
+html[data-theme="swiss"] .paper-contact a:hover {
+  background: #000;
+  color: #fff;
+}
+
+html[data-theme="swiss"] .paper-rule {
+  border-top-width: 3px;
+  margin: 0 0 2.5rem;
+}
+
+html[data-theme="swiss"] .paper-abstract-label {
+  display: none;
+}
+
+html[data-theme="swiss"] .paper-abstract p {
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-top: 0;
+  color: #333;
+}
+
+html[data-theme="swiss"] .paper-section > h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #000;
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="swiss"] .paper-subsection-header {
+  margin-bottom: 0.6rem;
+}
+
+html[data-theme="swiss"] .paper-subsection-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+html[data-theme="swiss"] .paper-subsection-org {
+  font-style: normal;
+  color: var(--color-muted);
+}
+
+html[data-theme="swiss"] .paper-subsection-date {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+html[data-theme="swiss"] .paper-subsection ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+html[data-theme="swiss"] .paper-subsection li {
+  padding-left: 1rem;
+  border-left: 2px solid #eee;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="swiss"] .skills-inline,
+html[data-theme="swiss"] .skills-table {
+  display: none;
+}
+
+html[data-theme="swiss"] .skills-group {
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+html[data-theme="swiss"] .skills-group-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+html[data-theme="swiss"] .paper-references h2 {
+  border-bottom: none;
+}
+
+html[data-theme="swiss"] .paper-references li::before {
+  font-weight: 600;
+}
+
+html[data-theme="swiss"] .paper-references a {
+  border-bottom: 1px solid #ccc;
+}
+
+html[data-theme="swiss"] .paper-references a:hover {
+  border-color: #000;
+}
+
+html[data-theme="swiss"] .theme-hint {
+  --hint-bg: rgba(255, 255, 255, 0.95);
+}

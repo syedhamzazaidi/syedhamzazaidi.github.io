@@ -1,0 +1,245 @@
+/* Style 4 — Code Editor */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+html[data-theme="editor"] {
+  --font-body: 'Inter', sans-serif;
+  --font-title: 'Inter', sans-serif;
+  --font-heading: 'JetBrains Mono', monospace;
+  --font-meta: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-bg: #1e1e1e;
+  --color-text: #d4d4d4;
+  --color-title: #569cd6;
+  --color-heading: #4ec9b0;
+  --color-muted: #858585;
+  --color-meta: #6a9955;
+  --color-rule: #3c3c3c;
+  --color-link: #9cdcfe;
+
+  --title-size: 1.5rem;
+  --title-weight: 600;
+  --title-align: left;
+  --heading-size: 0.85rem;
+  --heading-weight: 500;
+  --body-size: 0.9rem;
+  --body-line-height: 1.7;
+  --section-gap: 0;
+  --paper-width: 760px;
+  --paper-padding-y: 0;
+  --paper-padding-x: 0;
+  --org-style: normal;
+}
+
+html[data-theme="editor"] body {
+  padding: 2rem 1rem 4rem;
+}
+
+html[data-theme="editor"] .paper {
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  counter-reset: line;
+}
+
+html[data-theme="editor"] .paper::before {
+  content: "●  ●  ●    resume.ts    —    portfolio";
+  display: block;
+  background: #323233;
+  color: #cccccc;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+html[data-theme="editor"] .paper-meta,
+html[data-theme="editor"] .paper-authors,
+html[data-theme="editor"] .paper-contact,
+html[data-theme="editor"] .paper-rule {
+  display: none;
+}
+
+html[data-theme="editor"] .paper-title {
+  padding: 1.5rem 1.5rem 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #569cd6;
+}
+
+html[data-theme="editor"] .paper-affiliations {
+  text-align: left;
+  padding: 0 1.5rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #6a9955;
+  margin-bottom: 0;
+}
+
+html[data-theme="editor"] .paper-affiliations sup {
+  display: none;
+}
+
+html[data-theme="editor"] .paper-body {
+  padding: 0 1.5rem 1.5rem;
+}
+
+html[data-theme="editor"] .paper-abstract {
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  padding: 1rem 1rem 1rem 3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+html[data-theme="editor"] .paper-abstract::before {
+  content: "1";
+  position: absolute;
+  left: 0.75rem;
+  top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #858585;
+  text-align: right;
+  width: 1.5rem;
+}
+
+html[data-theme="editor"] .paper-abstract-label {
+  color: #569cd6;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+html[data-theme="editor"] .paper-abstract-label::after {
+  content: ":";
+}
+
+html[data-theme="editor"] .paper-abstract p {
+  display: inline;
+  color: #ce9178;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+html[data-theme="editor"] .paper-section {
+  border-top: 1px solid #3c3c3c;
+  padding: 1.25rem 0 1.25rem 2rem;
+  position: relative;
+  counter-increment: line;
+}
+
+html[data-theme="editor"] .paper-section::before {
+  counter-increment: editorline;
+  content: counter(editorline);
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 2rem;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #858585;
+}
+
+html[data-theme="editor"] .paper-body {
+  counter-reset: editorline 2;
+}
+
+html[data-theme="editor"] .paper-section > h2 {
+  font-family: 'JetBrains Mono', monospace;
+  color: #4ec9b0;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="editor"] .paper-section > h2::before {
+  content: "// ";
+  color: #6a9955;
+}
+
+html[data-theme="editor"] .paper-subsection-title {
+  color: #dcdcaa;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+}
+
+html[data-theme="editor"] .paper-subsection-org {
+  color: #9cdcfe;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+html[data-theme="editor"] .paper-subsection-date {
+  color: #858585;
+  font-size: 0.75rem;
+}
+
+html[data-theme="editor"] .paper-subsection ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+html[data-theme="editor"] .paper-subsection li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: #d4d4d4;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+html[data-theme="editor"] .paper-subsection li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: #569cd6;
+}
+
+html[data-theme="editor"] .skills-group,
+html[data-theme="editor"] .skills-inline {
+  display: none;
+}
+
+html[data-theme="editor"] .skills-table {
+  display: table;
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+html[data-theme="editor"] .skills-table th {
+  color: #569cd6;
+  border-bottom-color: #3c3c3c;
+}
+
+html[data-theme="editor"] .skills-table td:last-child {
+  color: #b5cea8;
+}
+
+html[data-theme="editor"] .paper-references {
+  border-top: 1px solid #3c3c3c;
+  padding-top: 1.25rem;
+  margin-top: 0;
+}
+
+html[data-theme="editor"] .paper-references h2 {
+  font-family: 'JetBrains Mono', monospace;
+  color: #4ec9b0;
+}
+
+html[data-theme="editor"] .paper-references li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+}
+
+html[data-theme="editor"] .paper-references li::before {
+  color: #858585;
+}
+
+html[data-theme="editor"] .theme-hint {
+  --hint-bg: rgba(30, 30, 30, 0.95);
+  --hint-color: #858585;
+  --hint-border: #3c3c3c;
+}

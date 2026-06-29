@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="arxiv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — Hamza Zaidi</title>
+<title>404 — Syed Hamza Zaidi</title>
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/themes/arxiv.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#000;color:#fff;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}
-  h1{font-family:'Instrument Serif',serif;font-size:6rem;font-weight:400;opacity:.15;margin-bottom:1rem}
-  p{color:rgba(255,255,255,.45);font-size:.9rem;margin-bottom:1.5rem}
-  a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;border:1px solid rgba(255,255,255,.15);padding:8px 20px;border-radius:6px;transition:all .2s}
-  a:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+  html[data-theme="arxiv"] {
+    --font-body: 'IBM Plex Serif', Georgia, serif;
+    --font-title: 'IBM Plex Serif', serif;
+    --font-meta: 'IBM Plex Mono', monospace;
+    --color-bg: #fafafa;
+    --color-text: #111;
+    --color-muted: #444;
+    --color-link: #1a0dab;
+  }
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .not-found { text-align: center; max-width: 480px; padding: 2rem; }
+  .not-found h1 { font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .not-found p { color: var(--color-muted); margin-bottom: 1.25rem; line-height: 1.6; }
+  .not-found a { color: var(--color-link); }
+  .not-found .meta { font-family: var(--font-meta); font-size: 0.8rem; color: var(--color-muted); margin-bottom: 1.5rem; }
 </style>
 </head>
 <body>
-<div>
-  <h1>404</h1>
-  <p>This page doesn't exist.</p>
-  <a href="/">Back to the cosmos</a>
+<div class="not-found">
+  <p class="meta">Error 404 · Page not found</p>
+  <h1>Manuscript not available</h1>
+  <p>The requested resource could not be located in this repository.</p>
+  <p><a href="/">Return to main document</a></p>
 </div>
 </body>
 </html>

@@ -1,315 +1,242 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="blueprint">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>carouselBuilder — free online carousel, collage & social video maker</title>
-  <meta name="description" content="Create seamless Instagram carousels, TikTok-ready layouts, photo collages, white borders, templates, and mixed image/video exports directly in your browser.">
-  <meta property="og:title" content="carouselBuilder — social carousel maker">
-  <meta property="og:description" content="A private, in-browser editor for Instagram/TikTok carousels, collages, templates, images, videos, and optimized exports.">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#07080b">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2307080b'/%3E%3Crect x='41' y='25' width='37' height='50' rx='9' fill='%235fe3ff' opacity='0.4'/%3E%3Crect x='22' y='30' width='37' height='50' rx='9' fill='%235fe3ff'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/css/social-design.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Hamza Zaidi — Software Engineer</title>
+<meta name="description" content="Syed Hamza Zaidi — AI engineer building agentic AI systems, memory, and infrastructure.">
+<meta property="og:title" content="Syed Hamza Zaidi — Software Engineer">
+<meta property="og:description" content="AI engineer building agentic AI systems, memory, and infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://syedhamzazaidi.github.io">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-024QNHMS9W"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-024QNHMS9W');</script>
+
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/themes/blueprint.css">
 </head>
 <body>
   <noscript>
     <div class="noscript">carouselBuilder needs JavaScript because all editing, previewing, and exporting happens locally in your browser.</div>
   </noscript>
 
-  <div class="app-shell" id="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 100 100"><rect x="41" y="25" width="37" height="50" rx="9" fill="#5fe3ff" opacity="0.4"/><rect x="22" y="30" width="37" height="50" rx="9" fill="#5fe3ff"/></svg>
-        </div>
-        <div>
-          <h1>carousel<span class="brand-accent">Builder</span></h1>
-          <p>Local · Private · Browser-native</p>
-        </div>
-      </div>
 
-      <div class="topbar-actions">
-        <div class="topbar-group">
-          <label class="field compact">
-            <span>Slides</span>
-            <span class="stepper">
-              <button type="button" class="stepper-btn" data-step="-1" aria-label="Remove a slide">−</button>
-              <input id="slideCountInput" type="number" min="1" max="20" value="5" aria-label="Slide count">
-              <button type="button" class="stepper-btn" data-step="1" aria-label="Add a slide">+</button>
-            </span>
-          </label>
-        </div>
-        <div class="topbar-group">
-          <button class="btn" id="templatesBtn" title="Templates &amp; format">Templates</button>
-        </div>
-        <div class="topbar-group">
-          <button class="btn" id="previewBtn">Preview</button>
-          <button class="btn primary" id="exportBtn">Export / Share</button>
-        </div>
-      </div>
-    </header>
+<article class="paper">
 
-    <aside class="left-panel panel">
-      <section class="tab-panel active" id="tab-media">
-        <div class="panel-head">
-          <h2>Media</h2>
-          <p>Drag files onto the canvas, or add them below. Private by default — files stay in this browser and are never uploaded.</p>
-        </div>
-        <input id="mediaInput" type="file" accept="image/*,video/*" multiple hidden>
-        <button class="upload-box" id="uploadBtn">
-          <span class="upload-plus" aria-hidden="true">+</span>
-          <strong>Add photos &amp; videos</strong>
-          <span>JPG · PNG · WebP · GIF · MP4 · MOV · WebM</span>
-        </button>
-        <div class="media-grid" id="mediaGrid"></div>
-      </section>
-    </aside>
-
-    <main class="workspace" id="workspace">
-      <div class="canvas-toolbar">
-        <div class="status-pill" id="projectMeta">Instagram · 1080×1350 · 5 slides</div>
-        <div class="view-toggles" role="group" aria-label="View options">
-          <label class="view-toggle" title="Grid overlay">
-            <input type="checkbox" id="showGrid" checked>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-            <span>Grid</span>
-          </label>
-          <label class="view-toggle" title="Platform safe zones">
-            <input type="checkbox" id="showSafeZones" checked>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" stroke-dasharray="3 3"/></svg>
-            <span>Safe&nbsp;zones</span>
-          </label>
-          <label class="view-toggle" title="Snap to edges &amp; centers — hold Shift while dragging to snap to the grid">
-            <input type="checkbox" id="snapToggle" checked>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg>
-            <span>Snap</span>
-          </label>
-        </div>
-      </div>
-      <div class="stage-wrap" id="stageWrap">
-        <div class="canvas-tools" id="canvasTools" role="toolbar" aria-label="Tools">
-          <span class="ctool-grip" id="toolsGrip" title="Drag to move the toolbar" aria-label="Drag to move the toolbar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>
-          </span>
-          <span class="ctool-sep" aria-hidden="true"></span>
-          <button class="ctool active" data-tool="select" title="Select &amp; move — V" aria-label="Select and move (V)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/></svg>
-            <span class="ctool-key" aria-hidden="true">V</span>
-          </button>
-          <button class="ctool" data-tool="hand" title="Hand — pan the canvas (H, or hold Space)" aria-label="Hand, pan the canvas (H, or hold Space)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5V4.5a1.5 1.5 0 0 1 3 0V10m0-.5a1.5 1.5 0 0 1 3 0V10"/><path d="M8 11V8.5a1.5 1.5 0 0 0-3 0V13c0 4 2.5 7 6.5 7s6.5-2.5 6.5-7v-3"/></svg>
-            <span class="ctool-key" aria-hidden="true">H</span>
-          </button>
-          <button class="ctool" data-tool="draw" title="Brush — freehand drawing (B)" aria-label="Brush, freehand drawing (B)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15q3 -6 6 0t6 0t6 0"/></svg>
-            <span class="ctool-key" aria-hidden="true">B</span>
-          </button>
-          <button class="ctool" data-tool="pen" title="Pen — vector path; click to add points, drag to curve, Enter to finish (P)" aria-label="Pen, vector path (P)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c6 0 6-12 14-12"/><circle cx="4" cy="18" r="2"/><circle cx="18" cy="6" r="2"/></svg>
-            <span class="ctool-key" aria-hidden="true">P</span>
-          </button>
-          <span class="ctool-sep" aria-hidden="true"></span>
-          <button class="ctool" id="addTextBtn" title="Add text — T" aria-label="Add text (T)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M12 5v14M9 19h6"/></svg>
-            <span class="ctool-key" aria-hidden="true">T</span>
-          </button>
-          <button class="ctool" id="addShapeBtn" title="Add shape — R" aria-label="Add shape (R)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
-            <span class="ctool-key" aria-hidden="true">R</span>
-          </button>
-          <button class="ctool" id="addStickerBtn" title="Add sticker — E" aria-label="Add sticker (E)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5.3L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5L8 12.9 4 9l5.6-.7z"/></svg>
-            <span class="ctool-key" aria-hidden="true">E</span>
-          </button>
-          <button class="ctool" id="addGridBtn" title="Add photo grid — G" aria-label="Add photo grid (G)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.4"/><rect x="13" y="4" width="7" height="7" rx="1.4"/><rect x="4" y="13" width="7" height="7" rx="1.4"/><rect x="13" y="13" width="7" height="7" rx="1.4"/></svg>
-            <span class="ctool-key" aria-hidden="true">G</span>
-          </button>
-          <span class="ctool-sep" aria-hidden="true"></span>
-          <button class="ctool" id="undoBtn" title="Undo — Ctrl/Cmd+Z" aria-label="Undo (Ctrl or Cmd + Z)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7L4 11l5 4"/><path d="M4 11h8.5a5.5 5.5 0 0 1 0 11H8"/></svg>
-          </button>
-          <button class="ctool" id="redoBtn" title="Redo — Ctrl/Cmd+Shift+Z" aria-label="Redo (Ctrl or Cmd + Shift + Z)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 4-5 4"/><path d="M20 11h-8.5a5.5 5.5 0 0 0 0 11H16"/></svg>
-          </button>
-        </div>
-        <div class="pen-popover" id="penPopover" hidden>
-          <label class="field"><span>Stroke color</span><input id="drawColor" type="color" value="#ffffff"></label>
-          <label class="field"><span>Stroke size</span><input id="drawSize" type="range" min="2" max="80" value="16"></label>
-        </div>
-        <canvas id="editorCanvas" width="1600" height="900" aria-label="Design canvas"></canvas>
-        <div class="drop-hint" id="dropHint">Drop images or videos to place them</div>
-        <div class="zoom-widget" id="zoomWidget">
-          <button type="button" class="zoom-btn" id="zoomOut" aria-label="Zoom out">−</button>
-          <button type="button" class="zoom-pct" id="zoomReset" title="Reset to fit" aria-label="Zoom level, click to fit"><span id="zoomLabel">100%</span></button>
-          <button type="button" class="zoom-btn" id="zoomIn" aria-label="Zoom in">+</button>
-        </div>
-      </div>
-    </main>
-
-    <aside class="right-panel panel">
-      <div class="panel-head">
-        <h2>Layers</h2>
-        <p>Drag to reorder — the top layer sits in front.</p>
-      </div>
-      <div class="layer-list" id="layerList"></div>
-
-      <div id="layerInspector" class="inspector-section" hidden>
-        <h3 id="selectionLabel">Layer</h3>
-        <label class="field"><span>Name</span><input id="layerName" type="text"></label>
-        <div class="two-col">
-          <label class="field"><span>X</span><input id="layerX" type="number"></label>
-          <label class="field"><span>Y</span><input id="layerY" type="number"></label>
-          <label class="field"><span>W</span><input id="layerW" type="number" min="1"></label>
-          <label class="field"><span>H</span><input id="layerH" type="number" min="1"></label>
-        </div>
-        <div class="two-col">
-          <label class="field"><span>Rotate</span><input id="layerRotation" type="number"></label>
-          <label class="field"><span>Opacity</span><input id="layerOpacity" type="range" min="0" max="1" step=".01"></label>
-        </div>
-        <div class="button-row">
-          <button class="btn" id="layerForward">Forward</button>
-          <button class="btn" id="layerBackward">Backward</button>
-          <button class="btn" id="layerDuplicate">Duplicate</button>
-          <button class="btn danger" id="layerDelete">Delete</button>
-        </div>
-        <div class="toggle-row">
-          <label class="check"><input id="layerLocked" type="checkbox"> Locked</label>
-          <label class="check"><input id="layerVisible" type="checkbox"> Visible</label>
-        </div>
-
-        <div id="mediaInspector" class="inspector-subsection" hidden>
-          <details open>
-            <summary>Media controls</summary>
-            <div class="inspector-subsection-body">
-              <label class="field"><span>Fit</span><select id="layerFit"><option value="cover">Cover</option><option value="contain">Contain</option><option value="fill">Fill</option></select></label>
-              <label class="field"><span>Border</span><input id="layerBorder" type="range" min="0" max="160" value="0"></label>
-              <label class="field"><span>Border color</span><input id="layerBorderColor" type="color"></label>
-              <label class="field"><span>Outline</span><input id="layerStroke" type="range" min="0" max="40"></label>
-              <label class="field"><span>Blur background</span><input id="layerBlurBg" type="range" min="0" max="40"></label>
-              <div class="two-col">
-                <label class="field"><span>Brightness</span><input id="filterBrightness" type="range" min="0" max="2" step=".01"></label>
-                <label class="field"><span>Contrast</span><input id="filterContrast" type="range" min="0" max="2" step=".01"></label>
-                <label class="field"><span>Saturation</span><input id="filterSaturate" type="range" min="0" max="2" step=".01"></label>
-                <label class="field"><span>Blur</span><input id="filterBlur" type="range" min="0" max="20" step=".5"></label>
-              </div>
-              <div id="videoControls" hidden>
-                <label class="field"><span>Video time</span><input id="videoTime" type="range" min="0" max="10" step=".01"></label>
-                <div class="button-row">
-                  <button class="btn" id="videoPlayPause">Play / pause</button>
-                  <button class="btn" id="videoPoster">Use frame as poster</button>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div id="textInspector" class="inspector-subsection" hidden>
-          <details open>
-            <summary>Text controls</summary>
-            <div class="inspector-subsection-body">
-              <label class="field"><span>Text</span><textarea id="textContent" rows="4"></textarea></label>
-              <label class="field"><span>Font</span><select id="textFont"></select></label>
-              <div class="two-col">
-                <label class="field"><span>Size</span><input id="textSize" type="number" min="4"></label>
-                <label class="field"><span>Weight</span><input id="textWeight" type="number" min="100" max="900" step="100"></label>
-                <label class="field"><span>Color</span><input id="textColor" type="color"></label>
-                <label class="field"><span>Align</span><select id="textAlign"><option>left</option><option>center</option><option>right</option></select></label>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div id="shapeInspector" class="inspector-subsection" hidden>
-          <details open>
-            <summary>Shape controls</summary>
-            <div class="inspector-subsection-body">
-              <label class="field"><span>Shape</span><select id="shapeKind"><option value="rect">Rectangle</option><option value="roundRect">Rounded</option><option value="circle">Circle</option><option value="line">Line</option></select></label>
-              <div class="two-col">
-                <label class="field"><span>Fill</span><input id="shapeFill" type="color"></label>
-                <label class="field"><span>Stroke</span><input id="shapeStroke" type="color"></label>
-              </div>
-              <label class="field"><span>Stroke width</span><input id="shapeStrokeWidth" type="range" min="0" max="40"></label>
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <details class="panel-collapse" id="projectInspector">
-        <summary>Canvas</summary>
-        <div class="panel-collapse-body">
-          <label class="field"><span>Name</span><input id="projectNameInput" type="text"></label>
-          <div class="two-col">
-            <label class="field"><span>Width</span><input id="projectWidthInput" type="number" min="100"></label>
-            <label class="field"><span>Height</span><input id="projectHeightInput" type="number" min="100"></label>
-          </div>
-          <label class="field"><span>Background</span><input id="projectBgInput" type="color" value="#111111"></label>
-        </div>
-      </details>
-    </aside>
+  <div class="paper-meta">
+    <div class="paper-meta-row">
+      <span class="paper-meta-id">Resume</span>
+      <span>Bengaluru, India</span>
+    </div>
   </div>
 
-  <dialog class="modal" id="templateModal">
-    <form method="dialog" class="modal-card wide chooser">
-      <header>
-        <div>
-          <h2>Start a new design</h2>
-          <p class="muted">Choose a format and a layout — you can swap media and tweak everything after.</p>
+  <h1 class="paper-title">Syed Hamza Zaidi</h1>
+
+  <p class="paper-authors">
+    Engineering agentic AI systems, memory, and infrastructure
+  </p>
+
+  <p class="paper-affiliations">
+    AI Engineer at faff<br>
+    B.E. Electronics and Instrumentation Engineering, BITS Pilani
+  </p>
+
+  <p class="paper-contact">·
+    <a href="https://linkedin.com/in/syed-hamza-zaidi" target="_blank" rel="noopener">linkedin.com/in/syed-hamza-zaidi</a>
+  </p>
+
+  <hr class="paper-rule">
+
+  <div class="paper-body">
+
+    <section class="paper-abstract" aria-labelledby="abstract-heading">
+      <span class="paper-abstract-label" id="abstract-heading">Summary.</span>
+      <p>Agent orchestrator. I do not write code or debug manually anymore; I build agents and flows which do it for me. I have led projects in a multi-billion dollar MNC, a seed stage startup, and built software from scratch as a founding engineer.</p>
+    </section>
+
+    <section class="paper-section" aria-labelledby="sec-exp">
+      <h2 id="sec-exp">Experience</h2>
+
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">AI Engineer</span>,
+            <span class="paper-subsection-org">faff</span>
+          </div>
+          <span class="paper-subsection-date">12/2025 - Present · Bengaluru, India</span>
         </div>
-        <button class="icon-btn" value="cancel" id="templateModalClose" aria-label="Close">×</button>
-      </header>
-      <label class="field chooser-format"><span>Format</span><select id="presetSelect" aria-label="Platform format"></select></label>
-      <button type="button" class="blank-card" data-template="__blank__">
-        <span class="blank-mark" aria-hidden="true">+</span>
-        <span><strong>Blank canvas</strong><span>Start from scratch with an empty board.</span></span>
-      </button>
-      <div class="template-grid chooser-grid" id="templateGrid"></div>
-    </form>
-  </dialog>
-
-  <dialog class="modal" id="previewModal">
-    <form method="dialog" class="modal-card wide">
-      <header><h2>Preview carousel</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></header>
-      <div class="preview-body">
-        <button class="icon-btn" id="prevSlidePreview" type="button">‹</button>
-        <canvas id="previewCanvas"></canvas>
-        <button class="icon-btn" id="nextSlidePreview" type="button">›</button>
-      </div>
-      <p class="muted" id="previewCaption">Slide 1</p>
-    </form>
-  </dialog>
-
-  <dialog class="modal" id="exportModal">
-    <form method="dialog" class="modal-card">
-      <header><h2>Export & share</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></header>
-      <div class="export-grid">
-        <label class="field"><span>Image format</span><select id="exportImageType"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option></select></label>
-        <label class="field"><span>JPEG quality</span><input id="exportQuality" type="range" min=".5" max="1" step=".01" value=".92"></label>
-        <label class="field"><span>Frame rate</span><input id="exportFps" type="number" min="12" max="60" value="30"></label>
-        <label class="field"><span>Clip length (s)</span><input id="exportSeconds" type="number" min="1" max="60" value="5"></label>
-      </div>
-      <div class="button-stack">
-        <button class="btn primary" id="downloadAllBtn" type="button">Export all slides (ZIP)</button>
-        <button class="btn" id="shareAllBtn" type="button">Share to apps…</button>
-        <button class="btn" id="downloadCurrentBtn" type="button">Download this slide only</button>
-      </div>
-      <progress id="exportProgress" max="1" value="0" hidden></progress>
-      <div class="notice" id="exportLog">Everything renders locally — nothing is uploaded. Pick an option above to get your files.</div>
-      <details class="help-card" open>
-        <summary>Export notes</summary>
+        <p>faff is a seed stage startup backed by Nexus Venture Partners with $3 million raised, building an AI personal assistant and concierge service.</p>
         <ul>
-          <li>Carousel slides export at one identical size, named in swipe order.</li>
-          <li>Stories &amp; Reels use 1080×1920; safe-zone guides are editor-only and never exported.</li>
-          <li>Video uses MP4 when your browser supports it, otherwise WebM or a still poster.</li>
-          <li>Direct posting needs a server, so carouselBuilder hands off to your share sheet or downloads.</li>
+          <li>Automated the entire customer-facing chat experience through a multi-agent system, optimizing for latency and cost.</li>
+          <li>Worked on voice agents, WhatsApp as an interface for agents, temporal memory, RAG, and multi-agent coordination.</li>
         </ul>
-      </details>
-    </form>
-  </dialog>
+      </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Member of Technical Staff</span>,
+            <span class="paper-subsection-org">Salesforce</span>
+          </div>
+          <span class="paper-subsection-date">08/2023 - 12/2025 · Hyderabad, India</span>
+        </div>
+        <p>Founding member of the GenAI Developer Experience team.</p>
+        <ul>
+          <li>Designed a federated search engine for all internal knowledge using Retrieval Augmented Generation from scratch, then wrapped it in an agentic chatbot for ease of use.</li>
+          <li>Contributed to a managed LangChain / LangGraph agent service for bring-your-own-agent workflows.</li>
+          <li>Hosted managed MCP services on a central platform.</li>
+          <li>Awarded Best Internal Product from 50+ entries in a company-wide hackathon.</li>
+          <li>Awarded the Tech &amp; Product All-Star Award, a peer-nominated award presented to the top 1% of Tech &amp; Product employees.</li>
+        </ul>
+      </div>
 
-  <script type="module" src="assets/js/scrl/app.js"></script>
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Associate Member of Technical Staff</span>,
+            <span class="paper-subsection-org">Salesforce</span>
+          </div>
+          <span class="paper-subsection-date">06/2022 - 08/2023 · Hyderabad, India</span>
+        </div>
+        <ul>
+          <li>Enhanced organizational transparency and trust by developing an executive dashboard with real-time visibility into organization-wide initiatives.</li>
+          <li>Reduced monthly report generation time for the CTO from 2 days to 2 minutes by automating manual tasks across multiple teams.</li>
+          <li>Designed a data lake in CRM Analytics and Apache Airflow pipelines to extract, transform, and load data from Splunk, Honeycomb, Salesforce, SQL databases, Postgres, BigQuery, and more to power a Tableau dashboard.</li>
+        </ul>
+      </div>
+
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Freelance Software Engineer</span>,
+            <span class="paper-subsection-org">Salesforce</span>
+          </div>
+          <span class="paper-subsection-date">10/2021 - 05/2022 · Remote</span>
+        </div>
+        <p>Worked in parallel to the final year of undergraduate study.</p>
+        <ul>
+          <li>Designed and deployed an NLP model to categorize support threads into FAQ buckets using semantic segmentation.</li>
+          <li>Integrated the Salesforce Einstein Bot API with an internal Slack bot to provide users escalation paths in Slack support channels.</li>
+          <li>Redesigned NLP preprocessing for Information Retrieval models, increasing the Query Resolution Rate from 2% to 16%.</li>
+        </ul>
+      </div>
+
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Software Engineer Intern</span>,
+            <span class="paper-subsection-org">Salesforce</span>
+          </div>
+          <span class="paper-subsection-date">06/2021 - 07/2021 · Remote</span>
+        </div>
+        <ul>
+          <li>Designed and implemented an Information Retrieval model to rank documents based on Semantic Textual Similarity retrieved from multiple internal knowledge sources.</li>
+          <li>Deployed the model to production where it served over 200 teams and 30,000+ daily active users.</li>
+          <li>Created an automated CI testing framework for Information Retrieval models against multiple datasets.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="paper-section" aria-labelledby="sec-edu">
+      <h2 id="sec-edu">Education</h2>
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Bachelor of Engineering - Electronics and Instrumentation Engineering</span>,
+            <span class="paper-subsection-org">BITS Pilani</span>
+          </div>
+          <span class="paper-subsection-date">01/2018 - 12/2022</span>
+        </div>
+        <ul>
+          <li>Head Teaching Assistant for Neural Networks &amp; Fuzzy Logic: led a team of 12 Teaching Assistants to design assignments and workshops for 120+ students.</li>
+          <li>Courses: Information Retrieval, Neural Networks &amp; Fuzzy Logic, Graph Mining, Data Structures &amp; Algorithms, Object Oriented Programming, Discrete Structures for Computer Science, Digital Image Processing, Combinatorial Mathematics.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="paper-section" aria-labelledby="sec-skills">
+      <h2 id="sec-skills">Technical Skills</h2>
+
+      <div class="skills-group">
+        <span class="skills-group-label">AI Systems:</span>
+        Agentic AI, multi-agent orchestration, RAG, temporal memory, voice agents, MCP, semantic search
+      </div>
+      <div class="skills-group">
+        <span class="skills-group-label">Frameworks &amp; Models:</span>
+        LangChain, LangGraph, OpenAI, Perplexity, Gemini, FastAPI, Flask, Salesforce Einstein Bot API
+      </div>
+      <div class="skills-group">
+        <span class="skills-group-label">Infrastructure:</span>
+        Go, Python, Postgres, Redis, Docker, Kubernetes, AWS EKS, AWS Amplify, Apache Airflow
+      </div>
+
+      <p class="skills-inline">
+        Agentic AI, multi-agent orchestration, RAG, temporal memory, LangChain, LangGraph, MCP, Python, Go, FastAPI, Postgres, Redis, Docker, Kubernetes, AWS EKS, React, shadcn/ui, Apache Airflow, Tableau, CRM Analytics
+      </p>
+
+      <table class="skills-table">
+        <thead>
+          <tr><th>Area</th><th>Tools / Platforms</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Agent systems</td><td>Multi-agent orchestration, RAG, temporal memory, MCP, voice agents</td></tr>
+          <tr><td>Backend</td><td>Python, Go, FastAPI, Flask, Postgres, Redis</td></tr>
+          <tr><td>Infrastructure</td><td>Docker, Kubernetes, AWS EKS, AWS Amplify, Apache Airflow</td></tr>
+          <tr><td>Frontend / Data</td><td>React, shadcn/ui, CRM Analytics, Tableau</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="paper-section" aria-labelledby="sec-works">
+      <h2 id="sec-works">Projects</h2>
+
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">finoco.ai</span>
+            <span class="paper-subsection-org"> — Financial Analysis using Generative AI</span>
+          </div>
+          <span class="paper-subsection-date">01/2025 - 06/2025</span>
+        </div>
+        <ul>
+          <li>Founding engineer at a pre-seed startup, building the initial product from scratch.</li>
+          <li>Built a Python FastAPI backend with Redis cache using LangChain and LangGraph to design agents leveraging OpenAI, Perplexity, and Gemini models.</li>
+          <li>Built a Go API service and Postgres database to handle user sessions, chat threads, and vectorDB.</li>
+          <li>Deployed a horizontally scalable backend on AWS EKS as a Kubernetes cluster with Docker images.</li>
+          <li>Built a React frontend using shadcn/ui components, served on AWS Amplify.</li>
+        </ul>
+      </div>
+
+      <div class="paper-subsection">
+        <div class="paper-subsection-header">
+          <div>
+            <span class="paper-subsection-title">Secure Face Recognition</span>
+            <span class="paper-subsection-org"> — Salesforce InTurn Innovate Hackathon</span>
+          </div>
+          <span class="paper-subsection-date">06/2021</span>
+        </div>
+        <ul>
+          <li>Won 1st prize in the Salesforce InTurn Innovate Hackathon 2021.</li>
+          <li>Invented a novel robust authentication mechanism based on face recognition and liveness detection.</li>
+          <li>Deployed the model via a Flask backend and a dynamic Salesforce Lightning Web Components frontend.</li>
+          <li>Designed and implemented a custom liveness detection mechanism using real-time statistical modeling to analyze facial reflections against dynamically changing background colors, thwarting still images, videos, and deepfake attacks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="paper-references" aria-labelledby="sec-refs">
+      <h2 id="sec-refs">References</h2>
+      <ol>
+        <li><a href="https://linkedin.com/in/syed-hamza-zaidi" target="_blank" rel="noopener">linkedin.com/in/syed-hamza-zaidi</a></li>
+        <li><a href="assets/pdf/resume.pdf" target="_blank" rel="noopener">Resume PDF</a></li>
+      </ol>
+    </section>
+
+  </div>
+</article>
+
+<script src="js/theme.js"></script>
 </body>
 </html>
