@@ -29,6 +29,12 @@ body {
   position: relative;
 }
 
+.paper-shell {
+  position: relative;
+  max-width: var(--paper-width, 680px);
+  margin: 0 auto;
+}
+
 /* Metadata strip */
 .paper-meta {
   font-family: var(--font-meta);
@@ -158,6 +164,138 @@ body {
   margin-bottom: 0.3rem;
 }
 
+.paper-subsection-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1.25rem;
+  align-items: start;
+}
+
+.paper-aside-card,
+.face-scan-diagram {
+  margin-top: 0.35rem;
+}
+
+.paper-aside-card-label {
+  display: block;
+  font-family: var(--font-meta);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.paper-aside-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paper-aside-card li {
+  margin-bottom: 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.paper-aside-card li:last-child {
+  margin-bottom: 0;
+}
+
+/* Margin callout — awards card outside paper column (desktop) */
+.paper-subsection--annotated {
+  position: relative;
+}
+
+.paper-callout-connector,
+.paper-callout-tag {
+  display: none;
+}
+
+.paper-aside-card--margin {
+  margin-top: 0.75rem;
+}
+
+/* Margin cards live outside the paper column on either side. Both a left
+   and a right gutter are reserved, so the layout needs room for two asides
+   (~1180px) before the cards float out; below that they stack inline. */
+@media (min-width: 1180px) {
+  .paper-shell {
+    --margin-aside-width: 11.5rem;
+    --margin-aside-gap: 2.75rem;
+    max-width: calc(
+      var(--paper-width, 680px) +
+        2 * (var(--margin-aside-width) + var(--margin-aside-gap))
+    );
+  }
+
+  .paper {
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .paper-aside-card--margin {
+    position: absolute;
+    top: 0;
+    margin-top: 0;
+    width: var(--margin-aside-width);
+    z-index: 2;
+  }
+
+  .paper-aside-card--right {
+    left: calc(100% + var(--margin-aside-gap));
+  }
+
+  .paper-aside-card--left {
+    left: calc(-1 * (var(--margin-aside-gap) + var(--margin-aside-width)));
+  }
+
+  .paper-callout-connector {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: var(--margin-aside-gap);
+    height: 2rem;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .paper-callout-connector--right {
+    left: 100%;
+  }
+
+  /* Mirror the leader artwork so the dot sits at the column edge and the
+     arrow points outward into the left-margin card. */
+  .paper-callout-connector--left {
+    left: calc(-1 * var(--margin-aside-gap));
+    transform: scaleX(-1);
+  }
+
+  .paper-callout-tag {
+    display: block;
+    position: absolute;
+    top: 1.65rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: var(--font-meta);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .paper-callout-tag--right {
+    left: calc(100% + (var(--margin-aside-gap) / 2));
+  }
+
+  .paper-callout-tag--left {
+    left: calc(-1 * (var(--margin-aside-gap) / 2));
+  }
+}
+
 /* Skills */
 .skills-group {
   margin-bottom: 0.65rem;
@@ -278,6 +416,21 @@ body {
     padding: 0;
   }
 
+  .paper-shell {
+    max-width: 100%;
+  }
+
+  .paper-aside-card--margin {
+    position: static;
+    width: auto;
+    margin-top: 0.75rem;
+  }
+
+  .paper-callout-connector,
+  .paper-callout-tag {
+    display: none !important;
+  }
+
   .paper-references a {
     color: #000;
   }
@@ -291,5 +444,18 @@ body {
   .paper-subsection-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .paper-subsection-content {
+    grid-template-columns: 1fr;
+  }
+
+  .paper-aside-card,
+  .face-scan-diagram {
+    max-width: 100%;
+  }
+
+  .paper-aside-card--margin {
+    margin-top: 0.75rem;
   }
 }

@@ -69,3 +69,338 @@ html[data-theme="blueprint"] .theme-hint {
   --hint-color: #bfdbfe;
   --hint-border: rgba(191, 219, 254, 0.3);
 }
+
+html[data-theme="blueprint"] .paper-aside-card {
+  position: relative;
+  width: 11.5rem;
+  padding: 0.65rem 0.75rem 0.7rem;
+  border: 1px dashed rgba(56, 189, 248, 0.55);
+  background:
+    linear-gradient(rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    rgba(12, 36, 58, 0.88);
+  background-size: 12px 12px, 12px 12px, auto;
+  color: #e0f2fe;
+  box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.08);
+}
+
+html[data-theme="blueprint"] .paper-aside-card::before,
+html[data-theme="blueprint"] .paper-aside-card::after {
+  content: "";
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid rgba(56, 189, 248, 0.7);
+}
+
+html[data-theme="blueprint"] .paper-aside-card::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+html[data-theme="blueprint"] .paper-aside-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+html[data-theme="blueprint"] .paper-aside-card-label {
+  color: var(--color-accent);
+}
+
+html[data-theme="blueprint"] .paper-aside-card li::before {
+  content: "▸";
+  color: var(--color-accent);
+  margin-right: 0.35rem;
+  font-size: 0.65rem;
+}
+
+/* Margin callout connector — Salesforce awards */
+html[data-theme="blueprint"] .paper-callout-dot {
+  fill: rgba(56, 189, 248, 0.95);
+}
+
+html[data-theme="blueprint"] .paper-callout-dot--open {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.85);
+  stroke-width: 1;
+}
+
+html[data-theme="blueprint"] .paper-callout-path {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.78);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  stroke-linecap: round;
+}
+
+html[data-theme="blueprint"] .paper-callout-tick {
+  stroke: rgba(56, 189, 248, 0.5);
+  stroke-width: 1;
+}
+
+html[data-theme="blueprint"] .paper-callout-arrow {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.85);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Pin margin cards to the top of their section so the leader line actually
+   connects to them. Chained selectors outrank the base .paper-aside-card /
+   .face-scan-diagram position:relative rules for both card types. */
+@media (min-width: 1180px) {
+  html[data-theme="blueprint"] .paper-aside-card.paper-aside-card--margin,
+  html[data-theme="blueprint"] .face-scan-diagram.paper-aside-card--margin {
+    position: absolute;
+  }
+}
+
+html[data-theme="blueprint"] .paper-callout-tag {
+  color: rgba(125, 211, 252, 0.85);
+  background: rgba(12, 36, 58, 0.92);
+  padding: 0.05rem 0.25rem;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+/* Face scan diagram — Secure Face Recognition project */
+html[data-theme="blueprint"] .face-scan-diagram {
+  position: relative;
+  width: 11.5rem;
+  padding: 0.55rem 0.65rem 0.6rem;
+  border: 1px dashed rgba(56, 189, 248, 0.55);
+  background:
+    linear-gradient(rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    rgba(12, 36, 58, 0.88);
+  background-size: 12px 12px, 12px 12px, auto;
+  box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.08);
+  flex-shrink: 0;
+}
+
+html[data-theme="blueprint"] .face-scan-diagram::before,
+html[data-theme="blueprint"] .face-scan-diagram::after {
+  content: "";
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid rgba(56, 189, 248, 0.7);
+  pointer-events: none;
+}
+
+html[data-theme="blueprint"] .face-scan-diagram::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+html[data-theme="blueprint"] .face-scan-diagram::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+html[data-theme="blueprint"] .face-scan-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+html[data-theme="blueprint"] .face-scan-label--top {
+  margin-bottom: 0.35rem;
+}
+
+html[data-theme="blueprint"] .face-scan-label--bottom {
+  margin-top: 0.35rem;
+  text-align: right;
+  color: rgba(125, 211, 252, 0.75);
+}
+
+html[data-theme="blueprint"] .face-scan-viewport {
+  position: relative;
+  overflow: hidden;
+  height: 11rem;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background:
+    linear-gradient(rgba(147, 197, 253, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 197, 253, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, rgba(56, 189, 248, 0.12), transparent 62%),
+    rgba(8, 28, 48, 0.6);
+  background-size: 8px 8px, 8px 8px, auto, auto;
+  perspective: 460px;
+  perspective-origin: 50% 45%;
+}
+
+html[data-theme="blueprint"] .face-scan-viewport::before,
+html[data-theme="blueprint"] .face-scan-viewport::after {
+  content: "";
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-color: rgba(56, 189, 248, 0.5);
+  border-style: solid;
+  z-index: 2;
+  pointer-events: none;
+}
+
+html[data-theme="blueprint"] .face-scan-viewport::before {
+  top: 3px;
+  left: 3px;
+  border-width: 1px 0 0 1px;
+}
+
+html[data-theme="blueprint"] .face-scan-viewport::after {
+  bottom: 3px;
+  right: 3px;
+  border-width: 0 1px 1px 0;
+}
+
+/* 3D wireframe head — rotating ovoid mesh + front facial features */
+html[data-theme="blueprint"] .face-orbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  animation: face-orbit-spin 11s ease-in-out infinite;
+}
+
+html[data-theme="blueprint"] .face-globe {
+  position: relative;
+  width: 96px;
+  height: 120px;
+  transform-style: preserve-3d;
+}
+
+html[data-theme="blueprint"] .face-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.08);
+}
+
+/* Meridians — vertical ellipses revolved around the Y axis to form the skull */
+html[data-theme="blueprint"] .face-ring--m {
+  width: 96px;
+  height: 120px;
+  border-color: rgba(56, 189, 248, 0.3);
+  border-radius: 48% 48% 44% 44% / 46% 46% 56% 56%;
+  transform: translate(-50%, -50%) rotateY(var(--a));
+}
+
+/* Latitudes — horizontal cross-section rings laid flat at each height */
+html[data-theme="blueprint"] .face-ring--lat {
+  width: var(--d);
+  height: var(--d);
+  border-color: rgba(125, 211, 252, 0.22);
+  transform: translate(-50%, -50%) translateY(var(--y)) rotateX(90deg);
+}
+
+html[data-theme="blueprint"] .face-front {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 96px;
+  height: 120px;
+  overflow: visible;
+  transform: translate(-50%, -50%) translateZ(46px);
+  color: rgba(186, 230, 253, 0.95);
+}
+
+html[data-theme="blueprint"] .face-front-brow,
+html[data-theme="blueprint"] .face-front-eye,
+html[data-theme="blueprint"] .face-front-line,
+html[data-theme="blueprint"] .face-front-mouth {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html[data-theme="blueprint"] .face-front-mouth {
+  fill: rgba(56, 189, 248, 0.12);
+}
+
+html[data-theme="blueprint"] .face-front-pupil {
+  fill: rgba(56, 189, 248, 0.95);
+}
+
+html[data-theme="blueprint"] .face-front-tick {
+  stroke: rgba(56, 189, 248, 0.6);
+  stroke-width: 0.6;
+}
+
+html[data-theme="blueprint"] .face-front-mesh {
+  stroke: rgba(56, 189, 248, 0.4);
+  stroke-width: 0.6;
+  stroke-dasharray: 3 2;
+}
+
+html[data-theme="blueprint"] .face-front-node {
+  fill: rgba(125, 211, 252, 0.9);
+  filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.7));
+}
+
+@keyframes face-orbit-spin {
+  0%,
+  100% {
+    transform: rotateY(-26deg) rotateX(7deg);
+  }
+  50% {
+    transform: rotateY(26deg) rotateX(-3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="blueprint"] .face-orbit {
+    animation: none;
+    transform: rotateY(-16deg) rotateX(6deg);
+  }
+}
+
+html[data-theme="blueprint"] .face-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.2) 15%,
+    rgba(56, 189, 248, 0.95) 50%,
+    rgba(56, 189, 248, 0.2) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 6px rgba(56, 189, 248, 0.55),
+    0 0 14px rgba(56, 189, 248, 0.25);
+  animation: face-scan-sweep 2.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes face-scan-sweep {
+  0%,
+  100% {
+    top: 12%;
+    opacity: 0.6;
+  }
+  50% {
+    top: 88%;
+    opacity: 1;
+  }
+}
