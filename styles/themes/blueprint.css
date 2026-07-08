@@ -136,6 +136,18 @@ html[data-theme="blueprint"] .paper-aside-card-label {
   color: var(--color-accent);
 }
 
+html[data-theme="blueprint"] .paper-aside-launch {
+  color: #e0f2fe;
+  background: transparent;
+  border-color: rgba(56, 189, 248, 0.55);
+}
+
+html[data-theme="blueprint"] .paper-aside-launch:hover {
+  color: #0c243a;
+  background: rgba(56, 189, 248, 0.35);
+  border-color: rgba(125, 211, 252, 0.9);
+}
+
 html[data-theme="blueprint"] .paper-aside-card li::before {
   content: "▸";
   color: var(--color-accent);

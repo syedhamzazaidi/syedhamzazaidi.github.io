@@ -201,6 +201,28 @@ body {
   line-height: 1.45;
 }
 
+.paper-aside-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+}
+
+.paper-aside-launch {
+  display: block;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--font-meta);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  text-align: center;
+  border: 1px solid currentColor;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
 /* Margin callout — awards card outside paper column (desktop) */
 .paper-subsection--annotated {
   position: relative;
